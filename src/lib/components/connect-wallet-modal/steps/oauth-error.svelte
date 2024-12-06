@@ -3,20 +3,17 @@
 	import { cn } from '$/utils.js';
 	import { Spinner } from '$/components/ui/spinner/index.js';
 	import type { ConnectWalletModalStepProps } from './index.js';
-	import { getThirdwebSvelteContext } from '$/components/thirdweb-svelte-provider/context.js';
 
 	type $$Props = ConnectWalletModalStepProps<'oauth-error'>;
 	export let additionalProps: $$Props['additionalProps'];
 	export let onFinishConnect: $$Props['onFinishConnect'];
 
-	const context = getThirdwebSvelteContext();
-
 	let isRetrying = false;
 	const handleRetry = async () => {
 		isRetrying = true;
 		try {
-			const account = await additionalProps.retry();
-			onFinishConnect(account);
+			const wallet = await additionalProps.retry();
+			onFinishConnect(wallet);
 		} catch (err) {
 			additionalProps.message = (err as Error)?.message || 'An error occurred';
 		} finally {

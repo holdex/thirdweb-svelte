@@ -19,7 +19,7 @@
 	export let chain: Chain | undefined;
 	export let chains: Chain[] | undefined;
 	export let walletConnect: ConnectWalletModalProps['walletConnect'];
-	export let onFinishConnect: (account: Account) => void;
+	export let onFinishConnect: (wallet: Wallet) => void;
 
 	const context = getThirdwebSvelteContext();
 
@@ -31,7 +31,7 @@
 		errorConnecting = false;
 
 		try {
-			const account = await wallet.connect({
+			await wallet.connect({
 				chain,
 				client: context.client,
 				walletConnect: {
@@ -66,7 +66,7 @@
 				}
 			});
 
-			onFinishConnect(account);
+			onFinishConnect(wallet);
 		} catch (err) {
 			console.error(err);
 			errorConnecting = true;

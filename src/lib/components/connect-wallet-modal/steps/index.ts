@@ -1,5 +1,5 @@
 import type { Chain } from 'thirdweb';
-import type { Account, Wallet } from 'thirdweb/wallets';
+import type { Wallet } from 'thirdweb/wallets';
 import type { ConnectWalletModalProps } from '../index.js';
 
 export const connectWalletModalSteps = [
@@ -16,7 +16,7 @@ type ConnectWalletModalStepsAdditionalProps = {
 	'oauth-loading': undefined;
 	'oauth-error': {
 		message: string;
-		retry: () => Promise<Account>;
+		retry: () => Promise<Wallet>;
 	};
 	'wallet-selector': undefined;
 	'wallet-connect': {
@@ -27,9 +27,10 @@ type ConnectWalletModalStepsAdditionalProps = {
 export type ConnectWalletModalStepProps<CurrentStep extends ConnectWalletModalStep> = {
 	chain: Chain | undefined;
 	chains?: Chain[];
+	wallets: Wallet[];
 	walletConnect: ConnectWalletModalProps['walletConnect'];
 	setCustomBackClick: (backClick: (() => void) | null) => void;
-	onFinishConnect: (account: Account) => void;
+	onFinishConnect: (wallet: Wallet) => void;
 	setModalOpen: (open: boolean) => void;
 	setStep: <Step extends ConnectWalletModalStep>(
 		step: Step,

@@ -18,7 +18,7 @@
 	export let chain: Chain | undefined;
 	export let chains: Chain[] | undefined;
 	export let walletConnect: ConnectWalletModalProps['walletConnect'];
-	export let onFinishConnect: (account: Account) => void;
+	export let onFinishConnect: (wallet: Wallet) => void;
 	export let setModalOpen: (open: boolean) => void;
 
 	const context = getThirdwebSvelteContext();
@@ -42,7 +42,7 @@
 			});
 
 			try {
-				const acc = await wallet.connect({
+				await wallet.connect({
 					chain,
 					client: context.client,
 					projectId: walletConnect?.projectId,
@@ -52,7 +52,7 @@
 
 				wcModalClosed = true;
 				setModalOpen(true);
-				onFinishConnect(acc);
+				onFinishConnect(wallet);
 			} catch (err) {
 				wcModalClosed = true;
 				setModalOpen(true);
@@ -61,7 +61,7 @@
 			}
 		} else {
 			try {
-				const account = await wallet.connect({
+				await wallet.connect({
 					chain,
 					client: context.client,
 					projectId: walletConnect?.projectId,
@@ -87,7 +87,7 @@
 					optionalChains: chains
 				});
 
-				onFinishConnect(account);
+				onFinishConnect(wallet);
 			} catch (err) {
 				console.error(err);
 				errorConnecting = true;

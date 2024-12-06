@@ -1,20 +1,20 @@
 <script lang="ts">
 	import type { ConnectWalletModalStepProps } from '../index.js';
-	import { getDefaultWallets, getInstalledWallets, sortWallets } from './index.js';
 	import { type Wallet } from 'thirdweb/wallets';
 	import WalletSelectorItem from './wallet-selector-item.svelte';
 	import Separator from '$/components/ui/separator/separator.svelte';
 	import Button from '$/components/ui/button/button.svelte';
+	import { getInstalledWallets, sortWallets } from '$/utils/wallets.js';
 
 	type $$Props = ConnectWalletModalStepProps<'wallet-selector'>;
 	export let setStep: $$Props['setStep'];
+	export let wallets: Wallet[];
 
-	const defaultWallets = getDefaultWallets();
 	const installedWallets = getInstalledWallets();
-	let _wallets: Wallet[] = [...defaultWallets];
+	let _wallets: Wallet[] = [...wallets];
 
 	for (const iW of installedWallets) {
-		if (!defaultWallets.find((w) => w.id === iW.id)) {
+		if (!wallets.find((w) => w.id === iW.id)) {
 			_wallets.push(iW);
 		}
 	}
