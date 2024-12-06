@@ -4,7 +4,7 @@
 	import { setThirdwebSvelteContext } from './context.js';
 	import { createThirdwebClient } from 'thirdweb';
 	import { writable } from 'svelte/store';
-	import { lastActiveWalletId } from './storage.js';
+	import { lastActiveWalletIdStorage } from './storage.js';
 
 	export let clientId: string;
 
@@ -14,6 +14,7 @@
 	const isAutoConnecting = writable(true);
 
 	const disconnect = async () => {
+		lastActiveWalletIdStorage.remove();
 		await $wallet?.disconnect();
 		account.set(null);
 	};
@@ -25,7 +26,7 @@
 		wallet.set(newWallet);
 		account.set(newAccount);
 
-		lastActiveWalletId.set(newWallet.id);
+		lastActiveWalletIdStorage.set(newWallet.id);
 	};
 
 	setThirdwebSvelteContext({ wallet, client, account, disconnect, connect, isAutoConnecting });
