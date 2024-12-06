@@ -28,6 +28,7 @@
 				});
 				context.connect(activeWallet);
 			} catch (err) {
+				lastActiveWalletIdStorage.remove();
 				console.error(err);
 			} finally {
 				context.isAutoConnecting.set(false);
