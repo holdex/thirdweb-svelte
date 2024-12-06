@@ -10,9 +10,12 @@
 	$: account = context.account;
 
 	let isOpen = false;
+	const isAutoConnecting = context.isAutoConnecting;
 </script>
 
-{#if !$account}
+{#if $isAutoConnecting}
+	<Button size="lg" loading />
+{:else if !$account}
 	<Button size="lg" on:click={() => (isOpen = !isOpen)}>Connect</Button>
 {:else}
 	<Button size="lg" variant="ghost" on:click={() => context.disconnect()}>Disconnect</Button>

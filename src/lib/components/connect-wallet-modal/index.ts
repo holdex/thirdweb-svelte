@@ -1,8 +1,49 @@
 import type { DialogProps } from '../ui/dialog/index.js';
 import ConnectWalletModal from '$/components/connect-wallet-modal/connect-wallet-modal.svelte';
 import type { Chain } from 'thirdweb';
+import type { Wallet } from 'thirdweb/wallets';
 
 type ConnectWalletModalProps = DialogProps & {
+	/**
+	 * Array of supported wallets. If not provided, default wallets will be used.
+	 * @example
+	 * ```tsx
+	 * import { AutoConnect } from "thirdweb/react";
+	 * import { createWallet, inAppWallet } from "thirdweb/wallets";
+	 *
+	 * const wallets = [
+	 *   inAppWallet(),
+	 *   createWallet("io.metamask"),
+	 *   createWallet("com.coinbase.wallet"),
+	 *   createWallet("me.rainbow"),
+	 * ];
+	 *
+	 * function Example() {
+	 *  return (
+	 *    <ConnectButton
+	 *      client={client}
+	 *      wallets={wallets}
+	 *    />
+	 *  )
+	 * }
+	 * ```
+	 *
+	 * If no wallets are specified. The component will show All the EIP-6963 compliant installed wallet extensions, as well as below default wallets:
+	 *
+	 * ```tsx
+	 * const defaultWallets = [
+	 *  inAppWallet(),
+	 *  createWallet("io.metamask"),
+	 *  createWallet("com.coinbase.wallet"),
+	 *  createWallet("me.rainbow"),
+	 *  createWallet("io.zerion.wallet"),
+	 * ]
+	 * ```
+	 *
+	 * The `ConnectButton` also shows a "All wallets" button at the end of wallet list which allows user to connect to any of the 350+ wallets
+	 */
+	wallets?: Wallet[];
+
 	/**
 	 * The [`Chain`](https://portal.thirdweb.com/references/typescript/v5/Chain) object of the blockchain you want the wallet to connect to
 	 *

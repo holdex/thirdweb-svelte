@@ -2,16 +2,16 @@
 	import { getWalletInfoQuery } from '$/queries/wallets.js';
 	import type { Account, Wallet } from 'thirdweb/wallets';
 	import WalletLogoSpinner from './wallet-logo-spinner.svelte';
-	import { getInstalledWalletData } from '../wallet-selector/index.js';
 	import type { Chain } from 'thirdweb';
 	import { wait } from '$/utils.js';
 	import { getThirdwebSvelteContext } from '$/components/thirdweb-svelte-provider/context.js';
 	import { Button } from '$/components/ui/button/index.js';
 	import RotateCw from 'lucide-svelte/icons/rotate-cw';
+	import { getInstalledWalletData } from '$/utils/wallets.js';
 
 	export let wallet: Wallet;
 	export let chain: Chain | undefined = undefined;
-	export let onFinishConnect: (account: Account) => void;
+	export let onFinishConnect: (wallet: Wallet) => void;
 	export let chains: Chain[] | undefined = undefined;
 	export let onGetStartedClick: (() => void) | null = null;
 
@@ -24,13 +24,13 @@
 			connectPrompted = true;
 			errorConnecting = false;
 			await wait(1000);
-			const account = await wallet.connect({
+			await wallet.connect({
 				client: context.client,
 				chain,
 				optionalChains: chains
 			});
 
-			onFinishConnect(account);
+			onFinishConnect(wallet);
 		} catch (e) {
 			errorConnecting = true;
 			console.error(e);

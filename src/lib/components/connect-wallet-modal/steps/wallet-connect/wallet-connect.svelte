@@ -2,7 +2,6 @@
 	import type { ConnectWalletModalStepProps } from '../index.js';
 	import { getWalletInfoQuery } from '$/queries/wallets.js';
 	import { Spinner } from '$/components/ui/spinner/index.js';
-	import { getInstalledWalletData, getInstalledWalletProviders } from '../wallet-selector/index.js';
 	import InjectedWalletConnect from './injected-wallet-connect.svelte';
 	import { isMobile } from '$/utils/platform.js';
 	import type { Chain } from 'thirdweb';
@@ -12,11 +11,12 @@
 	import WalletconnectStandaloneConnect from './walletconnect-standalone-connect.svelte';
 	import WalletNotSupported from './wallet-not-supported.svelte';
 	import WalletGetStarted from '../wallet-get-started/wallet-get-started.svelte';
+	import { getInstalledWalletData, getInstalledWalletProviders } from '$/utils/wallets.js';
 
 	type $$Props = ConnectWalletModalStepProps<'wallet-connect'>;
 	export let additionalProps: $$Props['additionalProps'];
 	export let chain: Chain | undefined;
-	export let onFinishConnect: (account: Account) => void;
+	export let onFinishConnect: (wallet: Wallet) => void;
 	export let walletConnect: $$Props['walletConnect'];
 	export let chains: $$Props['chains'] = undefined;
 	export let setModalOpen: $$Props['setModalOpen'];

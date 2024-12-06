@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { type Wallet } from 'thirdweb/wallets';
-	import { getInstalledWalletData, getInstalledWalletProviders } from './index.js';
 	import type { ConnectWalletModalStepProps } from '../index.js';
 	import Button from '$/components/ui/button/button.svelte';
 	import Skeleton from '$/components/ui/skeleton/skeleton.svelte';
 	import { getWalletInfoQuery } from '$/queries/wallets.js';
 	import WalletImage from '../../components/wallet-image.svelte';
+	import { getInstalledWalletData } from '$/utils/wallets.js';
 
 	export let wallet: Wallet;
 	export let setStep: ConnectWalletModalStepProps<'wallet-selector'>['setStep'];

@@ -2,8 +2,8 @@
 	import { Skeleton } from '$/components/ui/skeleton/index.js';
 	import { getWalletInfoImageQuery } from '$/queries/wallets.js';
 	import { cn } from '$/utils.js';
+	import { getInstalledWalletProviders } from '$/utils/wallets.js';
 	import type { WalletId } from 'thirdweb/wallets';
-	import { getInstalledWalletProviders } from '../steps/wallet-selector/index.js';
 
 	export let walletId: WalletId;
 	export let walletImage: string | undefined = undefined;

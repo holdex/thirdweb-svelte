@@ -5,6 +5,7 @@
 	import { type Chain, type ThirdwebClient } from 'thirdweb';
 	import type { ConnectWalletModalStepProps } from '../index.js';
 	import type { SupportedSocialProvider } from './index.js';
+	import { createWallet } from 'thirdweb/wallets';
 
 	const context = getThirdwebSvelteContext();
 	export let client: ThirdwebClient = context.client;
@@ -21,23 +22,25 @@
 		}
 		setStep('oauth-loading', undefined);
 		try {
-			const acc = await context.wallet.connect({
+			const inAppWallet = createWallet('inApp');
+			await inAppWallet.connect({
 				client,
 				chain,
 				strategy: provider
 			});
-			onFinishConnect(acc);
+			onFinishConnect(inAppWallet);
 		} catch (err) {
 			const message = (err as Error)?.message || 'An error occurred';
 			setStep('oauth-error', {
 				message,
 				retry: async () => {
-					const acc = await context.wallet.connect({
+					const inAppWallet = createWallet('inApp');
+					await inAppWallet.connect({
 						client,
 						chain,
 						strategy: provider
 					});
-					return acc;
+					return inAppWallet;
 				}
 			});
 		}

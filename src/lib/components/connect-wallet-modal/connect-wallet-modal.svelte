@@ -8,6 +8,9 @@
 	import { type ConnectWalletModalStep } from './steps/index.js';
 	import { cn } from '$/utils.js';
 	import ConnectWalletModalContent from './connect-wallet-modal-content.svelte';
+	import { getThirdwebSvelteContext } from '../thirdweb-svelte-provider/context.js';
+	import AutoConnect from '../auto-connect.svelte';
+	import { getDefaultWallets } from '$/utils/wallets.js';
 
 	type $$Props = ConnectWalletModalProps;
 	export let chain: $$Props['chain'] = undefined;
@@ -15,6 +18,7 @@
 	export let open: $$Props['open'] = false;
 	export let walletConnect: $$Props['walletConnect'] = undefined;
 	export let chains: $$Props['chains'] = undefined;
+	export let wallets: NonNullable<$$Props['wallets']> = getDefaultWallets();
 
 	const isDesktop = mediaQuery('(min-width: 768px)');
 
@@ -51,6 +55,7 @@
 	$: title = customTitle || 'Sign in';
 </script>
 
+<AutoConnect {chain} {chains} {wallets} />
 {#if $isDesktop}
 	<Dialog.Root {...$$restProps} bind:open>
 		<Dialog.Content {theme} class={cn('twsv-pb-4')}>
@@ -76,6 +81,7 @@
 				<Dialog.Title class="twsv-w-fit twsv-text-xl">{title}</Dialog.Title>
 			</Dialog.Header>
 			<ConnectWalletModalContent
+				{wallets}
 				{walletConnect}
 				{additionalProps}
 				{closeModal}
@@ -113,6 +119,7 @@
 				<Drawer.Title class="twsv-w-fit twsv-text-xl">{title}</Drawer.Title>
 			</Drawer.Header>
 			<ConnectWalletModalContent
+				{wallets}
 				{walletConnect}
 				{additionalProps}
 				{closeModal}
