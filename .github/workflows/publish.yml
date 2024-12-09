@@ -23,7 +23,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '18'
-          registry-url: 'https://npm.pkg.github.com'
+          registry-url: 'https://registry.npmjs.org/'
           scope: '@holdex'
 
       - name: Init NPM_RC
