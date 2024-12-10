@@ -1,6 +1,6 @@
 {
 	"name": "@holdex/thirdweb-svelte",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
@@ -36,7 +36,8 @@
 		"access": "public"
 	},
 	"peerDependencies": {
-		"svelte": "^4.0.0"
+		"svelte": "^4.0.0",
+		"thirdweb": "^5.0.0"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.3",

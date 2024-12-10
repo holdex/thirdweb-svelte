@@ -22,6 +22,8 @@
 			try {
 				const activeWallet =
 					walletId && (availableWallets.find((w) => w.id === walletId) || createWallet(walletId));
+				if (!activeWallet) return;
+
 				await activeWallet.autoConnect({
 					client: context.client,
 					chain: preferredChain
@@ -32,6 +34,7 @@
 				console.error(err);
 			} finally {
 				context.isAutoConnecting.set(false);
+				context.isInitialized.set(true);
 			}
 		})();
 	}

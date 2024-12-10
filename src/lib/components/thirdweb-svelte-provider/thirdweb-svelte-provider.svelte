@@ -12,6 +12,7 @@
 	const wallet = writable<Wallet | null>(null);
 	const account = writable<Account | null>(null);
 	const isAutoConnecting = writable(true);
+	const isInitialized = writable(false);
 
 	const disconnect = async () => {
 		lastActiveWalletIdStorage.remove();
@@ -29,7 +30,15 @@
 		lastActiveWalletIdStorage.set(newWallet.id);
 	};
 
-	setThirdwebSvelteContext({ wallet, client, account, disconnect, connect, isAutoConnecting });
+	setThirdwebSvelteContext({
+		wallet,
+		client,
+		account,
+		disconnect,
+		connect,
+		isAutoConnecting,
+		isInitialized
+	});
 
 	const queryClient = new QueryClient();
 </script>
