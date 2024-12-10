@@ -34,6 +34,7 @@
 				console.error(err);
 			} finally {
 				context.isAutoConnecting.set(false);
+				context.isInitialized.set(true);
 			}
 		})();
 	}
