@@ -14,7 +14,9 @@ const config = {
 		adapter: adapter(),
 		alias: {
 			'$/*': './src/lib/*',
-			'~/*': './src/*'
+			'~/*': './src/*',
+			// Necessary to add this alias so the package `dist` folder code imports is updated properly
+			$: './src/lib'
 		}
 	}
 };

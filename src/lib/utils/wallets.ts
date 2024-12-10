@@ -41,7 +41,7 @@ export function getInstalledWallets() {
 	return _installedWallets;
 }
 
-export function getInstalledWalletData(walletId: WalletId) {
+export function getInstalledWalletData(walletId: WalletId): EIP6963ProviderDetail | undefined {
 	return getInstalledWalletProviders().find((x) => x.info.rdns === walletId);
 }
 

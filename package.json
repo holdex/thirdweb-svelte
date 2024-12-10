@@ -1,11 +1,11 @@
 {
 	"name": "@holdex/thirdweb-svelte",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build && tailwindcss -i src/app.css -o index.css --minify && npm run package",
+		"build": "vite build && npm run package",
 		"preview": "vite preview",
-		"package": "svelte-kit sync && svelte-package && publint",
+		"package": "tailwindcss -i src/app.css -o index.css --minify && svelte-kit sync && svelte-package && publint",
 		"prepublishOnly": "npm run package",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -21,10 +21,7 @@
 	"sideEffects": [
 		"**/*.css"
 	],
-	"svelte": [
-		"./index.js",
-		"./dist/index.css"
-	],
+	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"type": "module",
 	"exports": {
@@ -34,6 +31,9 @@
 			"css": "./index.css"
 		},
 		"./index.css": "./index.css"
+	},
+	"publishConfig": {
+		"access": "public"
 	},
 	"peerDependencies": {
 		"svelte": "^4.0.0"
@@ -46,34 +46,34 @@
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
 		"abitype": "^1.0.7",
 		"autoprefixer": "^10.4.20",
-		"bits-ui": "^0.21.16",
-		"clsx": "^2.1.1",
 		"eslint": "^9.7.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.36.0",
 		"globals": "^15.0.0",
-		"lucide-svelte": "^0.464.0",
 		"prettier": "^3.3.2",
 		"prettier-plugin-svelte": "^3.2.6",
 		"prettier-plugin-tailwindcss": "^0.6.5",
 		"publint": "^0.2.0",
 		"svelte": "^4.2.19",
 		"svelte-check": "^4.0.0",
-		"svelte-legos": "^0.2.5",
-		"tailwind-merge": "^2.5.5",
 		"tailwind-scrollbar": "^3.1.0",
-		"tailwind-variants": "^0.3.0",
 		"tailwindcss": "^3.4.9",
 		"typescript": "^5.0.0",
 		"typescript-eslint": "^8.0.0",
-		"uqr": "^0.1.2",
-		"vaul-svelte": "^0.3.2",
 		"vite": "^5.0.0"
 	},
 	"dependencies": {
 		"@tanstack/svelte-query": "^5.62.2",
+		"bits-ui": "^0.21.16",
+		"clsx": "^2.1.1",
+		"lucide-svelte": "^0.464.0",
 		"mipd": "^0.0.7",
 		"mode-watcher": "^0.5.0",
-		"thirdweb": "^5.73.0"
+		"svelte-legos": "^0.2.5",
+		"tailwind-merge": "^2.5.5",
+		"tailwind-variants": "^0.3.0",
+		"thirdweb": "^5.73.0",
+		"uqr": "^0.1.2",
+		"vaul-svelte": "^0.3.2"
 	}
 }

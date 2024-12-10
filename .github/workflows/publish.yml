@@ -1,0 +1,44 @@
+name: Thirdweb Svelte Publish
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the main branch
+on:
+  push:
+    branches:
+      - main
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "publish"
+  publish:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+          registry-url: 'https://registry.npmjs.org/'
+          scope: '@holdex'
+
+      - name: Init NPM_RC
+        run: echo "${{ secrets.NPM_RC }}" > .npmrc
+
+      - id: check
+        uses: EndBug/version-check@v2
+        with:
+          file-name: './package.json'
+          file-url: '::before'
+          static-checking: localIsNew
+
+      - name: Install packages
+        run: npm install
+
+      - name: Publish
+        run: npm publish --access public
+        if: steps.check.outputs.changed == 'true'

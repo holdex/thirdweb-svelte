@@ -1,0 +1,4 @@
+engine-strict=true
+resolution-mode=highest
+@holdex:registry=https://npm.pkg.github.com/
+//npm.pkg.github.com/:_authToken=NPM_TOKEN
