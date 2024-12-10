@@ -36,7 +36,8 @@
 		"access": "public"
 	},
 	"peerDependencies": {
-		"svelte": "^4.0.0"
+		"svelte": "^4.0.0",
+		"thirdweb": "^5.73.0"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.3",

@@ -11,9 +11,9 @@ type ThirdwebSvelteContext = {
 	connect: (wallet: Wallet) => void;
 	disconnect: () => void;
 };
-const getThirdwebSvelteContext = () => getContext<ThirdwebSvelteContext>('providerContext');
+const getThirdwebSvelteContext = () => getContext<ThirdwebSvelteContext>('thirdweb-svelte:context');
 const setThirdwebSvelteContext = (context: ThirdwebSvelteContext) => {
-	setContext('providerContext', context);
+	setContext('thirdweb-svelte:context', context);
 };
 
 export { getThirdwebSvelteContext, setThirdwebSvelteContext, type ThirdwebSvelteContext };
