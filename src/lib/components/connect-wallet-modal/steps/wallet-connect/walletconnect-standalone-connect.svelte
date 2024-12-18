@@ -43,7 +43,7 @@
 
 			try {
 				await wallet.connect({
-					chain,
+					chain: chain || chains?.[0],
 					client: context.client,
 					projectId: walletConnect?.projectId,
 					showQrModal: true,
@@ -62,7 +62,7 @@
 		} else {
 			try {
 				await wallet.connect({
-					chain,
+					chain: chain || chains?.[0],
 					client: context.client,
 					projectId: walletConnect?.projectId,
 					showQrModal: false,

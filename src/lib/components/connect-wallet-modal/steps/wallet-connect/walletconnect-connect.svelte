@@ -14,6 +14,10 @@
 	import Copy from 'lucide-svelte/icons/copy';
 	import Check from 'lucide-svelte/icons/check';
 
+	// The chains that metamask don't allow custom RPC connections, making call of wallet_addEthereumChain which will be called by thirdweb fail.
+	// Ethereum mainnet, sepolia, linea, linea sepolia
+	const METAMASK_LOCKED_CHAIN_IDS = [1, 11155111, 59144, 59141];
+
 	export let wallet: Wallet<WCSupportedWalletIds>;
 	export let walletInfo: WalletInfo;
 	export let chain: Chain | undefined;
@@ -30,9 +34,18 @@
 	const connect = async () => {
 		errorConnecting = false;
 
+		const lockedChain = chains?.find((c) => METAMASK_LOCKED_CHAIN_IDS.includes(c.id));
+		// locked chain needs to be included in the `chain` field, to make sure the connection got approved, and making thirdweb don't call wallet_addEthereumChain
+		const mainChain = lockedChain || chain || chains?.[0];
+
+		const isPreferredChainIncludedInChains = chains?.some((c) => c.id === chain?.id);
+		if (chain && mainChain?.id !== chain?.id && !isPreferredChainIncludedInChains) {
+			chains = [...(chains || []), chain];
+		}
+
 		try {
 			await wallet.connect({
-				chain,
+				chain: mainChain,
 				client: context.client,
 				walletConnect: {
 					projectId: walletConnect?.projectId,

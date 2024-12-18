@@ -51,6 +51,7 @@
 			{onFinishConnect}
 			{wallet}
 			{chain}
+			{chains}
 		/>
 	{:else}
 		<WalletNotSupported />
@@ -70,9 +71,9 @@
 		<InjectedWalletConnect
 			onGetStartedClick={() => (screen = 'get-started')}
 			{chains}
+			{chain}
 			{onFinishConnect}
 			{wallet}
-			{chain}
 		/>
 	{:else if $walletInfoQuery.data.mobile.native && $walletInfoQuery.data.mobile.universal}
 		<WalletconnectConnect
@@ -96,10 +97,10 @@
 	{:else if wallet.id}
 		<InjectedWalletConnect
 			onGetStartedClick={() => (screen = 'get-started')}
-			{chains}
 			{onFinishConnect}
 			{wallet}
 			{chain}
+			{chains}
 		/>
 	{:else}
 		<WalletGetStarted {wallet} walletInfo={$walletInfoQuery.data} {setCustomBackClick} />

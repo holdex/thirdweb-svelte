@@ -26,7 +26,7 @@
 
 				await activeWallet.autoConnect({
 					client: context.client,
-					chain: preferredChain
+					chain: preferredChain,
 				});
 				context.connect(activeWallet);
 			} catch (err) {

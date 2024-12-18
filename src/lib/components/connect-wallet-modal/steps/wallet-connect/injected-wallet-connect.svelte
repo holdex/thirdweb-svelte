@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getWalletInfoQuery } from '$/queries/wallets.js';
-	import type { Account, Wallet } from 'thirdweb/wallets';
+	import type { Wallet } from 'thirdweb/wallets';
 	import WalletLogoSpinner from './wallet-logo-spinner.svelte';
 	import type { Chain } from 'thirdweb';
 	import { wait } from '$/utils.js';
@@ -26,7 +26,7 @@
 			await wait(1000);
 			await wallet.connect({
 				client: context.client,
-				chain,
+				chain: chain || chains?.[0],
 				optionalChains: chains
 			});
 
