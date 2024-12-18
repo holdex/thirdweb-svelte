@@ -32,7 +32,7 @@
 
 		try {
 			await wallet.connect({
-				chain,
+				chain: chain || chains?.[0],
 				client: context.client,
 				walletConnect: {
 					projectId: walletConnect?.projectId,
