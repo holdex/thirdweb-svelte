@@ -1,3 +1,14 @@
+<p align="center">
+    <br />
+    <a href="https://thirdweb.com">
+        <img src="./logo.svg" width="200" alt=""/></a>
+    <br />
+</p>
+
+<h1 align="center"><a href='https://thirdweb.com/'>thirdweb</a> Svelte SDK</h1>
+
+<p align="center"><strong>Unofficial Svelte SDK for thirdweb</strong></p>
+
 # create-svelte
 
 Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
