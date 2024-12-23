@@ -70,13 +70,9 @@ But if you would like to develop the library and test your local code in your ot
 
 ```json
 {
-	// ...
 	"dependencies": {
-		// ...
 		"@holdex/thirdweb-svelte": "file:../path/to/your/local/thirdweb-svelte"
-		// ...
 	}
-	// ...
 }
 ```
 
