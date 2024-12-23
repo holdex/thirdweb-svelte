@@ -1,7 +1,7 @@
 <p align="center">
     <br />
     <a href="https://thirdweb.com">
-        <img src="./logo.svg" width="200" alt=""/></a>
+        <img src="https://github.com/user-attachments/assets/6e11cbb6-28b3-427f-baa3-3ee0de832539" width="200" alt=""/></a>
     <br />
 </p>
 
