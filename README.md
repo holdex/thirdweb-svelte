@@ -1,69 +1,90 @@
-<p align="center">
-    <br />
-    <a href="https://thirdweb.com">
-        <img src="./logo.svg" width="200" alt=""/></a>
-    <br />
-</p>
-
 <h1 align="center"><a href='https://thirdweb.com/'>thirdweb</a> Svelte SDK</h1>
 
 <p align="center"><strong>Unofficial Svelte SDK for thirdweb</strong></p>
 
-# create-svelte
+## How to Use
 
-Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+1. Install the library in your project
 
-Read more about creating a library [in the docs](https://svelte.dev/docs/kit/packaging).
-
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
+```
+pnpm add @holdex/thirdweb-svelte
 ```
 
-## Developing
+2. Import the provider and add it to your `src/routes/layout.svelte`
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+```svelte
+<script>
+	import { ThirdwebSvelteProvider } from '@holdex/thirdweb-svelte';
+</script>
 
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+<ThirdwebSvelteProvider clientId={YOUR_THIRDWEB_CLIENT_ID}>
+	<slot />
+</ThirdwebSvelteProvider>
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+3. Import the `ConnectWalletModal` component and use it in your page
 
-## Building
+```svelte
+<script>
+	import { ConnectWalletModal } from '@holdex/thirdweb-svelte';
+</script>
 
-To build your library:
-
-```bash
-npm run package
+<ConnectWalletModal
+	wallets={/* The list of web3 wallets that you want to show in the modal. Accepts array of `Wallet` type from thirdweb, which you can get by using `createWallet` imported from `thirdweb`. Optional, if not provided, the modal will show the default wallets. */}
+	chain={/* The chain that you want to connect to. Accepts `Chain` type from thirdweb, which you can get by using `defineChain` imported from `thirdweb` */}
+	chains={/* The list of chains that your user might want to switch to */}
+	bind:open={/* The state of the modal */}
+	onOpenChange={/* The callback function that will be called when the modal is opened or closed */}
+/>
 ```
 
-To create a production version of your showcase app:
+## Development Guidelines
 
-```bash
-npm run build
+### How to run
+
+1. Clone the repo
+2. Run `pnpm install`
+3. Run `pnpm dev`
+4. You should be able to see the app running at `http://localhost:5173`
+
+### Repo Structure
+
+- `src/lib` contains all the library's code
+- `src/lib/index.ts` is the entry point for the library
+- `src/routes` contains the app's code which will not be exported to npm, its just for testing and development purposes
+
+### Build Steps
+
+1. To build the package, run `pnpm package`
+2. To build the whole app, run `pnpm build`
+
+### Testing
+
+You can test the library using the app code in `src/routes`.
+
+But if you would like to develop the library and test your local code in your other projects which will be a consumer of this library, you can do the following:
+
+1. Run `pnpm package` in this repo
+1. Go to your consumer project
+1. Add or change the dependency in your consumer project to point to your local library
+
+```
+"@holdex/thirdweb-svelte": "file:../path/to/your/local/thirdweb-svelte"
 ```
 
-You can preview the production build with `npm run preview`.
+1. Run `pnpm install` in your consumer project
+1. You should be able to see the changes you made in this library reflected in your consumer project
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+Troubleshooting:
 
-## Publishing
-
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
-
-To publish your library to [npm](https://www.npmjs.com):
-
-```bash
-npm publish
-```
+- If you make changes to the library and run `pnpm package` but the changes are not reflected in your consumer project, you can try to remove `node_modules/.vite` and restart the dev server in your consumer project.
+- If you got error `exports not defined` in your consumer project, try to add the config below in your consumer project's `vite.config.js`
+  ```
+  export default defineConfig({
+    ...
+    resolve: {
+      preserveSymlinks: true,
+    },
+  })
+  ```
+- The changes may not be reflected if you run the consumer project through brave browser, but it should work on chrome.
