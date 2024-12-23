@@ -6,8 +6,8 @@
 
 1. Install the library in your project
 
-```
-pnpm add @holdex/thirdweb-svelte
+```bash
+pnpm i @holdex/thirdweb-svelte thirdweb
 ```
 
 2. Import the provider and add it to your `src/routes/layout.svelte`
@@ -68,8 +68,16 @@ But if you would like to develop the library and test your local code in your ot
 1. Go to your consumer project
 1. Add or change the dependency in your consumer project to point to your local library
 
-```
-"@holdex/thirdweb-svelte": "file:../path/to/your/local/thirdweb-svelte"
+```json
+{
+	// ...
+	"dependencies": {
+		// ...
+		"@holdex/thirdweb-svelte": "file:../path/to/your/local/thirdweb-svelte"
+		// ...
+	}
+	// ...
+}
 ```
 
 1. Run `pnpm install` in your consumer project
@@ -79,7 +87,7 @@ Troubleshooting:
 
 - If you make changes to the library and run `pnpm package` but the changes are not reflected in your consumer project, you can try to remove `node_modules/.vite` and restart the dev server in your consumer project.
 - If you got error `exports not defined` in your consumer project, try to add the config below in your consumer project's `vite.config.js`
-  ```
+  ```js
   export default defineConfig({
     ...
     resolve: {
