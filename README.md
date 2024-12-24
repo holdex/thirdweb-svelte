@@ -1,17 +1,16 @@
 <h1 align="center"><a href='https://thirdweb.com/'>thirdweb</a> Svelte SDK</h1>
-
-<p align="center"><strong>Unofficial Svelte SDK for thirdweb</strong></p>
+<p align="center"><strong>Svelte SDK for thirdweb</strong></p>
 
 ## How to Use
 
-1. Install the library in your project
-
+### 1. Installation
+Install both the Svelte SDK and the core thirdweb library:
 ```bash
 pnpm i @holdex/thirdweb-svelte thirdweb
 ```
 
-2. Import the provider and add it to your `src/routes/layout.svelte`
-
+### 2. Setup Provider
+Add the ThirdwebSvelteProvider to your `src/routes/layout.svelte`:
 ```svelte
 <script>
 	import { ThirdwebSvelteProvider } from '@holdex/thirdweb-svelte';
@@ -22,73 +21,93 @@ pnpm i @holdex/thirdweb-svelte thirdweb
 </ThirdwebSvelteProvider>
 ```
 
-3. Import the `ConnectWalletModal` component and use it in your page
-
+### 3. Implement Wallet Connection
+Import and use the ConnectWalletModal component in your pages:
 ```svelte
 <script>
 	import { ConnectWalletModal } from '@holdex/thirdweb-svelte';
 </script>
 
 <ConnectWalletModal
-	wallets={/* The list of web3 wallets that you want to show in the modal. Accepts array of `Wallet` type from thirdweb, which you can get by using `createWallet` imported from `thirdweb`. Optional, if not provided, the modal will show the default wallets. */}
-	chain={/* The chain that you want to connect to. Accepts `Chain` type from thirdweb, which you can get by using `defineChain` imported from `thirdweb` */}
-	chains={/* The list of chains that your user might want to switch to */}
-	bind:open={/* The state of the modal */}
-	onOpenChange={/* The callback function that will be called when the modal is opened or closed */}
+	wallets={/* Optional: Array of `Wallet` types from thirdweb (via `createWallet`).
+              If not provided, defaults to showing standard wallets */}
+	chain={/* Required: `Chain` type from thirdweb (via `defineChain`) */}
+	chains={/* Optional: Array of available chains for users to switch between */}
+	bind:open={/* Boolean to control modal visibility */}
+	onOpenChange={/* Callback function for modal open/close events */}
 />
 ```
 
 ## Development Guidelines
 
-### How to run
+### Getting Started
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   pnpm install
+   ```
+3. Start the development server:
+   ```bash
+   pnpm dev
+   ```
+4. Visit `http://localhost:5173` to see the test page with working wallet connection functionality
 
-1. Clone the repo
-2. Run `pnpm install`
-3. Run `pnpm dev`
-4. You should be able to see the app running at `http://localhost:5173`
+### Repository Structure
+- `src/lib/` - Contains all the library's source code
+- `src/lib/index.ts` - Main entry point for the library
+- `src/routes/` - Contains the test application code (not included in npm package)
 
-### Repo Structure
-
-- `src/lib` contains all the library's code
-- `src/lib/index.ts` is the entry point for the library
-- `src/routes` contains the app's code which will not be exported to npm, its just for testing and development purposes
-
-### Build Steps
-
-1. To build the package, run `pnpm package`
-2. To build the whole app, run `pnpm build`
+### Building
+- To build the package for npm:
+  ```bash
+  pnpm package
+  ```
+- To build the complete application:
+  ```bash
+  pnpm build
+  ```
 
 ### Testing
+You can test the library using the app code in `src/routes`. This directory contains a complete Svelte application that serves as a testing environment, making it easy to verify your changes to the SDK code in `src/lib`.
 
-You can test the library using the app code in `src/routes`.
+### Testing with Local Projects
+To test your local library changes in another project:
 
-But if you would like to develop the library and test your local code in your other projects which will be a consumer of this library, you can do the following:
+1. Build the package:
+   ```bash
+   pnpm package
+   ```
+2. In your consumer project, update the dependency in `package.json`:
+   ```json
+   {
+     "dependencies": {
+       "@holdex/thirdweb-svelte": "file:../path/to/your/local/thirdweb-svelte"
+     }
+   }
+   ```
+3. Reinstall dependencies in your consumer project:
+   ```bash
+   pnpm install
+   ```
 
-1. Run `pnpm package` in this repo
-1. Go to your consumer project
-1. Add or change the dependency in your consumer project to point to your local library
+### Troubleshooting
 
-```json
-{
-	"dependencies": {
-		"@holdex/thirdweb-svelte": "file:../path/to/your/local/thirdweb-svelte"
-	}
-}
-```
+If you encounter issues:
 
-1. Run `pnpm install` in your consumer project
-1. You should be able to see the changes you made in this library reflected in your consumer project
+1. **Changes not reflecting:** 
+   - Remove `node_modules/.vite` directory
+   - Restart the development server
 
-Troubleshooting:
+2. **"exports not defined" error:**
+   - Add the following to your consumer project's `vite.config.js`:
+   ```js
+   export default defineConfig({
+     resolve: {
+       preserveSymlinks: true,
+     }
+   })
+   ```
 
-- If you make changes to the library and run `pnpm package` but the changes are not reflected in your consumer project, you can try to remove `node_modules/.vite` and restart the dev server in your consumer project.
-- If you got error `exports not defined` in your consumer project, try to add the config below in your consumer project's `vite.config.js`
-  ```js
-  export default defineConfig({
-    ...
-    resolve: {
-      preserveSymlinks: true,
-    },
-  })
-  ```
-- The changes may not be reflected if you run the consumer project through brave browser, but it should work on chrome.
+3. **Browser compatibility:** 
+   - Use Chrome instead of Brave for development
+   - Brave browser may not properly reflect changes during development
