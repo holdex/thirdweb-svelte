@@ -30,7 +30,8 @@ const buttonVariants = tv({
 	},
 	defaultVariants: {
 		variant: 'default',
-		size: 'default'
+		size: 'default',
+		rounding: 'default'
 	}
 });
 
