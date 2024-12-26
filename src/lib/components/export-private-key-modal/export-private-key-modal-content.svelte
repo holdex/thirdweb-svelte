@@ -4,6 +4,7 @@
 	import { getThirdwebSvelteContext } from '../thirdweb-svelte-provider/context.js';
 	import type { ExportPrivateKeyModalProps } from './index.js';
 	import { Spinner } from '../ui/spinner/index.js';
+	import { NotSupportedIcon } from '../ui/not-supported-icon/index.js';
 
 	export let wallet: Wallet | null;
 	export let theme: ExportPrivateKeyModalProps['theme'] = 'dark';
@@ -17,7 +18,7 @@
 	}&theme=${theme}`;
 </script>
 
-{#if wallet}
+{#if wallet && wallet.id === 'inApp'}
 	{#if isLoading}
 		<div
 			class="twsv-absolute twsv-flex twsv-h-full twsv-w-full twsv-items-center twsv-justify-center"
@@ -34,5 +35,18 @@
 		src={iframeSrc}
 	/>
 {:else}
-	<div>No wallet found</div>
+	<div class="twsv-flex twsv-h-[250px] twsv-w-full twsv-items-center twsv-justify-center">
+		<div
+			class="twsv-flex twsv-min-h-72 twsv-flex-col twsv-items-center twsv-justify-center twsv-gap-6 twsv-text-center"
+		>
+			<NotSupportedIcon />
+			<span>
+				{#if wallet}
+					Only available for In-App Wallets
+				{:else}
+					No wallet found
+				{/if}</span
+			>
+		</div>
+	</div>
 {/if}
