@@ -2,6 +2,9 @@
 	import Button from '$/components/ui/button/button.svelte';
 	import Copy from 'lucide-svelte/icons/copy';
 	import GithubIcon from './github-icon.svelte';
+	import { toast } from 'svelte-sonner';
+
+	const command = 'pnpm i @holdex/thirdweb-svelte thirdweb';
 </script>
 
 <main class="twsv-flex twsv-min-h-screen twsv-w-full twsv-flex-col twsv-items-center">
@@ -16,7 +19,7 @@
 				</span>
 			</div>
 			<h1 class="twsv-text-3xl twsv-font-semibold md:twsv-text-5xl">thirdweb-svelte</h1>
-			<h2 class="twsv-text-base twsv-text-lg twsv-text-foreground/85">
+			<h2 class="twsv-text-base twsv-text-foreground/85 md:twsv-text-lg">
 				Svelte SDK for seamless thirdweb integration
 			</h2>
 		</div>
@@ -49,6 +52,10 @@
 					size="auto"
 					class="twsv-rounded-lg twsv-bg-transparent twsv-p-2 twsv-text-muted-foreground"
 					variant="outline"
+					on:click={() => {
+						navigator.clipboard.writeText(command);
+						toast.success('Copied to clipboard!');
+					}}
 				>
 					<Copy class="twsv-h-4 twsv-w-4" />
 				</Button>
@@ -56,7 +63,7 @@
 			<div
 				class="twsv-p-4 twsv-text-left twsv-font-mono twsv-text-sm twsv-text-foreground/70 md:twsv-p-6"
 			>
-				<span>pnpm i @holdex/thirdweb-svelte thirdweb</span>
+				<span>{command}</span>
 			</div>
 		</div>
 		<div class="twsv-mt-10 twsv-flex twsv-flex-wrap twsv-items-center twsv-gap-x-2 twsv-gap-y-3">
