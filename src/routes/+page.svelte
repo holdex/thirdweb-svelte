@@ -28,6 +28,7 @@
 				rounding="full"
 				class="twsv-px-5 twsv-py-3 md:twsv-text-base"
 				size="auto"
+				href="/try-me"
 			>
 				Try Me!
 			</Button>
