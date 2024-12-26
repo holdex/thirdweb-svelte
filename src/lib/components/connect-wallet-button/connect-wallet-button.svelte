@@ -24,7 +24,7 @@
 {:else}
 	<div class="twsv-flex twsv-gap-2">
 		<Button size="lg" variant="ghost" on:click={() => context.disconnect()}>Disconnect</Button>
-		{#if $wallet}
+		{#if $wallet && $wallet.id === 'inApp'}
 			<Button
 				size="lg"
 				variant="ghost"

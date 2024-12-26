@@ -20,11 +20,9 @@
 
 {#if wallet && wallet.id === 'inApp'}
 	{#if isLoading}
-		<div
-			class="twsv-absolute twsv-flex twsv-h-full twsv-w-full twsv-items-center twsv-justify-center"
-		>
-			<Spinner class="twsv-h-8 twsv-w-8" />
-		</div>
+		<Spinner
+			class="twsv-absolute twsv-left-1/2 twsv-top-1/2 twsv-h-8 twsv-w-8 -twsv-translate-x-1/2 -twsv-translate-y-1/2"
+		/>
 	{/if}
 	<iframe
 		id={`export-wallet-${wallet.id}`}
