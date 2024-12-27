@@ -10,6 +10,7 @@
 	let className: $$Props['class'] = undefined;
 	export let variant: $$Props['variant'] = 'default';
 	export let size: $$Props['size'] = 'default';
+	export let rounding: $$Props['rounding'] = 'default';
 	export let builders: $$Props['builders'] = [];
 	export let loading = false;
 	export { className as class };
@@ -17,7 +18,7 @@
 
 <ButtonPrimitive.Root
 	{builders}
-	class={cn(buttonVariants({ variant, size }), className)}
+	class={cn(buttonVariants({ variant, size, rounding }), className)}
 	type="button"
 	{...$$restProps}
 	disabled={loading || $$restProps.disabled}

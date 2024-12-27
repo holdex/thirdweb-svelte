@@ -3,7 +3,7 @@ import type { Button as ButtonPrimitive } from 'bits-ui';
 import Root from './button.svelte';
 
 const buttonVariants = tv({
-	base: 'twsv-ring-offset-background focus-visible:twsv-ring-ring twsv-inline-flex twsv-items-center twsv-justify-center twsv-whitespace-nowrap twsv-rounded-md twsv-text-sm twsv-font-medium twsv-transition-colors focus-visible:twsv-outline-none focus-visible:twsv-ring-2 focus-visible:twsv-ring-offset-2 disabled:twsv-pointer-events-none disabled:twsv-opacity-50 twsv-relative active:twsv-translate-y-px',
+	base: 'twsv-ring-offset-background focus-visible:twsv-ring-ring twsv-inline-flex twsv-items-center twsv-justify-center twsv-whitespace-nowrap twsv-text-sm twsv-font-medium twsv-transition-colors focus-visible:twsv-outline-none focus-visible:twsv-ring-2 focus-visible:twsv-ring-offset-2 disabled:twsv-pointer-events-none disabled:twsv-opacity-50 twsv-relative active:twsv-translate-y-px',
 	variants: {
 		variant: {
 			default: 'twsv-bg-primary twsv-text-primary-foreground hover:twsv-bg-primary/90',
@@ -18,15 +18,20 @@ const buttonVariants = tv({
 		},
 		size: {
 			default: 'twsv-h-11 twsv-px-4 twsv-py-2',
-			sm: 'twsv-h-9 twsv-rounded-md twsv-px-3',
-			lg: 'twsv-h-11 twsv-rounded-md twsv-px-8',
+			sm: 'twsv-h-9 twsv-px-3',
+			lg: 'twsv-h-11 twsv-px-8',
 			icon: 'twsv-h-10 twsv-w-10',
 			auto: 'twsv-h-auto twsv-w-auto'
+		},
+		rounding: {
+			default: 'twsv-rounded-md',
+			full: 'twsv-rounded-full'
 		}
 	},
 	defaultVariants: {
 		variant: 'default',
-		size: 'default'
+		size: 'default',
+		rounding: 'default'
 	}
 });
 
