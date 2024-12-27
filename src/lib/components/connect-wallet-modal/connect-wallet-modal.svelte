@@ -8,7 +8,6 @@
 	import { type ConnectWalletModalStep } from './steps/index.js';
 	import { cn } from '$/utils.js';
 	import ConnectWalletModalContent from './connect-wallet-modal-content.svelte';
-	import { getThirdwebSvelteContext } from '../thirdweb-svelte-provider/context.js';
 	import AutoConnect from '../auto-connect.svelte';
 	import { getDefaultWallets } from '$/utils/wallets.js';
 
@@ -107,7 +106,7 @@
 					<Button
 						variant="ghost"
 						size="auto"
-						class="twsv-absolute -twsv-left-2 twsv-top-0 twsv-text-muted-foreground"
+						class="twsv-absolute -twsv-left-2 twsv-top-6 twsv-text-muted-foreground"
 						on:click={() => {
 							if (customBackClick) customBackClick();
 							else setStep('provider-selector');
