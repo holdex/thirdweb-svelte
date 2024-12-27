@@ -32,6 +32,18 @@
 				rounding="full"
 				class="twsv-px-5 twsv-py-3 md:twsv-text-base"
 				size="auto"
+				disconnectButtonProps={{
+					variant: 'outline',
+					rounding: 'full',
+					size: 'auto',
+					class: 'twsv-px-5 twsv-py-3 md:twsv-text-base'
+				}}
+				exportPrivateKeyButtonProps={{
+					variant: 'outline',
+					rounding: 'full',
+					size: 'auto',
+					class: 'twsv-px-5 twsv-py-3 md:twsv-text-base'
+				}}
 			>
 				<span slot="connect">Try Me!</span>
 			</ConnectWalletButton>
