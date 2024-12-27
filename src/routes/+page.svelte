@@ -3,6 +3,7 @@
 	import Copy from 'lucide-svelte/icons/copy';
 	import GithubIcon from './github-icon.svelte';
 	import { toast } from 'svelte-sonner';
+	import ConnectWalletButton from '$/components/connect-wallet-button/connect-wallet-button.svelte';
 
 	const command = 'pnpm i @holdex/thirdweb-svelte thirdweb';
 </script>
@@ -26,15 +27,14 @@
 		<div
 			class="twsv-mt-6 twsv-rounded-full twsv-border-2 twsv-border-dashed twsv-border-secondary twsv-p-3 md:twsv-p-4"
 		>
-			<Button
+			<ConnectWalletButton
 				variant="accent"
 				rounding="full"
 				class="twsv-px-5 twsv-py-3 md:twsv-text-base"
 				size="auto"
-				href="/try-me"
 			>
-				Try Me!
-			</Button>
+				<span slot="connect">Try Me!</span>
+			</ConnectWalletButton>
 		</div>
 
 		<div

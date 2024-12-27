@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { getThirdwebSvelteContext } from '$/components/thirdweb-svelte-provider/index.js';
-	import type { Wallet } from 'thirdweb/wallets';
 	import ConnectWalletModal from '../connect-wallet-modal/connect-wallet-modal.svelte';
 	import { ExportPrivateKeyModal } from '../export-private-key-modal/index.js';
 	import { Button } from '../ui/button/index.js';
@@ -18,9 +17,15 @@
 </script>
 
 {#if $isAutoConnecting}
-	<Button size="lg" loading />
+	<Button size="lg" loading {...$$restProps} />
 {:else if !$account}
-	<Button size="lg" on:click={() => (isOpen = !isOpen)}>Connect</Button>
+	<Button size="lg" on:click={() => (isOpen = !isOpen)} {...$$restProps}>
+		{#if $$slots.connect}
+			<slot name="connect" />
+		{:else}
+			Connect
+		{/if}
+	</Button>
 {:else}
 	<div class="twsv-flex twsv-gap-2">
 		<Button size="lg" variant="ghost" on:click={() => context.disconnect()}>Disconnect</Button>
