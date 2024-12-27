@@ -14,8 +14,8 @@
 
 	let isLoading = true;
 
-	const baseDomain = 'embedded-wallet.thirdweb.com';
-	const iframeSrc = `https://${baseDomain}/sdk/2022-08-12/embedded-wallet/export-private-key?clientId=${
+	const baseDomain = 'https://embedded-wallet.thirdweb.com';
+	const iframeSrc = `${baseDomain}/sdk/2022-08-12/embedded-wallet/export-private-key?clientId=${
 		client.clientId
 	}&theme=${theme}`;
 
