@@ -59,6 +59,20 @@ If you would like to allow users who logged in with `inApp` wallet (e.g. Google,
 />
 ```
 
+Note that this modal is only available for inApp wallets. If you would like to check if the user is connected with an inApp wallet, you can check it by using the code below:
+
+```svelte
+<script>
+	import { getThirdwebSvelteContext } from '@holdex/thirdweb-svelte';
+
+	const { wallet } = getThirdwebSvelteContext();
+</script>
+
+{#if wallet.type === 'inApp'}
+	<!-- Show Export Private Key button -->
+{/if}
+```
+
 ## Development Guidelines
 
 ### Getting Started
