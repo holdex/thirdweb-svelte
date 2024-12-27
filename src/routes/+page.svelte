@@ -79,7 +79,7 @@
 				<span>View on Github</span>
 			</Button>
 			<Button
-				href="https://thirdweb.com"
+				href="https://portal.thirdweb.com/connect"
 				target="_blank"
 				rel="noopener noreferrer"
 				size="auto"
