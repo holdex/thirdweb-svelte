@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { getThirdwebSvelteContext } from '$/components/thirdweb-svelte-provider/index.js';
-	import type { Wallet } from 'thirdweb/wallets';
 	import ConnectWalletModal from '../connect-wallet-modal/connect-wallet-modal.svelte';
 	import { ExportPrivateKeyModal } from '../export-private-key-modal/index.js';
 	import { Button } from '../ui/button/index.js';
