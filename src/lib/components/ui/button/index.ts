@@ -18,8 +18,8 @@ const buttonVariants = tv({
 		},
 		size: {
 			default: 'twsv-h-11 twsv-px-4 twsv-py-2',
-			sm: 'twsv-h-9 twsv-rounded-md twsv-px-3',
-			lg: 'twsv-h-11 twsv-rounded-md twsv-px-8',
+			sm: 'twsv-h-9 twsv-px-3',
+			lg: 'twsv-h-11 twsv-px-8',
 			icon: 'twsv-h-10 twsv-w-10',
 			auto: 'twsv-h-auto twsv-w-auto'
 		},
