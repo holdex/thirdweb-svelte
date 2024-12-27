@@ -12,6 +12,7 @@
 	import { WalletConnect } from './steps/wallet-connect/index.js';
 	import Thirdweb from './components/thirdweb.svelte';
 	import type { ConnectWalletModalProps } from './index.js';
+	import { OtpVerification } from './steps/otp-verification/index.js';
 
 	export let step: ConnectWalletModalStep;
 	export let setStep: ConnectWalletModalStepProps<'provider-selector'>['setStep'];
@@ -43,7 +44,8 @@
 		};
 	};
 
-	$: hideFooter = step === 'oauth-error' || step === 'oauth-loading' || step === 'wallet-connect';
+	const hideFooterSteps = ['otp-verification', 'oauth-error', 'oauth-loading', 'wallet-connect'];
+	$: hideFooter = hideFooterSteps.includes(step);
 </script>
 
 <div
@@ -53,6 +55,18 @@
 	<div class="twsv-flex twsv-flex-col" use:heightObserver>
 		{#if step === 'provider-selector'}
 			<ProviderSelector
+				{wallets}
+				{chains}
+				{walletConnect}
+				{setStep}
+				{onFinishConnect}
+				{chain}
+				{additionalProps}
+				{setModalOpen}
+				{setCustomBackClick}
+			/>
+		{:else if step === 'otp-verification'}
+			<OtpVerification
 				{wallets}
 				{chains}
 				{walletConnect}

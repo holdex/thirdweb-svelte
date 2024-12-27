@@ -19,7 +19,7 @@
 	{/each}
 </div>
 <div class="twsv-mt-4">
-	<EmailInput />
+	<EmailInput {setStep} />
 </div>
 <div class="twsv-relative">
 	<Separator orientation="horizontal" class="twsv-relative twsv-my-6" />

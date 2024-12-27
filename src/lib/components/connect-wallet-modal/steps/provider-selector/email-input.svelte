@@ -5,6 +5,9 @@
 	import { validateEmail } from '$/utils/validation.js';
 	import ArrowRight from 'lucide-svelte/icons/arrow-right';
 	import { onMount } from 'svelte';
+	import type { ConnectWalletModalStepProps } from '../index.js';
+
+	export let setStep: ConnectWalletModalStepProps<'provider-selector'>['setStep'];
 
 	let value = '';
 	let error = '';
@@ -33,6 +36,7 @@
 	const handleSubmit = (event: SubmitEvent) => {
 		event.preventDefault();
 		showError = true;
+		setStep('otp-verification', { email: value });
 	};
 </script>
 

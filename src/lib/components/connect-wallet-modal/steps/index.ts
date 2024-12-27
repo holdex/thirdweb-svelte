@@ -7,7 +7,8 @@ export const connectWalletModalSteps = [
 	'oauth-loading',
 	'oauth-error',
 	'wallet-selector',
-	'wallet-connect'
+	'wallet-connect',
+	'otp-verification'
 ] as const;
 export type ConnectWalletModalStep = (typeof connectWalletModalSteps)[number];
 
@@ -22,6 +23,7 @@ type ConnectWalletModalStepsAdditionalProps = {
 	'wallet-connect': {
 		wallet: Wallet;
 	};
+	'otp-verification': { email: string };
 };
 
 export type ConnectWalletModalStepProps<CurrentStep extends ConnectWalletModalStep> = {
