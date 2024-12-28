@@ -82,7 +82,8 @@ const config: Config = {
 				sm: 'calc(var(--twsv-radius) - 4px)'
 			},
 			fontFamily: {
-				sans: [...fontFamily.sans]
+				sans: ['Inter', ...fontFamily.sans],
+				mono: ['var(--andale-mono)', ...fontFamily.mono]
 			}
 		}
 	},

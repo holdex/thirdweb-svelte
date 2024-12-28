@@ -99,6 +99,9 @@ importers:
       svelte-check:
         specifier: ^4.0.0
         version: 4.1.1(svelte@4.2.19)(typescript@5.7.2)
+      svelte-sonner:
+        specifier: ^0.3.28
+        version: 0.3.28(svelte@4.2.19)
       tailwind-scrollbar:
         specifier: ^3.1.0
         version: 3.1.0(tailwindcss@3.4.16)
@@ -2818,6 +2821,11 @@ packages:
     resolution: {integrity: sha512-r4HbLYripCLECgraqJMvsykW/8FaPBd1hLkt3ejJzJRfhhOnCgGTo6lJT27qrestDFbiIASQV3xOnjRr/D6cGw==}
     peerDependencies:
       svelte: ^4.0.0
+
+  svelte-sonner@0.3.28:
+    resolution: {integrity: sha512-K3AmlySeFifF/cKgsYNv5uXqMVNln0NBAacOYgmkQStLa/UoU0LhfAACU6Gr+YYC8bOCHdVmFNoKuDbMEsppJg==}
+    peerDependencies:
+      svelte: ^3.0.0 || ^4.0.0 || ^5.0.0-next.1
 
   svelte2tsx@0.7.30:
     resolution: {integrity: sha512-sHXK/vw/sVJmFuPSq6zeKrtuZKvo0jJyEi8ybN0dfrqSYVvHu8zFbO0zQKAL8y/fYackYojH41EJGe6v8rd5fw==}
@@ -6062,6 +6070,10 @@ snapshots:
       pascal-case: 3.1.2
       svelte: 3.59.2
       typescript: 5.7.2
+
+  svelte-sonner@0.3.28(svelte@4.2.19):
+    dependencies:
+      svelte: 4.2.19
 
   svelte2tsx@0.7.30(svelte@4.2.19)(typescript@5.7.2):
     dependencies:
