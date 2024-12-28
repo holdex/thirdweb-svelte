@@ -5,19 +5,48 @@
 	import SvelteOtp from '@k4ung/svelte-otp';
 	import { cn } from '$/utils.js';
 	import { Button } from '$/components/ui/button/index.js';
+	import { preAuthenticate } from 'thirdweb/wallets';
+	import { getThirdwebSvelteContext } from '$/components/thirdweb-svelte-provider/context.js';
 
 	type $$Props = ConnectWalletModalStepProps<'otp-verification'>;
 	export let additionalProps: $$Props['additionalProps'];
 
+	const { client } = getThirdwebSvelteContext();
+
+	type VerificationStatus =
+		| 'verifying'
+		| 'invalid'
+		| 'linking_error'
+		| 'valid'
+		| 'idle'
+		| 'payment_required';
+	let verifyStatus: VerificationStatus = 'idle';
 	type AccountStatus = 'sending' | 'sent' | 'error';
 	let accountStatus: AccountStatus = 'sending';
 
 	let otp = '';
 
-	onMount(async () => {
-		// TODO: send otp
-		await new Promise((resolve) => setTimeout(resolve, 500));
-		accountStatus = 'sent';
+	async function sendOtp() {
+		accountStatus = 'sending';
+		otp = '';
+		verifyStatus = 'idle';
+
+		try {
+			await preAuthenticate({
+				email: additionalProps.email,
+				strategy: 'email',
+				client
+			});
+			accountStatus = 'sent';
+		} catch (err) {
+			console.error(err);
+			verifyStatus = 'idle';
+			accountStatus = 'error';
+		}
+	}
+
+	onMount(() => {
+		sendOtp();
 	});
 </script>
 
@@ -43,7 +72,7 @@
 		<div
 			class="-twsv-ml-6 -twsv-mr-6 twsv-self-stretch twsv-border-t twsv-border-border twsv-pb-1 twsv-pt-4"
 		>
-			<Button variant="link" size="auto">Resend verification code</Button>
+			<Button variant="link" size="auto" on:click={sendOtp}>Resend verification code</Button>
 		</div>
 	</div>
 {/if}
