@@ -3,6 +3,7 @@
 	import { Separator } from '$/components/ui/separator/index.js';
 	import { SocialIcon } from '../../components/social-icon/index.js';
 	import type { ConnectWalletModalStepProps } from '../index.js';
+	import EmailInput from './email-input.svelte';
 	import { SUPPORTED_SOCIAL_PROVIDERS } from './index.js';
 	import SocialProviderButton from './social-provider-button.svelte';
 
@@ -16,6 +17,9 @@
 	{#each SUPPORTED_SOCIAL_PROVIDERS as provider}
 		<SocialProviderButton {chain} {setStep} {provider} {onFinishConnect} />
 	{/each}
+</div>
+<div class="twsv-mt-4">
+	<EmailInput {setStep} />
 </div>
 <div class="twsv-relative">
 	<Separator orientation="horizontal" class="twsv-relative twsv-my-6" />
