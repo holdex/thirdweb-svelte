@@ -26,7 +26,7 @@
 	type AccountStatus = 'sending' | 'sent' | 'error';
 	let accountStatus: AccountStatus = 'sent';
 	let error: string | null = null;
-	let isSendingOtpOnMount = false;
+	let isSendingOtpOnMount = true;
 
 	let otp = '';
 
