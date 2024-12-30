@@ -1,3 +1,16 @@
+@font-face {
+	font-family: 'Andale Mono Regular';
+	font-style: normal;
+	font-weight: normal;
+	src:
+		local('Andale Mono Regular'),
+		url('/fonts/andale-mono.woff') format('woff');
+}
+
+:root {
+	--andale-mono: 'Andale Mono Regular';
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

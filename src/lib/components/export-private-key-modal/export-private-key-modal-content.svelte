@@ -5,6 +5,7 @@
 	import type { ExportPrivateKeyModalProps } from './index.js';
 	import { Spinner } from '../ui/spinner/index.js';
 	import { NotSupportedIcon } from '../ui/not-supported-icon/index.js';
+	import { onDestroy, onMount } from 'svelte';
 
 	export let wallet: Wallet | null;
 	export let theme: ExportPrivateKeyModalProps['theme'] = 'dark';
@@ -13,9 +14,45 @@
 
 	let isLoading = true;
 
-	const iframeSrc = `https://embedded-wallet.thirdweb.com/sdk/2022-08-12/embedded-wallet/export-private-key?clientId=${
+	const baseDomain = 'https://embedded-wallet.thirdweb.com';
+	const iframeSrc = `${baseDomain}/sdk/2022-08-12/embedded-wallet/export-private-key?clientId=${
 		client.clientId
 	}&theme=${theme}`;
+
+	const loginReady = async (e: MessageEvent<{ eventType: string }>) => {
+		if (typeof e.data === 'object' && 'eventType' in e.data && e.origin === baseDomain) {
+			if (e.data.eventType === 'exportPrivateKeyIframeLoaded') {
+				const iframe = document.getElementById(`export-wallet-${wallet?.id}`);
+
+				if (!(iframe instanceof HTMLIFrameElement)) {
+					return;
+				}
+				if (!wallet) {
+					return;
+				}
+
+				const AUTH_TOKEN_LOCAL_STORAGE_PREFIX = 'walletToken';
+				const authToken = localStorage.getItem(
+					`${AUTH_TOKEN_LOCAL_STORAGE_PREFIX}-${client.clientId}`
+				);
+				if (iframe?.contentWindow) {
+					iframe.contentWindow.postMessage(
+						{
+							eventType: 'initExportPrivateKey',
+							authToken
+						},
+						e.origin
+					);
+				}
+			}
+		}
+	};
+	onMount(() => {
+		window.addEventListener('message', loginReady);
+	});
+	onDestroy(() => {
+		window.removeEventListener('message', loginReady);
+	});
 </script>
 
 {#if wallet && wallet.id === 'inApp'}
