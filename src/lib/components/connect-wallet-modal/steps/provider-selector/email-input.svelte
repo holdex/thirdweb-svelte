@@ -19,8 +19,8 @@
 		showError = false;
 	});
 
-	const handleChange: (e: FormInputEvent<KeyboardEvent>) => void = (event) => {
-		if (event.key === 'Enter') {
+	const handleChange: (e: FormInputEvent<KeyboardEvent | FormInputEvent>) => void = (event) => {
+		if ('key' in event && event.key === 'Enter') {
 			showError = true;
 		}
 		const input = event.target as HTMLInputElement;
@@ -43,6 +43,7 @@
 <form class="twsv-relative" on:submit={handleSubmit}>
 	<Input
 		{value}
+		on:change={handleChange}
 		on:keypress={handleChange}
 		placeholder="Email address"
 		class={cn('twsv-pr-16 twsv-text-base', shownError && '!twsv-border-red-500')}
