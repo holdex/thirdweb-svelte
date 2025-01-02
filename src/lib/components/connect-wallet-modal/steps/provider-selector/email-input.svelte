@@ -36,6 +36,9 @@
 	const handleSubmit = (event: SubmitEvent) => {
 		event.preventDefault();
 		showError = true;
+		if (!validateEmail(value)) {
+			return;
+		}
 		setStep('otp-verification', { email: value });
 	};
 </script>
