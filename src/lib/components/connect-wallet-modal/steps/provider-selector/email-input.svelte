@@ -46,6 +46,7 @@
 <form class="twsv-relative" on:submit={handleSubmit}>
 	<Input
 		{value}
+		type="email"
 		on:change={handleChange}
 		on:keypress={handleChange}
 		placeholder="Email address"
