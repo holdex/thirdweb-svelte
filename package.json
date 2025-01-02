@@ -67,7 +67,6 @@
 	},
 	"dependencies": {
 		"@jimmyverburgt/svelte-input-otp": "^0.0.3",
-		"@k4ung/svelte-otp": "^0.0.9",
 		"@tanstack/svelte-query": "^5.62.2",
 		"bits-ui": "^0.21.16",
 		"clsx": "^2.1.1",

@@ -11,9 +11,6 @@ importers:
       '@jimmyverburgt/svelte-input-otp':
         specifier: ^0.0.3
         version: 0.0.3(svelte@4.2.19)
-      '@k4ung/svelte-otp':
-        specifier: ^0.0.9
-        version: 0.0.9(typescript@5.7.2)
       '@tanstack/svelte-query':
         specifier: ^5.62.2
         version: 5.62.2(svelte@4.2.19)
@@ -535,9 +532,6 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
-
-  '@k4ung/svelte-otp@0.0.9':
-    resolution: {integrity: sha512-PvAwblltBpRfn/+JMtKMhxfhakfSgEQFVmO3+gqJmudq+LRl2i+kiYZOlh5+HhtnzeS3xWMypVdGJlC0UbxcyA==}
 
   '@lit-labs/ssr-dom-shim@1.2.1':
     resolution: {integrity: sha512-wx4aBmgeGvFmOKucFKY+8VFJSYZxs9poN3SDNQFF6lT6NrQUnHiPB2PWz2sc4ieEcAaYYzN+1uWahEeTq2aRIQ==}
@@ -1903,10 +1897,6 @@ packages:
   hey-listen@1.0.8:
     resolution: {integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==}
 
-  highlight.js@11.11.1:
-    resolution: {integrity: sha512-Xwwo44whKBVCYoliBQwaPvtd/2tYFkRQtXDWj1nackaV2JPXx3L0+Jvd8/qCJ2p+ML0/XVkJ2q+Mr+UVdpJK5w==}
-    engines: {node: '>=12.0.0'}
-
   hmac-drbg@1.0.1:
     resolution: {integrity: sha512-Tti3gMqLdZfhOQY1Mzf/AanLiqh1WTiJgEj26ZuYQ9fbkLomzGchCws4FyrSd4VkpBfiNhaE1On+lOz894jvXg==}
 
@@ -2138,11 +2128,6 @@ packages:
 
   magic-string@0.30.14:
     resolution: {integrity: sha512-5c99P1WKTed11ZC0HMJOj6CDIue6F8ySu+bJL+85q1zBEIY8IklrJ1eiKC2NDRh3Ct3FcvmJPyQHb9erXMTJNw==}
-
-  marked@4.3.0:
-    resolution: {integrity: sha512-PRsaiG84bK+AMvxziE/lCFss8juXjNaWzVbN5tXAm4XjeaS9NAHhop+PjQxz2A9h8Q4M/xGmzP8vqNwy6JeK0A==}
-    engines: {node: '>= 12'}
-    hasBin: true
 
   mdn-data@2.0.30:
     resolution: {integrity: sha512-GaqWWShW4kv/G9IEucWScBx9G1/vsFZZJUO+tD26M8J8z3Kw5RDQjaoZe03YAClgeS/SWPOcb4nkFBTEi5DUEA==}
@@ -2846,10 +2831,6 @@ packages:
     peerDependencies:
       svelte: ^3.55 || ^4.0.0-next.0 || ^4.0 || ^5.0.0-next.0
       typescript: ^4.9.4 || ^5.0.0
-
-  svelte@3.59.2:
-    resolution: {integrity: sha512-vzSyuGr3eEoAtT/A6bmajosJZIUWySzY2CzB3w2pgPvnkUjGqlDnsNnA0PMO+mMAhuyMul6C2uuZzY6ELSkzyA==}
-    engines: {node: '>= 8'}
 
   svelte@4.2.19:
     resolution: {integrity: sha512-IY1rnGr6izd10B0A8LqsBfmlT5OILVuZ7XsI0vdGPEvuonFV7NYEUK4dAkm9Zg2q0Um92kYjTpS1CAP3Nh/KWw==}
@@ -3691,15 +3672,6 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@k4ung/svelte-otp@0.0.9(typescript@5.7.2)':
-    dependencies:
-      '@sveltejs/package': 2.3.7(svelte@3.59.2)(typescript@5.7.2)
-      highlight.js: 11.11.1
-      marked: 4.3.0
-      svelte: 3.59.2
-    transitivePeerDependencies:
-      - typescript
-
   '@lit-labs/ssr-dom-shim@1.2.1': {}
 
   '@lit/reactive-element@1.6.3':
@@ -4191,17 +4163,6 @@ snapshots:
       svelte: 4.2.19
       tiny-glob: 0.2.9
       vite: 5.4.11
-
-  '@sveltejs/package@2.3.7(svelte@3.59.2)(typescript@5.7.2)':
-    dependencies:
-      chokidar: 4.0.1
-      kleur: 4.1.5
-      sade: 1.8.1
-      semver: 7.6.3
-      svelte: 3.59.2
-      svelte2tsx: 0.7.30(svelte@3.59.2)(typescript@5.7.2)
-    transitivePeerDependencies:
-      - typescript
 
   '@sveltejs/package@2.3.7(svelte@4.2.19)(typescript@5.7.2)':
     dependencies:
@@ -5265,8 +5226,6 @@ snapshots:
 
   hey-listen@1.0.8: {}
 
-  highlight.js@11.11.1: {}
-
   hmac-drbg@1.0.1:
     dependencies:
       hash.js: 1.1.7
@@ -5481,8 +5440,6 @@ snapshots:
   magic-string@0.30.14:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
-
-  marked@4.3.0: {}
 
   mdn-data@2.0.30: {}
 
@@ -6088,21 +6045,12 @@ snapshots:
     dependencies:
       svelte: 4.2.19
 
-  svelte2tsx@0.7.30(svelte@3.59.2)(typescript@5.7.2):
-    dependencies:
-      dedent-js: 1.0.1
-      pascal-case: 3.1.2
-      svelte: 3.59.2
-      typescript: 5.7.2
-
   svelte2tsx@0.7.30(svelte@4.2.19)(typescript@5.7.2):
     dependencies:
       dedent-js: 1.0.1
       pascal-case: 3.1.2
       svelte: 4.2.19
       typescript: 5.7.2
-
-  svelte@3.59.2: {}
 
   svelte@4.2.19:
     dependencies:
