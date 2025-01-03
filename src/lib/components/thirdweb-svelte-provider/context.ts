@@ -10,7 +10,7 @@ type ThirdwebSvelteContext = {
 	wallet: Writable<Wallet | null>;
 	account: Writable<Account | null>;
 	connect: (wallet: Wallet) => void;
-	disconnect: () => void;
+	disconnect: () => Promise<void>;
 };
 const getThirdwebSvelteContext = () => getContext<ThirdwebSvelteContext>('thirdweb-svelte:context');
 const setThirdwebSvelteContext = (context: ThirdwebSvelteContext) => {

@@ -11,6 +11,11 @@
 	--andale-mono: 'Andale Mono Regular';
 }
 
+/* This class is for svelte-input-otp */
+.invisible-input {
+	opacity: 0 !important;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

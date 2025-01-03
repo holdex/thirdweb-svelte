@@ -1,12 +1,11 @@
 <script lang="ts">
 	import { Spinner } from '$/components/ui/spinner/index.js';
 	import type { ConnectWalletModalStepProps } from '../index.js';
-	import SvelteOtp from '@k4ung/svelte-otp';
-	import { cn } from '$/utils.js';
 	import { Button } from '$/components/ui/button/index.js';
 	import { createWallet, preAuthenticate } from 'thirdweb/wallets';
 	import { getThirdwebSvelteContext } from '$/components/thirdweb-svelte-provider/context.js';
 	import { onMount } from 'svelte';
+	import { PinInput } from '$/components/ui/pin-input/index.js';
 
 	type $$Props = ConnectWalletModalStepProps<'otp-verification'>;
 	export let additionalProps: $$Props['additionalProps'];
@@ -99,7 +98,7 @@
 </script>
 
 {#if isSendingOtpOnMount}
-	<div class="twsv-flex twsv-flex-col twsv-items-center twsv-gap-8 twsv-py-12 twsv-text-center">
+	<div class="twsv-flex twsv-flex-col twsv-items-center twsv-gap-8 twsv-py-36 twsv-text-center">
 		<Spinner />
 	</div>
 {:else}
@@ -115,15 +114,7 @@
 			<span>{additionalProps.email}</span>
 		</div>
 		<div class="twsv-flex twsv-flex-col twsv-gap-4">
-			<SvelteOtp
-				numOfInputs={6}
-				numberOnly
-				inputClass={cn(
-					'!twsv-w-10 !twsv-h-10 twsv-rounded-xl !twsv-border-2 !twsv-border-secondary !twsv-bg-transparent focus-visible:twsv-outline-none focus-visible:twsv-ring-2 focus-visible:twsv-ring-accent',
-					verifyStatus === 'invalid' && '!twsv-border-red-500 !twsv-ring-0'
-				)}
-				bind:value={otp}
-			/>
+			<PinInput bind:value={otp} handleOtpComplete={verify} />
 			{#if verifyStatus === 'invalid'}
 				<p class="twsv-text-sm twsv-text-red-500">Invalid verification code</p>
 			{:else if verifyStatus === 'linking_error'}

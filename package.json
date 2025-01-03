@@ -1,6 +1,6 @@
 {
 	"name": "@holdex/thirdweb-svelte",
-	"version": "0.0.8",
+	"version": "0.0.9",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
@@ -47,6 +47,7 @@
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
 		"abitype": "^1.0.7",
 		"autoprefixer": "^10.4.20",
+		"eruda": "^3.4.1",
 		"eslint": "^9.7.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.36.0",
@@ -65,7 +66,7 @@
 		"vite": "^5.0.0"
 	},
 	"dependencies": {
-		"@k4ung/svelte-otp": "^0.0.9",
+		"@jimmyverburgt/svelte-input-otp": "^0.0.3",
 		"@tanstack/svelte-query": "^5.62.2",
 		"bits-ui": "^0.21.16",
 		"clsx": "^2.1.1",
