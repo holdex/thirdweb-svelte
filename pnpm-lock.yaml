@@ -29,9 +29,9 @@ importers:
       mode-watcher:
         specifier: ^0.5.0
         version: 0.5.0(svelte@4.2.19)
-      svelte-legos:
-        specifier: ^0.2.5
-        version: 0.2.5(svelte@4.2.19)
+      svelte-media-queries:
+        specifier: ^1.6.2
+        version: 1.6.2
       tailwind-merge:
         specifier: ^2.5.5
         version: 2.5.5
@@ -1456,9 +1456,6 @@ packages:
   caniuse-lite@1.0.30001686:
     resolution: {integrity: sha512-Y7deg0Aergpa24M3qLC5xjNklnKnhsmSyR/V89dLZ1n0ucJIFNs7PgR2Yfa/Zf6W79SbBicgtGxZr2juHkEUIA==}
 
-  canvas-confetti@1.9.3:
-    resolution: {integrity: sha512-rFfTURMvmVEX1gyXFgn5QMn81bYk70qa0HLzcIOSVEyl57n6o9ItHeBtUSWdvKAPY0xlvBHno4/v3QPrT83q9g==}
-
   chalk@4.1.2:
     resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
     engines: {node: '>=10'}
@@ -2549,13 +2546,6 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
 
-  prism-svelte@0.5.0:
-    resolution: {integrity: sha512-db91Bf3pRGKDPz1lAqLFSJXeW13mulUJxhycysFpfXV5MIK7RgWWK2E5aPAa71s8TCzQUXxF5JOV42/iOs6QkA==}
-
-  prismjs@1.29.0:
-    resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}
-    engines: {node: '>=6'}
-
   process-warning@1.0.0:
     resolution: {integrity: sha512-du4wfLyj4yCZq1VupnVSZmRsPJsNuxoDQFdCFHLaYiEbFBD7QE0a+I4D7hOxrVnh78QE/YipFAj9lXHiXocV+Q==}
 
@@ -2816,10 +2806,8 @@ packages:
     peerDependencies:
       svelte: ^3.19.0 || ^4.0.0
 
-  svelte-legos@0.2.5:
-    resolution: {integrity: sha512-r4HbLYripCLECgraqJMvsykW/8FaPBd1hLkt3ejJzJRfhhOnCgGTo6lJT27qrestDFbiIASQV3xOnjRr/D6cGw==}
-    peerDependencies:
-      svelte: ^4.0.0
+  svelte-media-queries@1.6.2:
+    resolution: {integrity: sha512-SMz6od/vIeZEGlc4P0HKJK4G0fZotuwFhCSpBQaPqh75h6sL6sNf+4+IjbegFKXbP7b+SOfyzVOIMXTr8jynkA==}
 
   svelte-sonner@0.3.28:
     resolution: {integrity: sha512-K3AmlySeFifF/cKgsYNv5uXqMVNln0NBAacOYgmkQStLa/UoU0LhfAACU6Gr+YYC8bOCHdVmFNoKuDbMEsppJg==}
@@ -4740,8 +4728,6 @@ snapshots:
 
   caniuse-lite@1.0.30001686: {}
 
-  canvas-confetti@1.9.3: {}
-
   chalk@4.1.2:
     dependencies:
       ansi-styles: 4.3.0
@@ -5780,10 +5766,6 @@ snapshots:
 
   prettier@3.4.1: {}
 
-  prism-svelte@0.5.0: {}
-
-  prismjs@1.29.0: {}
-
   process-warning@1.0.0: {}
 
   proxy-compare@2.5.1: {}
@@ -6034,12 +6016,7 @@ snapshots:
     dependencies:
       svelte: 4.2.19
 
-  svelte-legos@0.2.5(svelte@4.2.19):
-    dependencies:
-      canvas-confetti: 1.9.3
-      prism-svelte: 0.5.0
-      prismjs: 1.29.0
-      svelte: 4.2.19
+  svelte-media-queries@1.6.2: {}
 
   svelte-sonner@0.3.28(svelte@4.2.19):
     dependencies:
