@@ -1,6 +1,6 @@
 {
 	"name": "@holdex/thirdweb-svelte",
-	"version": "0.0.9",
+	"version": "0.0.10",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
@@ -73,7 +73,7 @@
 		"lucide-svelte": "^0.464.0",
 		"mipd": "^0.0.7",
 		"mode-watcher": "^0.5.0",
-		"svelte-legos": "^0.2.5",
+		"svelte-media-queries": "^1.6.2",
 		"tailwind-merge": "^2.5.5",
 		"tailwind-variants": "^0.3.0",
 		"thirdweb": "^5.73.0",
