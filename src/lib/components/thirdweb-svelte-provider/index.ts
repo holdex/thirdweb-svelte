@@ -1,4 +1,13 @@
 import ThirdwebSvelteProvider from './thirdweb-svelte-provider.svelte';
-import { getThirdwebSvelteContext } from './context.js';
+import {
+	getThirdwebSvelteContext,
+	type ThirdwebSvelteContext,
+	type AccountWithChain
+} from './context.js';
 
-export { ThirdwebSvelteProvider, getThirdwebSvelteContext };
+export {
+	ThirdwebSvelteProvider,
+	getThirdwebSvelteContext,
+	type ThirdwebSvelteContext,
+	type AccountWithChain
+};
