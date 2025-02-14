@@ -5,6 +5,7 @@
 	import { createThirdwebClient } from 'thirdweb';
 	import { writable } from 'svelte/store';
 	import { lastActiveWalletIdStorage } from './storage.js';
+	import { onDestroy } from 'svelte';
 
 	export let clientId: string;
 
@@ -48,12 +49,12 @@
 
 	const queryClient = new QueryClient();
 
+	let unsub: (() => void) | undefined;
 	$: {
-		$wallet?.subscribe('accountChanged', () => {
+		const unsubAccountChanged = $wallet?.subscribe('accountChanged', () => {
 			connect($wallet);
 		});
-		$wallet?.subscribe('chainChanged', () => {
-			console.log('chainc hanged', $wallet.getChain());
+		const unsubChainChanged = $wallet?.subscribe('chainChanged', () => {
 			if ($account) {
 				account.set({
 					...$account,
@@ -61,7 +62,15 @@
 				});
 			}
 		});
+
+		unsub = () => {
+			unsubAccountChanged?.();
+			unsubChainChanged?.();
+		};
 	}
+	onDestroy(() => {
+		unsub?.();
+	});
 </script>
 
 <QueryClientProvider client={queryClient}>
