@@ -17,7 +17,7 @@
 <MediaQuery query="(min-width: 768px)" let:matches>
 	{#if matches}
 		<Dialog.Root {...$$restProps} bind:open>
-			<Dialog.Content {theme} class={cn('twsv-pb-4')}>
+			<Dialog.Content {theme} class={cn('twsv-pb-4 twsv-font-sans')}>
 				<Dialog.Header class={cn('twsv-relative twsv-flex-row twsv-space-y-0')}>
 					<Dialog.Title class="twsv-w-fit twsv-text-xl">Export Private Key</Dialog.Title>
 				</Dialog.Header>
@@ -26,7 +26,7 @@
 		</Dialog.Root>
 	{:else}
 		<Drawer.Root bind:open>
-			<Drawer.Content>
+			<Drawer.Content class="twsv-font-sans">
 				<Drawer.Header class={cn('twsv-relative twsv-flex-row twsv-space-y-0')}>
 					<Drawer.Title class="twsv-w-fit twsv-text-xl">Export Private Key</Drawer.Title>
 				</Drawer.Header>
