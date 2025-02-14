@@ -53,6 +53,7 @@
 			connect($wallet);
 		});
 		$wallet?.subscribe('chainChanged', () => {
+			console.log('chainc hanged', $wallet.getChain());
 			if ($account) {
 				account.set({
 					...$account,
