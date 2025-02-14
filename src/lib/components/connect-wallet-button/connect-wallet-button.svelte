@@ -10,6 +10,7 @@
 	import ethIcon from '$/assets/eth.svg';
 	import bnbIcon from '$/assets/bnb.png';
 	import * as DropdownMenu from '../ui/dropdown-menu/index.js';
+	import { Spinner } from '../ui/spinner/index.js';
 
 	type $$Props = ConnectWalletButtonProps;
 	export let disconnectButtonProps: ButtonProps | undefined = undefined;
@@ -22,6 +23,8 @@
 	let isOpen = false;
 	let isExportPrivateKeyOpen = false;
 	const isAutoConnecting = context.isAutoConnecting;
+
+	let isSwitchingChain = false;
 
 	const chains = [
 		defineChain({
@@ -69,7 +72,7 @@
 	<div class="twsv-flex twsv-flex-col twsv-items-center twsv-gap-4">
 		<div class="twsv-flex twsv-gap-4">
 			<div
-				class="twsv-flex twsv-flex-col twsv-gap-0.5 twsv-rounded-lg twsv-border twsv-border-border twsv-bg-secondary/30 twsv-px-4 twsv-py-3 twsv-text-left"
+				class="twsv-flex twsv-flex-col twsv-gap-0.5 twsv-rounded-lg twsv-border twsv-border-border twsv-bg-secondary/30 twsv-px-4 twsv-py-3 twsv-pr-10 twsv-text-left"
 			>
 				<span class="twsv-text-base">{truncateAddress($account.address)}</span>
 				<span class="twsv-text-sm twsv-text-muted-foreground">{$wallet?.id}</span>
@@ -81,7 +84,9 @@
 						size="auto"
 						class="twsv-h-full twsv-rounded-lg twsv-bg-secondary/30 twsv-px-6"
 					>
-						{#if $account.chain?.icon}
+						{#if isSwitchingChain}
+							<Spinner class="twsv-size-6" />
+						{:else if $account.chain?.icon}
 							<img src={$account.chain.icon.url} class="twsv-size-6" alt="" />
 						{:else}
 							<TriangleAlert class="twsv-size-6" />
@@ -93,8 +98,13 @@
 						{#each chains as chain (chain.id)}
 							<DropdownMenu.Item
 								class="twsv-flex twsv-gap-3 twsv-px-3 twsv-py-2"
-								on:click={() => {
-									$wallet?.switchChain(chain);
+								on:click={async () => {
+									isSwitchingChain = true;
+									try {
+										await $wallet?.switchChain(chain);
+									} finally {
+										isSwitchingChain = false;
+									}
 								}}
 							>
 								<img src={chain.icon?.url} class="twsv-size-6" alt="" />
