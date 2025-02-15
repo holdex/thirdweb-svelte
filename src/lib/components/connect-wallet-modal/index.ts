@@ -5,6 +5,15 @@ import type { Wallet } from 'thirdweb/wallets';
 
 type ConnectWalletModalProps = DialogProps & {
 	/**
+	 * Set the class name for the content of the `ConnectWalletModal` component.
+	 * You can change the font, padding, etc.
+	 *
+	 * e.g. if you use tailwind, and want to change the font to use your website's font, you can pass `contentClassName="font-inherit"`.
+	 * In that case, the font that will be used is the font you set to the `body` tag in the `app.html` file.
+	 */
+	contentClassName?: string;
+
+	/**
 	 * Array of supported wallets. If not provided, default wallets will be used.
 	 * @example
 	 * ```tsx

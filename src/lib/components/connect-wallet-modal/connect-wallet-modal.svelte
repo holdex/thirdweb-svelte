@@ -18,6 +18,7 @@
 	export let walletConnect: $$Props['walletConnect'] = undefined;
 	export let chains: $$Props['chains'] = undefined;
 	export let wallets: NonNullable<$$Props['wallets']> = getDefaultWallets();
+	export let contentClassName: $$Props['contentClassName'] = '';
 
 	let step: ConnectWalletModalStep = 'provider-selector';
 	let additionalProps: any = undefined;
@@ -57,6 +58,7 @@
 	{#if matches}
 		<Dialog.Root {...$$restProps} bind:open>
 			<Dialog.Content {theme} class={cn('twsv-pb-4 twsv-font-sans')}>
+			<Dialog.Content {theme} class={cn('twsv-pb-4 twsv-font-sans', contentClassName)}>
 				<Dialog.Header
 					class={cn(
 						'twsv-relative twsv-flex-row twsv-space-y-0',
@@ -94,7 +96,7 @@
 		</Dialog.Root>
 	{:else}
 		<Drawer.Root bind:open>
-			<Drawer.Content>
+			<Drawer.Content class={cn('twsv-font-sans', contentClassName)}>
 				<Drawer.Header
 					class={cn(
 						'twsv-relative twsv-flex-row twsv-space-y-0',
