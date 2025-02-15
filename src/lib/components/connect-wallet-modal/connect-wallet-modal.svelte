@@ -57,7 +57,6 @@
 <MediaQuery query="(min-width: 768px)" let:matches>
 	{#if matches}
 		<Dialog.Root {...$$restProps} bind:open>
-			<Dialog.Content {theme} class={cn('twsv-pb-4 twsv-font-sans')}>
 			<Dialog.Content {theme} class={cn('twsv-pb-4 twsv-font-sans', contentClassName)}>
 				<Dialog.Header
 					class={cn(
