@@ -36,8 +36,13 @@ jobs:
           file-url: '::before'
           static-checking: localIsNew
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - name: Install packages
-        run: npm install
+        run: pnpm install
 
       - name: Publish
         run: npm publish --access public
