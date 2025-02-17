@@ -10,6 +10,7 @@
 	type $$Props = ConnectWalletModalStepProps<'otp-verification'>;
 	export let additionalProps: $$Props['additionalProps'];
 	export let chain: $$Props['chain'];
+	export let chains: $$Props['chains'] = undefined;
 	export let onFinishConnect: $$Props['onFinishConnect'];
 
 	const { client } = getThirdwebSvelteContext();
@@ -59,7 +60,7 @@
 		try {
 			const wallet = createWallet('inApp');
 			await wallet.connect({
-				chain,
+				chain: chain || chains?.[0],
 				strategy: 'email',
 				email: additionalProps.email,
 				verificationCode: otp,

@@ -24,9 +24,7 @@
 				Svelte SDK for seamless thirdweb integration
 			</h2>
 		</div>
-		<div
-			class="twsv-mt-6 twsv-rounded-full twsv-border-2 twsv-border-dashed twsv-border-secondary twsv-p-3 md:twsv-p-4"
-		>
+		<div class="twsv-mt-6">
 			<ConnectWalletButton
 				variant="accent"
 				rounding="full"

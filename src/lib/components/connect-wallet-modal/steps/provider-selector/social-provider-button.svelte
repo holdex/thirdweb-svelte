@@ -11,6 +11,7 @@
 	const context = getThirdwebSvelteContext();
 	export let client: ThirdwebClient = context.client;
 	export let chain: Chain | undefined = undefined;
+	export let chains: Chain[] | undefined = undefined;
 	export let provider: SupportedSocialProvider;
 	export let setStep: ConnectWalletModalStepProps<'provider-selector'>['setStep'];
 	export let onFinishConnect: ConnectWalletModalStepProps<'provider-selector'>['onFinishConnect'];
@@ -33,7 +34,7 @@
 			}
 			await inAppWallet.connect({
 				client,
-				chain,
+				chain: chain || chains?.[0],
 				strategy: provider,
 				openedWindow: socialLoginWindow,
 				closeOpenedWindow: () => {
@@ -56,7 +57,7 @@
 					}
 					await inAppWallet.connect({
 						client,
-						chain,
+						chain: chain || chains?.[0],
 						strategy: provider,
 						openedWindow: socialLoginWindow,
 						closeOpenedWindow: () => {
