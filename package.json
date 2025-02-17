@@ -53,6 +53,7 @@
 		"@sveltejs/kit": "^2.17.2",
 		"@sveltejs/package": "^2.3.10",
 		"@sveltejs/vite-plugin-svelte": "^3.1.2",
+		"@types/node": "^22.13.4",
 		"abitype": "^1.0.8",
 		"autoprefixer": "^10.4.20",
 		"eruda": "^3.4.1",
