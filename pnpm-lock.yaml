@@ -17,9 +17,15 @@ importers:
       '@tanstack/svelte-query':
         specifier: ^5.66.0
         version: 5.66.0(svelte@4.2.19)
+      bits-ui:
+        specifier: ^0.22.0
+        version: 0.22.0(svelte@4.2.19)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      lucide-svelte:
+        specifier: ^0.464.0
+        version: 0.464.0(svelte@4.2.19)
       mipd:
         specifier: ^0.0.7
         version: 0.0.7(typescript@5.7.3)
@@ -29,6 +35,9 @@ importers:
       svelte-media-queries:
         specifier: ^1.6.2
         version: 1.6.2
+      svelte-sonner:
+        specifier: ^0.3.28
+        version: 0.3.28(svelte@4.2.19)
       tailwind-merge:
         specifier: ^2.6.0
         version: 2.6.0
@@ -66,9 +75,6 @@ importers:
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.5.2)
-      bits-ui:
-        specifier: ^0.22.0
-        version: 0.22.0(svelte@4.2.19)
       eruda:
         specifier: ^3.4.1
         version: 3.4.1
@@ -84,9 +90,6 @@ importers:
       globals:
         specifier: ^15.15.0
         version: 15.15.0
-      lucide-svelte:
-        specifier: ^0.464.0
-        version: 0.464.0(svelte@4.2.19)
       prettier:
         specifier: ^3.5.1
         version: 3.5.1
@@ -105,9 +108,6 @@ importers:
       svelte-check:
         specifier: ^4.1.4
         version: 4.1.4(svelte@4.2.19)(typescript@5.7.3)
-      svelte-sonner:
-        specifier: ^0.3.28
-        version: 0.3.28(svelte@4.2.19)
       tailwind-scrollbar:
         specifier: ^3.1.0
         version: 3.1.0(tailwindcss@3.4.17)
