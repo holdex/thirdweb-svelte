@@ -35,6 +35,11 @@
 	"publishConfig": {
 		"access": "public"
 	},
+	"pnpm": {
+		"overrides": {
+			"elliptic": "^6.6.1"
+		}
+	},
 	"peerDependencies": {
 		"svelte": "^4.0.0 || ^5.0.0",
 		"thirdweb": "^5.0.0"
