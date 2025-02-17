@@ -45,5 +45,5 @@ jobs:
         run: pnpm install
 
       - name: Publish
-        run: npm publish --access public
+        run: pnpm publish --access public
         if: steps.check.outputs.changed == 'true'
