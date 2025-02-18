@@ -8,21 +8,32 @@
 Install both the Svelte SDK and the core thirdweb library:
 
 ```bash
-pnpm i @holdex/thirdweb-svelte thirdweb
+pnpm i @holdex/thirdweb-svelte thirdweb @tanstack/svelte-query
 ```
 
 ### 2. Setup Provider
 
-Add the ThirdwebSvelteProvider to your `src/routes/layout.svelte`:
+Add the ThirdwebSvelteProvider to your `src/routes/+layout.svelte`:
 
 ```svelte
 <script>
 	import { ThirdwebSvelteProvider } from '@holdex/thirdweb-svelte';
+	import { browser } from '$app/environment';
+
+	const queryClient = new QueryClient({
+		defaultOptions: {
+			queries: {
+				enabled: browser
+			}
+		}
+	});
 </script>
 
-<ThirdwebSvelteProvider clientId={YOUR_THIRDWEB_CLIENT_ID}>
-	<slot />
-</ThirdwebSvelteProvider>
+<QueryClientProvider client={queryClient}>
+	<ThirdwebSvelteProvider clientId={YOUR_THIRDWEB_CLIENT_ID}>
+		<slot />
+	</ThirdwebSvelteProvider>
+</QueryClientProvider>
 ```
 
 ### 3. Implement Wallet Connection
@@ -71,6 +82,23 @@ Note that this modal is only available for inApp wallets. If you would like to c
 {#if wallet.type === 'inApp'}
 	<!-- Show Export Private Key button -->
 {/if}
+```
+
+## Known Issues
+
+1. In Svelte 5, the `isInitialized` state from `getThirdwebSvelteContext()` may show inconsistent values across different parts of your component. To work around this, create a local state variable that tracks the initialization status:
+
+```svelte
+<script lang="ts">
+	import { getThirdwebSvelteContext } from '@holdex/thirdweb-svelte';
+
+	const { isInitialized } = getThirdwebSvelteContext();
+	let isInit = $state(false);
+
+	$effect(() => {
+		isInit = $isInitialized;
+	});
+</script>
 ```
 
 ## Development Guidelines
