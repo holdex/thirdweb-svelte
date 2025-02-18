@@ -8,7 +8,7 @@
 Install both the Svelte SDK and the core thirdweb library:
 
 ```bash
-pnpm i @holdex/thirdweb-svelte thirdweb @tanstack/svelte-query
+pnpm i @holdex/thirdweb-svelte thirdweb @tanstack/svelte-query vaul-svelte
 ```
 
 ### 2. Setup Provider

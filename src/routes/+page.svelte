@@ -5,7 +5,7 @@
 	import { toast } from 'svelte-sonner';
 	import ConnectWalletButton from '$/components/connect-wallet-button/connect-wallet-button.svelte';
 
-	const command = 'pnpm i @holdex/thirdweb-svelte thirdweb';
+	const command = 'pnpm i @holdex/thirdweb-svelte thirdweb @tanstack/svelte-query vaul-svelte';
 </script>
 
 <main class="twsv-flex twsv-min-h-screen twsv-w-full twsv-flex-col twsv-items-center">
