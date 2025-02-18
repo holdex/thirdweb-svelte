@@ -44,6 +44,7 @@
 		"elliptic": "^6.6.1"
 	},
 	"peerDependencies": {
+		"@tanstack/svelte-query": "^5.66.0",
 		"svelte": "^4.0.0 || ^5.0.0",
 		"thirdweb": "^5.0.0"
 	},
@@ -75,7 +76,6 @@
 	},
 	"dependencies": {
 		"@jimmyverburgt/svelte-input-otp": "^0.0.3",
-		"@tanstack/svelte-query": "^5.66.0",
 		"bits-ui": "^0.22.0",
 		"clsx": "^2.1.1",
 		"lucide-svelte": "^0.464.0",
