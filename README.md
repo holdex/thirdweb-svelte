@@ -87,19 +87,55 @@ Note that this modal is only available for inApp wallets. If you would like to c
 
 ## Known Issues
 
-1. In Svelte 5, the `isInitialized` state from `getThirdwebSvelteContext()` may show inconsistent values across different parts of your component. To work around this, create a local state variable that tracks the initialization status:
+1. **Svelte 5 Initialization State Inconsistency**
+
+The `isInitialized` state from `getThirdwebSvelteContext()` may show inconsistent values in Svelte 5 components. To fix this, create a local state that syncs with the initialization status:
 
 ```svelte
 <script lang="ts">
 	import { getThirdwebSvelteContext } from '@holdex/thirdweb-svelte';
 
+	// Create local state to track initialization
 	const { isInitialized } = getThirdwebSvelteContext();
-	let isInit = $state(false);
+	let isWalletInitialized = $state(false);
 
+	// Keep local state in sync
 	$effect(() => {
-		isInit = $isInitialized;
+		isWalletInitialized = $isInitialized;
 	});
 </script>
+```
+
+2. **Vaul-svelte Version Compatibility**
+
+You must use vaul-svelte@0.3.2 even with Svelte 5 (not vaul-svelte@next). While this version has a drawer entry animation issue in Svelte 5, you can fix it with custom animation:
+
+If you're using the shadcn-svelte drawer component with bottom slide animation:
+
+1. Add these animation styles to your `tailwind.config.ts`:
+
+```ts
+{
+  extend: {
+    keyframes: {
+      'slide-from-bottom': {
+        from: { transform: 'translate3d(0, 100%, 0)' },
+        to: { transform: 'translate3d(0, 0, 0)' }
+      }
+    },
+    animation: {
+      'slide-from-bottom': 'slide-from-bottom 0.5s cubic-bezier(0.32, 0.72, 0, 1)'
+    }
+  }
+}
+```
+
+2. Apply the animation class to your drawer content:
+
+```svelte
+<DrawerPrimitive.Content class="animate-slide-from-bottom ...">
+	<!-- Your drawer content -->
+</DrawerPrimitive.Content>
 ```
 
 ## Development Guidelines
@@ -108,13 +144,17 @@ Note that this modal is only available for inApp wallets. If you would like to c
 
 1. Clone the repository
 2. Install dependencies:
-   ```bash
-   pnpm install
-   ```
+
+```bash
+pnpm install
+```
+
 3. Start the development server:
-   ```bash
-   pnpm dev
-   ```
+
+```bash
+pnpm dev
+```
+
 4. Visit `http://localhost:5173` to see the test page with working wallet connection functionality
 
 ### Repository Structure
@@ -126,13 +166,16 @@ Note that this modal is only available for inApp wallets. If you would like to c
 ### Building
 
 - To build the package for npm:
-  ```bash
-  pnpm package
-  ```
+
+```bash
+pnpm package
+```
+
 - To build the complete application:
-  ```bash
-  pnpm build
-  ```
+
+```bash
+pnpm build
+```
 
 ### Testing
 
@@ -143,21 +186,26 @@ You can test the library using the app code in `src/routes`. This directory cont
 To test your local library changes in another project:
 
 1. Build the package:
-   ```bash
-   pnpm package
-   ```
+
+```bash
+pnpm package
+```
+
 2. In your consumer project, update the dependency in `package.json`:
-   ```json
-   {
-   	"dependencies": {
-   		"@holdex/thirdweb-svelte": "file:../path/to/your/local/thirdweb-svelte"
-   	}
-   }
-   ```
+
+```json
+{
+	"dependencies": {
+		"@holdex/thirdweb-svelte": "file:../path/to/your/local/thirdweb-svelte"
+	}
+}
+```
+
 3. Reinstall dependencies in your consumer project:
-   ```bash
-   pnpm install
-   ```
+
+```bash
+pnpm install
+```
 
 ### Troubleshooting
 
