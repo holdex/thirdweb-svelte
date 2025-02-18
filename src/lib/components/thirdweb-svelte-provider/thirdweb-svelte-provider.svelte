@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { QueryClient, QueryClientProvider } from '@tanstack/svelte-query';
 	import { type Wallet } from 'thirdweb/wallets';
 	import { setThirdwebSvelteContext, type AccountWithChain } from './context.js';
 	import { createThirdwebClient } from 'thirdweb';
@@ -47,8 +46,6 @@
 		isInitialized
 	});
 
-	const queryClient = new QueryClient();
-
 	let unsub: (() => void) | undefined;
 	$: {
 		const unsubAccountChanged = $wallet?.subscribe('accountChanged', () => {
@@ -73,6 +70,4 @@
 	});
 </script>
 
-<QueryClientProvider client={queryClient}>
-	<slot />
-</QueryClientProvider>
+<slot />
