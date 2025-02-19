@@ -35,11 +35,16 @@ const config: Config = {
 					'100%': {
 						transform: 'rotate(360deg)'
 					}
+				},
+				'slide-from-bottom': {
+					from: { transform: 'translate3d(0, 100%, 0)' },
+					to: { transform: 'translate3d(0, 0, 0)' }
 				}
 			},
 			animation: {
 				'dash-animation': 'dash-animation 1.5s ease-in-out infinite',
-				'rotate-animation': 'rotate-animation 2s linear infinite'
+				'rotate-animation': 'rotate-animation 2s linear infinite',
+				'slide-from-bottom': 'slide-from-bottom 0.5s cubic-bezier(0.32, 0.72, 0, 1)'
 			},
 			colors: {
 				border: 'hsl(var(--twsv-border) / <alpha-value>)',

@@ -1,6 +1,6 @@
 {
 	"name": "@holdex/thirdweb-svelte",
-	"version": "0.2.2",
+	"version": "0.2.3",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && pnpm run package",
@@ -44,8 +44,10 @@
 		"elliptic": "^6.6.1"
 	},
 	"peerDependencies": {
+		"@tanstack/svelte-query": "^5.66.0",
 		"svelte": "^4.0.0 || ^5.0.0",
-		"thirdweb": "^5.0.0"
+		"thirdweb": "^5.0.0",
+		"vaul-svelte": "^0.3.2"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.6",
@@ -53,6 +55,7 @@
 		"@sveltejs/kit": "^2.17.2",
 		"@sveltejs/package": "^2.3.10",
 		"@sveltejs/vite-plugin-svelte": "^3.1.2",
+		"@tanstack/svelte-query": "^5.66.0",
 		"@types/node": "^22.13.4",
 		"abitype": "^1.0.8",
 		"autoprefixer": "^10.4.20",
@@ -69,13 +72,14 @@
 		"svelte-check": "^4.1.4",
 		"tailwind-scrollbar": "^3.1.0",
 		"tailwindcss": "^3.4.17",
+		"thirdweb": "^5.88.4",
 		"typescript": "^5.7.3",
 		"typescript-eslint": "^8.24.0",
+		"vaul-svelte": "^0.3.2",
 		"vite": "^5.4.14"
 	},
 	"dependencies": {
 		"@jimmyverburgt/svelte-input-otp": "^0.0.3",
-		"@tanstack/svelte-query": "^5.66.0",
 		"bits-ui": "^0.22.0",
 		"clsx": "^2.1.1",
 		"lucide-svelte": "^0.464.0",
@@ -85,8 +89,6 @@
 		"svelte-sonner": "^0.3.28",
 		"tailwind-merge": "^2.6.0",
 		"tailwind-variants": "^0.3.1",
-		"thirdweb": "^5.88.4",
-		"uqr": "^0.1.2",
-		"vaul-svelte": "^0.3.2"
+		"uqr": "^0.1.2"
 	}
 }

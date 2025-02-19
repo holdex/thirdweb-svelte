@@ -4,6 +4,16 @@
 	import ThirdwebSvelteProvider from '$/components/thirdweb-svelte-provider/thirdweb-svelte-provider.svelte';
 	import { PUBLIC_THIRDWEB_CLIENT_ID } from '$env/static/public';
 	import '../app.css';
+	import { QueryClient, QueryClientProvider } from '@tanstack/svelte-query';
+	import { browser } from '$app/environment';
+
+	const queryClient = new QueryClient({
+		defaultOptions: {
+			queries: {
+				enabled: browser
+			}
+		}
+	});
 
 	$: {
 		async function initEruda() {
@@ -20,6 +30,8 @@
 
 <ModeWatcher defaultMode="dark" />
 <Toaster />
-<ThirdwebSvelteProvider clientId={PUBLIC_THIRDWEB_CLIENT_ID}>
-	<slot />
-</ThirdwebSvelteProvider>
+<QueryClientProvider client={queryClient}>
+	<ThirdwebSvelteProvider clientId={PUBLIC_THIRDWEB_CLIENT_ID}>
+		<slot />
+	</ThirdwebSvelteProvider>
+</QueryClientProvider>

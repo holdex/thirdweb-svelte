@@ -14,9 +14,6 @@ importers:
       '@jimmyverburgt/svelte-input-otp':
         specifier: ^0.0.3
         version: 0.0.3(svelte@4.2.19)
-      '@tanstack/svelte-query':
-        specifier: ^5.66.0
-        version: 5.66.0(svelte@4.2.19)
       bits-ui:
         specifier: ^0.22.0
         version: 0.22.0(svelte@4.2.19)
@@ -44,15 +41,9 @@ importers:
       tailwind-variants:
         specifier: ^0.3.1
         version: 0.3.1(tailwindcss@3.4.17)
-      thirdweb:
-        specifier: ^5.88.4
-        version: 5.88.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.7.3)
       uqr:
         specifier: ^0.1.2
         version: 0.1.2
-      vaul-svelte:
-        specifier: ^0.3.2
-        version: 0.3.2(svelte@4.2.19)
     devDependencies:
       '@eslint/compat':
         specifier: ^1.2.6
@@ -69,6 +60,9 @@ importers:
       '@sveltejs/vite-plugin-svelte':
         specifier: ^3.1.2
         version: 3.1.2(svelte@4.2.19)(vite@5.4.14(@types/node@22.13.4))
+      '@tanstack/svelte-query':
+        specifier: ^5.66.0
+        version: 5.66.0(svelte@4.2.19)
       '@types/node':
         specifier: ^22.13.4
         version: 22.13.4
@@ -117,12 +111,18 @@ importers:
       tailwindcss:
         specifier: ^3.4.17
         version: 3.4.17
+      thirdweb:
+        specifier: ^5.88.4
+        version: 5.88.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.7.3)
       typescript:
         specifier: ^5.7.3
         version: 5.7.3
       typescript-eslint:
         specifier: ^8.24.0
         version: 8.24.0(eslint@9.20.1(jiti@2.4.1))(typescript@5.7.3)
+      vaul-svelte:
+        specifier: ^0.3.2
+        version: 0.3.2(svelte@4.2.19)
       vite:
         specifier: ^5.4.14
         version: 5.4.14(@types/node@22.13.4)

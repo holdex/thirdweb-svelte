@@ -17,7 +17,7 @@
 	<DrawerOverlay class={cn(theme === 'dark' && 'dark')} />
 	<DrawerPrimitive.Content
 		class={cn(
-			'twsv-fixed twsv-inset-x-0 twsv-bottom-0 twsv-z-50 twsv-mt-24 twsv-flex twsv-h-auto twsv-flex-col twsv-rounded-t-[10px] twsv-border twsv-border-border twsv-bg-background twsv-px-6 twsv-pb-4 twsv-text-foreground',
+			'twsv-animate-slide-from-bottom twsv-fixed twsv-inset-x-0 twsv-bottom-0 twsv-z-50 twsv-mt-24 twsv-flex twsv-h-auto twsv-flex-col twsv-rounded-t-[10px] twsv-border twsv-border-border twsv-bg-background twsv-px-6 twsv-pb-4 twsv-text-foreground',
 			theme === 'dark' && 'dark',
 			className
 		)}
