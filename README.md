@@ -20,6 +20,7 @@ Add the ThirdwebSvelteProvider to your `src/routes/+layout.svelte`:
 	import { ThirdwebSvelteProvider } from '@holdex/thirdweb-svelte';
 	import { browser } from '$app/environment';
 	import { QueryClient, QueryClientProvider } from '@tanstack/svelte-query';
+	import '@holdex/thirdweb-svelte/index.css';
 
 	const queryClient = new QueryClient({
 		defaultOptions: {
