@@ -24,12 +24,14 @@
 	export let wallets: Wallet[];
 	export let setModalOpen: (open: boolean) => void;
 	export let setCustomBackClick: (backClick: (() => void) | null) => void;
+	export let onConnected: ((wallet: Wallet) => void) | undefined = undefined;
 
 	const context = getThirdwebSvelteContext();
 
 	const onFinishConnect = (wallet: Wallet) => {
 		context.connect(wallet);
 		closeModal();
+		onConnected?.(wallet);
 	};
 
 	let height = 0;
