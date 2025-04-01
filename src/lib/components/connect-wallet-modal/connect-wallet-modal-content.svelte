@@ -24,7 +24,7 @@
 	export let wallets: Wallet[];
 	export let setModalOpen: (open: boolean) => void;
 	export let setCustomBackClick: (backClick: (() => void) | null) => void;
-	export let onConnected: ((wallet: Wallet) => void) | undefined = undefined;
+	export let onConnected: ConnectWalletModalProps['onConnected'];
 
 	const context = getThirdwebSvelteContext();
 

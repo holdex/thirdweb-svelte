@@ -19,6 +19,7 @@
 	export let chains: $$Props['chains'] = undefined;
 	export let wallets: NonNullable<$$Props['wallets']> = getDefaultWallets();
 	export let contentClassName: $$Props['contentClassName'] = '';
+	export let onConnected: $$Props['onConnected'] = undefined;
 
 	let step: ConnectWalletModalStep = 'provider-selector';
 	let additionalProps: any = undefined;
@@ -80,6 +81,7 @@
 					<Dialog.Title class="twsv-w-fit twsv-text-xl">{title}</Dialog.Title>
 				</Dialog.Header>
 				<ConnectWalletModalContent
+					{onConnected}
 					{wallets}
 					{walletConnect}
 					{additionalProps}
@@ -118,6 +120,7 @@
 					<Drawer.Title class="twsv-w-fit twsv-text-xl">{title}</Drawer.Title>
 				</Drawer.Header>
 				<ConnectWalletModalContent
+					{onConnected}
 					{wallets}
 					{walletConnect}
 					{additionalProps}

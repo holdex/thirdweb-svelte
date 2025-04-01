@@ -120,6 +120,13 @@ type ConnectWalletModalProps = DialogProps & {
 	 * You can create a project id by signing up on [walletconnect.com](https://walletconnect.com/)
 	 */
 	walletConnect?: { projectId: string };
+
+	/**
+	 * Callback function that is called when a wallet is connected.
+	 *
+	 * @param wallet - The wallet that was connected.
+	 */
+	onConnected?: (wallet: Wallet) => void;
 };
 
 export { type ConnectWalletModalProps, ConnectWalletModal };
