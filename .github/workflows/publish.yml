@@ -23,8 +23,6 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '18'
-          registry-url: 'https://registry.npmjs.org/'
-          scope: '@holdex'
 
       - name: Init NPM_RC
         run: echo "${{ secrets.NPM_RC }}" > .npmrc
@@ -46,4 +44,11 @@ jobs:
 
       - name: Publish
         run: pnpm publish --access public
+        if: steps.check.outputs.changed == 'true'
+
+      - name: Init NPM_RC for GitHub Packages
+        run: echo "${{ secrets.NPM_RC_GITHUB_REGISTRY }}" > .npmrc
+
+      - name: Publish to GitHub Packages
+        run: pnpm publish
         if: steps.check.outputs.changed == 'true'
