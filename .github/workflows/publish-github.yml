@@ -18,7 +18,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v2
 
       - uses: actions/setup-node@v2
         with:
@@ -30,7 +30,8 @@ jobs:
         uses: EndBug/version-check@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          file-url: '::before'
+          file-name: "./package.json"
+          file-url: "::before"
           static-checking: localIsNew
 
       - name: Install pnpm
@@ -40,9 +41,11 @@ jobs:
 
       - name: Install packages
         run: pnpm install
+        working-directory: .
 
       - name: Publish
         run: pnpm publish
+        working-directory: .
         if: steps.check.outputs.changed == 'true'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
