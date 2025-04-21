@@ -1,4 +1,4 @@
-name: Thirdweb Svelte Publish
+name: Thirdweb Svelte Publish to Github Registry
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the main branch
 on:
@@ -22,15 +22,15 @@ jobs:
 
       - uses: actions/setup-node@v2
         with:
-          node-version: '18'
-
-      - name: Init NPM_RC
-        run: echo "${{ secrets.NPM_RC }}" > .npmrc
+          node-version: '18.x'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@holdex'
 
       - id: check
         uses: EndBug/version-check@v2
         with:
-          file-name: './package.json'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          file-name: './sdk/package.json'
           file-url: '::before'
           static-checking: localIsNew
 
@@ -43,5 +43,7 @@ jobs:
         run: pnpm install
 
       - name: Publish
-        run: pnpm publish --access public
+        run: pnpm publish
         if: steps.check.outputs.changed == 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
