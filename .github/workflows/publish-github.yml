@@ -30,7 +30,6 @@ jobs:
         uses: EndBug/version-check@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          file-name: './sdk/package.json'
           file-url: '::before'
           static-checking: localIsNew
 
