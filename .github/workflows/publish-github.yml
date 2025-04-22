@@ -1,33 +1,34 @@
 name: Thirdweb Svelte Publish to Github Registry
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the main branch
+
 on:
   push:
     branches:
       - main
       - test/release
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+
 jobs:
-  # This workflow contains a single job called "publish"
   publish:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4 # Use the latest version
         with:
           node-version: '18.x'
           registry-url: 'https://npm.pkg.github.com'
           scope: '@holdex'
-      - name: Init NPM_RC
-        run: echo "${{ secrets.NPM_RC_GITHUB_REGISTRY }}" > .npmrc
+
+      - name: Configure npmrc
+        run: |
+          cat <<EOF > .npmrc
+          //npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
+          @holdex:registry=https://npm.pkg.github.com
+          always-auth=true
+          EOF
 
       - id: check
         uses: EndBug/version-check@v2
@@ -38,19 +39,11 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 10
+          version: 8 # Specify a version
 
-      - name: Install packages
+      - name: Install dependencies
         run: pnpm install
-        working-directory: .
 
-      - name: Check PAT_GH
-        run: echo ${{ secrets.PAT_GH }}
-
-      - name: Check GITHUB_TOKEN
-        run: echo ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Publish
+      - name: Publish package
         run: pnpm publish --no-git-checks
-        working-directory: .
-        # if: steps.check.outputs.changed == 'true'
+        #if: steps.check.outputs.changed == 'true'
