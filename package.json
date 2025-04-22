@@ -1,6 +1,6 @@
 {
 	"name": "@holdex/thirdweb-svelte",
-	"version": "0.2.15",
+	"version": "0.2.16",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && pnpm run package",
@@ -33,7 +33,7 @@
 		"./index.css": "./index.css"
 	},
 	"publishConfig": {
-		"registry": "https://npm.pkg.github.com/"
+		"registry": "https://npm.pkg.github.com/@holdex"
 	},
 	"pnpm": {
 		"overrides": {
