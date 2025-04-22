@@ -51,8 +51,6 @@ jobs:
         run: echo ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish
-        run: pnpm publish
+        run: pnpm publish --no-git-checks
         working-directory: .
         # if: steps.check.outputs.changed == 'true'
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.PAT_GH }}
