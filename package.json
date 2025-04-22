@@ -33,7 +33,7 @@
 		"./index.css": "./index.css"
 	},
 	"publishConfig": {
-		"registry": "https://npm.pkg.github.com/"
+		"registry": "https://npm.pkg.github.com/@holdex"
 	},
 	"pnpm": {
 		"overrides": {
