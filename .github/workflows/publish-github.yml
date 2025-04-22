@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+      - test/release
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "publish"
@@ -31,9 +32,8 @@ jobs:
       - id: check
         uses: EndBug/version-check@v2
         with:
-          token: ${{ secrets.PAT_GH }}
-          file-name: "./package.json"
-          file-url: "::before"
+          file-name: './package.json'
+          file-url: '::before'
           static-checking: localIsNew
 
       - name: Install pnpm
@@ -45,9 +45,15 @@ jobs:
         run: pnpm install
         working-directory: .
 
+      - name: Check PAT_GH
+        run: echo ${{ secrets.PAT_GH }}
+
+      - name: Check GITHUB_TOKEN
+        run: echo ${{ secrets.GITHUB_TOKEN }}
+
       - name: Publish
         run: pnpm publish
         working-directory: .
-        if: steps.check.outputs.changed == 'true'
+        # if: steps.check.outputs.changed == 'true'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PAT_GH }}
