@@ -25,6 +25,8 @@ jobs:
           node-version: '18.x'
           registry-url: 'https://npm.pkg.github.com'
           scope: '@holdex'
+      - name: Init NPM_RC
+        run: echo "${{ secrets.NPM_RC_GITHUB_REGISTRY }}" > .npmrc
 
       - id: check
         uses: EndBug/version-check@v2
