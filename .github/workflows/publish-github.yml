@@ -32,7 +32,6 @@ jobs:
       - id: check
         uses: EndBug/version-check@v2
         with:
-          file-name: './package.json'
           file-url: '::before'
           static-checking: localIsNew
 
