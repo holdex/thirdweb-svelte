@@ -29,7 +29,7 @@ jobs:
       - id: check
         uses: EndBug/version-check@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_PAT }}
           file-name: "./package.json"
           file-url: "::before"
           static-checking: localIsNew
@@ -48,4 +48,4 @@ jobs:
         working-directory: .
         if: steps.check.outputs.changed == 'true'
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GH_PAT }}
