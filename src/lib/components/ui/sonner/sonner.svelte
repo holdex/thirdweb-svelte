@@ -2,7 +2,7 @@
 	import { Toaster as Sonner, type ToasterProps as SonnerProps } from 'svelte-sonner';
 	import { mode } from 'mode-watcher';
 	interface Props {
-		[key: string]: any
+		[key: string]: any;
 	}
 
 	let { ...rest }: Props = $props();
@@ -11,7 +11,7 @@
 </script>
 
 <Sonner
-	theme={$mode}
+	theme={mode.current}
 	class="toaster group"
 	toastOptions={{
 		classes: {
