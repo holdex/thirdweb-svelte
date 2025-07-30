@@ -83,6 +83,6 @@
 	};
 </script>
 
-<Button on:click={handleClick} variant="outline" size="auto" class="twsv-flex-1 twsv-p-3">
+<Button onclick={handleClick} variant="outline" size="auto" class="twsv-flex-1 twsv-p-3">
 	<SocialIcon iconName={provider} class="twsv-h-6 twsv-w-6" />
 </Button>
