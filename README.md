@@ -8,7 +8,13 @@
 Install both the Svelte SDK and the core thirdweb library:
 
 ```bash
-pnpm i @holdex/thirdweb-svelte thirdweb @tanstack/svelte-query vaul-svelte
+pnpm i @holdex/thirdweb-svelte thirdweb @tanstack/svelte-query vaul-svelte@1.0.0-next.7
+```
+
+For svelte 4 projects, you can use the v0.x version of the SDK:
+
+```bash
+pnpm i @holdex/thirdweb-svelte@0.x thirdweb @tanstack/svelte-query vaul-svelte@0.3.2
 ```
 
 ### 2. Setup Provider
@@ -107,7 +113,7 @@ The `isInitialized` state from `getThirdwebSvelteContext()` may show inconsisten
 </script>
 ```
 
-2. **Vaul-svelte Version Compatibility**
+2. **Vaul-svelte Version Compatibility** (only for v0.x)
 
 You must use vaul-svelte@0.3.2 even with Svelte 5 (not vaul-svelte@next). While this version has a drawer entry animation issue in Svelte 5, you can fix it with custom animation:
 
@@ -213,12 +219,10 @@ pnpm install
 If you encounter issues:
 
 1. **Changes not reflecting:**
-
    - Remove `node_modules/.vite` directory
    - Restart the development server
 
 2. **"exports not defined" error:**
-
    - Add the following to your consumer project's `vite.config.js`:
 
    ```js
