@@ -101,7 +101,7 @@
 						{#each chains as chain (chain.id)}
 							<DropdownMenu.Item
 								class="twsv-flex twsv-gap-3 twsv-px-3 twsv-py-2"
-								on:click={async () => {
+								onclick={async () => {
 									isSwitchingChain = true;
 									try {
 										await $wallet?.switchChain(chain);
