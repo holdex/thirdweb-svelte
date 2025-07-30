@@ -1,17 +1,23 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import type { Chain } from 'thirdweb';
 	import { getThirdwebSvelteContext } from './thirdweb-svelte-provider/context.js';
 	import { lastActiveWalletIdStorage } from './thirdweb-svelte-provider/storage.js';
 	import { getInstalledWallets } from '$/utils/wallets.js';
 	import { createWallet, type Wallet, type WalletId } from 'thirdweb/wallets';
 
-	export let chain: Chain | undefined = undefined;
-	export let chains: Chain[] | undefined = undefined;
-	export let wallets: Wallet[];
+	interface Props {
+		chain?: Chain | undefined;
+		chains?: Chain[] | undefined;
+		wallets: Wallet[];
+	}
+
+	let { chain = undefined, chains = undefined, wallets }: Props = $props();
 
 	const context = getThirdwebSvelteContext();
 
-	$: {
+	run(() => {
 		(async () => {
 			context.isAutoConnecting.set(true);
 
@@ -37,5 +43,5 @@
 				context.isInitialized.set(true);
 			}
 		})();
-	}
+	});
 </script>

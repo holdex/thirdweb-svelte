@@ -1,4 +1,4 @@
-<script>
+<script lang='ts'>
 	import Button from '$/components/ui/button/button.svelte';
 	import Copy from 'lucide-svelte/icons/copy';
 	import GithubIcon from './github-icon.svelte';
@@ -14,7 +14,7 @@
 	>
 		<div class="twsv-flex twsv-flex-col twsv-items-center twsv-justify-center twsv-gap-4">
 			<div class="twsv-flex twsv-items-center twsv-gap-3">
-				<div class="twsv-h-2 twsv-w-4 twsv-rounded-full twsv-bg-accent" />
+				<div class="twsv-h-2 twsv-w-4 twsv-rounded-full twsv-bg-accent"></div>
 				<span class="twsv-text-sm twsv-font-medium twsv-text-foreground/85">
 					thirdweb Svelte SDK
 				</span>
@@ -43,7 +43,9 @@
 					class: 'twsv-px-5 twsv-py-3 md:twsv-text-base'
 				}}
 			>
-				<span slot="connect">Try Me!</span>
+				{#snippet connect()}
+					<span>Try Me!</span>
+				{/snippet}
 			</ConnectWalletButton>
 		</div>
 
@@ -54,9 +56,9 @@
 				class="twsv-flex twsv-items-center twsv-justify-between twsv-border-b twsv-border-border twsv-px-4 twsv-py-3 md:twsv-px-6 md:twsv-py-4"
 			>
 				<div class="twsv-flex twsv-items-center twsv-gap-2">
-					<div class="twsv-h-2.5 twsv-w-2.5 twsv-rounded-full twsv-bg-secondary/70" />
-					<div class="twsv-h-2.5 twsv-w-2.5 twsv-rounded-full twsv-bg-secondary/70" />
-					<div class="twsv-h-2.5 twsv-w-2.5 twsv-rounded-full twsv-bg-secondary/70" />
+					<div class="twsv-h-2.5 twsv-w-2.5 twsv-rounded-full twsv-bg-secondary/70"></div>
+					<div class="twsv-h-2.5 twsv-w-2.5 twsv-rounded-full twsv-bg-secondary/70"></div>
+					<div class="twsv-h-2.5 twsv-w-2.5 twsv-rounded-full twsv-bg-secondary/70"></div>
 				</div>
 				<Button
 					size="auto"

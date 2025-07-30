@@ -12,19 +12,17 @@
 	import * as DropdownMenu from '../ui/dropdown-menu/index.js';
 	import { Spinner } from '../ui/spinner/index.js';
 
-	type $$Props = ConnectWalletButtonProps;
-	export let disconnectButtonProps: ButtonProps | undefined = undefined;
-	export let exportPrivateKeyButtonProps: ButtonProps | undefined = undefined;
+	let { disconnectButtonProps = undefined, exportPrivateKeyButtonProps = undefined, connect, ...rest }: ConnectWalletButtonProps = $props();
 
 	const context = getThirdwebSvelteContext();
 	const wallet = context.wallet;
 	const account = context.account;
 
-	let isOpen = false;
-	let isExportPrivateKeyOpen = false;
+	let isOpen = $state(false);
+	let isExportPrivateKeyOpen = $state(false);
 	const isAutoConnecting = context.isAutoConnecting;
 
-	let isSwitchingChain = false;
+	let isSwitchingChain = $state(false);
 
 	const chains = [
 		defineChain({
@@ -54,15 +52,15 @@
 	<div
 		class="twsv-rounded-full twsv-border-2 twsv-border-dashed twsv-border-secondary twsv-p-3 md:twsv-p-4"
 	>
-		<Button size="lg" loading {...$$restProps} />
+		<Button size="lg" loading {...rest} />
 	</div>
 {:else if !$account}
 	<div
 		class="twsv-rounded-full twsv-border-2 twsv-border-dashed twsv-border-secondary twsv-p-3 md:twsv-p-4"
 	>
-		<Button size="lg" on:click={() => (isOpen = !isOpen)} {...$$restProps}>
-			{#if $$slots.connect}
-				<slot name="connect" />
+		<Button size="lg" on:click={() => (isOpen = !isOpen)} {...rest}>
+			{#if connect}
+				{@render connect?.()}
 			{:else}
 				Connect
 			{/if}

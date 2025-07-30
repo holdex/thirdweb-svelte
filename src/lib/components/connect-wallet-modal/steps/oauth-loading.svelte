@@ -2,7 +2,7 @@
 	import { Spinner } from '$/components/ui/spinner/index.js';
 	import type { ConnectWalletModalStepProps } from './index.js';
 
-	type $$Props = ConnectWalletModalStepProps<'oauth-loading'>;
+	let {}: ConnectWalletModalStepProps<'oauth-loading'> = $props();
 </script>
 
 <div class="twsv-flex twsv-flex-col twsv-items-center twsv-gap-8 twsv-py-12 twsv-text-center">

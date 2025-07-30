@@ -7,13 +7,17 @@
 	import { onMount } from 'svelte';
 	import type { ConnectWalletModalStepProps } from '../index.js';
 
-	export let setStep: ConnectWalletModalStepProps<'provider-selector'>['setStep'];
+	interface Props {
+		setStep: ConnectWalletModalStepProps<'provider-selector'>['setStep'];
+	}
 
-	let value = '';
-	let error = '';
-	let showError = false;
+	let { setStep }: Props = $props();
 
-	$: shownError = showError && error;
+	let value = $state('');
+	let error = $state('');
+	let showError = $state(false);
+
+	let shownError = $derived(showError && error);
 
 	onMount(() => {
 		showError = false;
@@ -43,7 +47,7 @@
 	};
 </script>
 
-<form class="twsv-relative" on:submit={handleSubmit}>
+<form class="twsv-relative" onsubmit={handleSubmit}>
 	<Input
 		{value}
 		type="email"

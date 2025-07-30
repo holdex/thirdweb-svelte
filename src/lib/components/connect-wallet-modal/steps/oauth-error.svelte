@@ -4,11 +4,12 @@
 	import { Spinner } from '$/components/ui/spinner/index.js';
 	import type { ConnectWalletModalStepProps } from './index.js';
 
-	type $$Props = ConnectWalletModalStepProps<'oauth-error'>;
-	export let additionalProps: $$Props['additionalProps'];
-	export let onFinishConnect: $$Props['onFinishConnect'];
+	let {
+		additionalProps = $bindable(),
+		onFinishConnect
+	}: ConnectWalletModalStepProps<'oauth-error'> = $props();
 
-	let isRetrying = false;
+	let isRetrying = $state(false);
 	const handleRetry = async () => {
 		isRetrying = true;
 		try {
@@ -21,7 +22,9 @@
 		}
 	};
 
-	$: message = isRetrying ? 'Sign into your account in the pop-up' : additionalProps.message;
+	let message = $derived(
+		isRetrying ? 'Sign into your account in the pop-up' : additionalProps.message
+	);
 </script>
 
 <div class="twsv-flex twsv-flex-col twsv-items-center twsv-gap-8 twsv-py-12 twsv-text-center">

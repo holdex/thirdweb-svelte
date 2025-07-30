@@ -9,14 +9,28 @@
 		onAnimationEnd?: (event: AnimationEvent) => void;
 	};
 
-	let className: $$Props['class'] = undefined;
-	export let theme: $$Props['theme'] = 'dark';
-	export let transition: $$Props['transition'] = flyAndScale;
-	export let transitionConfig: $$Props['transitionConfig'] = {
+	interface Props {
+		class?: $$Props['class'];
+		theme?: $$Props['theme'];
+		transition?: $$Props['transition'];
+		transitionConfig?: $$Props['transitionConfig'];
+		onAnimationEnd?: $$Props['onAnimationEnd'];
+		children?: import('svelte').Snippet;
+		[key: string]: any
+	}
+
+	let {
+		class: className = undefined,
+		theme = 'dark',
+		transition = flyAndScale,
+		transitionConfig = {
 		duration: 200
-	};
-	export let onAnimationEnd: $$Props['onAnimationEnd'] = undefined;
-	export { className as class };
+	},
+		onAnimationEnd = undefined,
+		children,
+		...rest
+	}: Props = $props();
+	
 </script>
 
 <Dialog.Portal>
@@ -28,10 +42,10 @@
 			'twsv-fixed twsv-left-[50%] twsv-top-[50%] twsv-z-50 twsv-w-full twsv-max-w-sm twsv-translate-x-[-50%] twsv-translate-y-[-50%] twsv-border twsv-border-border twsv-bg-background twsv-text-foreground twsv-shadow-lg sm:twsv-rounded-2xl md:twsv-w-full',
 			theme === 'dark' && 'dark'
 		)}
-		{...$$restProps}
+		{...rest}
 	>
-		<div on:animationend={onAnimationEnd} class={cn('twsv-grid twsv-gap-6 twsv-p-6', className)}>
-			<slot />
+		<div onanimationend={onAnimationEnd} class={cn('twsv-grid twsv-gap-6 twsv-p-6', className)}>
+			{@render children?.()}
 			<DialogPrimitive.Close
 				class="twsv-absolute twsv-right-6 twsv-top-6 twsv-rounded-md twsv-opacity-50 twsv-ring-offset-background twsv-transition-opacity data-[state=open]:twsv-bg-accent data-[state=open]:twsv-text-muted-foreground hover:twsv-bg-secondary hover:twsv-opacity-100 focus:twsv-bg-secondary focus:twsv-outline-none focus:twsv-ring-2 focus:twsv-ring-ring focus:twsv-ring-offset-2 disabled:twsv-pointer-events-none"
 			>

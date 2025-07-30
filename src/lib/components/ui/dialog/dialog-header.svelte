@@ -4,8 +4,14 @@
 
 	type $$Props = HTMLAttributes<HTMLDivElement>;
 
-	let className: $$Props['class'] = undefined;
-	export { className as class };
+	interface Props {
+		class?: $$Props['class'];
+		children?: import('svelte').Snippet;
+		[key: string]: any
+	}
+
+	let { class: className = undefined, children, ...rest }: Props = $props();
+	
 </script>
 
 <div
@@ -13,7 +19,7 @@
 		'twsv-flex twsv-flex-col twsv-space-y-1.5 twsv-text-center sm:twsv-text-left',
 		className
 	)}
-	{...$$restProps}
+	{...rest}
 >
-	<slot />
+	{@render children?.()}
 </div>

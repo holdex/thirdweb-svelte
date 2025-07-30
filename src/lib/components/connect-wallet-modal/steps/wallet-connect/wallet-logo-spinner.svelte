@@ -3,10 +3,13 @@
 	import type { WalletId } from 'thirdweb/wallets';
 	import WalletImage from '../../components/wallet-image.svelte';
 
-	export let error = false;
-	export let walletId: WalletId;
-	let className: string | undefined = undefined;
-	export { className as class };
+	interface Props {
+		error?: boolean;
+		walletId: WalletId;
+		class?: string | undefined;
+	}
+
+	let { error = false, walletId, class: className = undefined }: Props = $props();
 
 	const loaderRadius = 20;
 	const radiusFactor = 36 - loaderRadius;

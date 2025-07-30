@@ -5,14 +5,19 @@
 	import { getInstalledWalletProviders } from '$/utils/wallets.js';
 	import type { WalletId } from 'thirdweb/wallets';
 
-	export let walletId: WalletId;
-	export let walletImage: string | undefined = undefined;
-	let className: string | undefined = undefined;
-	export { className as class };
+	interface Props {
+		walletId: WalletId;
+		walletImage?: string | undefined;
+		class?: string | undefined;
+	}
 
-	$: installedWalletInfo = getInstalledWalletProviders().find((x) => x.info.rdns === walletId);
-	$: walletInfoImageQuery = getWalletInfoImageQuery(walletId, { enabled: !walletImage });
-	$: image = walletImage || installedWalletInfo?.info.icon || $walletInfoImageQuery.data;
+	let { walletId, walletImage = undefined, class: className = undefined }: Props = $props();
+
+	let installedWalletInfo = $derived(
+		getInstalledWalletProviders().find((x) => x.info.rdns === walletId)
+	);
+	let walletInfoImageQuery = $derived(getWalletInfoImageQuery(walletId, { enabled: !walletImage }));
+	let image = $derived(walletImage || installedWalletInfo?.info.icon || $walletInfoImageQuery.data);
 </script>
 
 {#if image}

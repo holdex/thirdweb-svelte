@@ -7,11 +7,12 @@
 	import { SUPPORTED_SOCIAL_PROVIDERS } from './index.js';
 	import SocialProviderButton from './social-provider-button.svelte';
 
-	type $$Props = ConnectWalletModalStepProps<'provider-selector'>;
-	export let chain: $$Props['chain'];
-	export let chains: $$Props['chains'] = undefined;
-	export let setStep: $$Props['setStep'];
-	export let onFinishConnect: $$Props['onFinishConnect'];
+	let {
+		chain,
+		chains = undefined,
+		setStep,
+		onFinishConnect
+	}: ConnectWalletModalStepProps<'provider-selector'> = $props();
 </script>
 
 <div class="twsv-flex twsv-items-center twsv-gap-3">

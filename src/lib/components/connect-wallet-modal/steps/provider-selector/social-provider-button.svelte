@@ -8,13 +8,25 @@
 	import { createWallet } from 'thirdweb/wallets';
 	import { openOauthSignInWindow } from './utils.js';
 
+	interface Props {
+		client?: ThirdwebClient;
+		chain?: Chain | undefined;
+		chains?: Chain[] | undefined;
+		provider: SupportedSocialProvider;
+		setStep: ConnectWalletModalStepProps<'provider-selector'>['setStep'];
+		onFinishConnect: ConnectWalletModalStepProps<'provider-selector'>['onFinishConnect'];
+	}
+
 	const context = getThirdwebSvelteContext();
-	export let client: ThirdwebClient = context.client;
-	export let chain: Chain | undefined = undefined;
-	export let chains: Chain[] | undefined = undefined;
-	export let provider: SupportedSocialProvider;
-	export let setStep: ConnectWalletModalStepProps<'provider-selector'>['setStep'];
-	export let onFinishConnect: ConnectWalletModalStepProps<'provider-selector'>['onFinishConnect'];
+
+	let {
+		client = context.client,
+		chain = undefined,
+		chains = undefined,
+		provider,
+		setStep,
+		onFinishConnect
+	}: Props = $props();
 
 	const handleClick = async () => {
 		if (!context || !client) {

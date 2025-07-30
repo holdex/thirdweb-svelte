@@ -5,12 +5,17 @@
 
 	type $$Props = DialogPrimitive.OverlayProps;
 
-	let className: $$Props['class'] = undefined;
-	export let transition: $$Props['transition'] = fade;
-	export let transitionConfig: $$Props['transitionConfig'] = {
+	interface Props {
+		class?: $$Props['class'];
+		transition?: $$Props['transition'];
+		transitionConfig?: $$Props['transitionConfig'];
+		[key: string]: any
+	}
+
+	let { class: className = undefined, transition = fade, transitionConfig = {
 		duration: 150
-	};
-	export { className as class };
+	}, ...rest }: Props = $props();
+	
 </script>
 
 <DialogPrimitive.Overlay
@@ -20,5 +25,5 @@
 		'twsv-fixed twsv-inset-0 twsv-z-50 twsv-bg-background/80 twsv-backdrop-blur-sm',
 		className
 	)}
-	{...$$restProps}
+	{...rest}
 />

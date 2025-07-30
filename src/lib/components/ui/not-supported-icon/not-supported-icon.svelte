@@ -1,7 +1,10 @@
 <script lang="ts">
-	type $$Props = {
+	interface Props {
 		class?: string;
-	};
+		[key: string]: any;
+	}
+
+	let { ...rest }: Props = $props();
 </script>
 
 <svg
@@ -11,7 +14,7 @@
 	fill="none"
 	xmlns="http://www.w3.org/2000/svg"
 	role="presentation"
-	{...$$restProps}
+	{...rest}
 >
 	<g clip-path="url(#clip0_4036_4155)">
 		<path

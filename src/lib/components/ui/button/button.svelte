@@ -7,27 +7,42 @@
 	type $$Props = Props;
 	type $$Events = Events;
 
-	let className: $$Props['class'] = undefined;
-	export let variant: $$Props['variant'] = 'default';
-	export let size: $$Props['size'] = 'default';
-	export let rounding: $$Props['rounding'] = 'default';
-	export let builders: $$Props['builders'] = [];
-	export let loading = false;
-	export { className as class };
+	interface Props_1 {
+		class?: $$Props['class'];
+		variant?: $$Props['variant'];
+		size?: $$Props['size'];
+		rounding?: $$Props['rounding'];
+		builders?: $$Props['builders'];
+		loading?: boolean;
+		children?: import('svelte').Snippet;
+		[key: string]: any
+	}
+
+	let {
+		class: className = undefined,
+		variant = 'default',
+		size = 'default',
+		rounding = 'default',
+		builders = [],
+		loading = false,
+		children,
+		...rest
+	}: Props_1 = $props();
+	
 </script>
 
 <ButtonPrimitive.Root
 	{builders}
 	class={cn(buttonVariants({ variant, size, rounding }), className)}
 	type="button"
-	{...$$restProps}
-	disabled={loading || $$restProps.disabled}
+	{...rest}
+	disabled={loading || rest.disabled}
 	on:click
 	on:keydown
 >
 	{#if loading}
 		<Spinner class="twsv-h-[1em] twsv-w-[1em]" />
 	{:else}
-		<slot />
+		{@render children?.()}
 	{/if}
 </ButtonPrimitive.Root>

@@ -4,11 +4,16 @@
 
 	type $$Props = HTMLAttributes<HTMLDivElement>;
 
-	let className: $$Props['class'] = undefined;
-	export { className as class };
+	interface Props {
+		class?: $$Props['class'];
+		[key: string]: any
+	}
+
+	let { class: className = undefined, ...rest }: Props = $props();
+	
 </script>
 
 <div
 	class={cn('twsv-animate-pulse twsv-rounded-md twsv-bg-muted', className)}
-	{...$$restProps}
+	{...rest}
 ></div>

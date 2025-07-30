@@ -6,7 +6,12 @@
 		iconName: SocialIconName;
 	};
 
-	export let iconName: SocialIconName;
+	interface Props {
+		iconName: SocialIconName;
+		[key: string]: any;
+	}
+
+	let { iconName, ...rest }: Props = $props();
 </script>
 
-<img {...$$restProps} src={socialIcons[iconName]} alt="" />
+<img {...rest} src={socialIcons[iconName]} alt="" />

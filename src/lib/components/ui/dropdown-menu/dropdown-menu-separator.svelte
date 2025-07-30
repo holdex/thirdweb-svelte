@@ -4,11 +4,16 @@
 
 	type $$Props = DropdownMenuPrimitive.SeparatorProps;
 
-	let className: $$Props['class'] = undefined;
-	export { className as class };
+	interface Props {
+		class?: $$Props['class'];
+		[key: string]: any
+	}
+
+	let { class: className = undefined, ...rest }: Props = $props();
+	
 </script>
 
 <DropdownMenuPrimitive.Separator
 	class={cn('-twsv-mx-1 twsv-my-1 twsv-h-px twsv-bg-muted', className)}
-	{...$$restProps}
+	{...rest}
 />

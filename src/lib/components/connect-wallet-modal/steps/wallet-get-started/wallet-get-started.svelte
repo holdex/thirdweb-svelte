@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import { Button } from '$/components/ui/button/index.js';
 	import type { Wallet, WalletInfo } from 'thirdweb/wallets';
 	import ChromeIcon from './chrome-icon.svelte';
@@ -9,13 +11,22 @@
 	import QrCode from '../../components/qr-code/qr-code.svelte';
 	import WalletImage from '../../components/wallet-image.svelte';
 
-	export let wallet: Wallet;
-	export let walletInfo: WalletInfo;
-	export let baseCustomBackClick: (() => void) | null = null;
-	export let setCustomBackClick: (backClick: (() => void) | null) => void;
+	interface Props {
+		wallet: Wallet;
+		walletInfo: WalletInfo;
+		baseCustomBackClick?: (() => void) | null;
+		setCustomBackClick: (backClick: (() => void) | null) => void;
+	}
 
-	let showScreen = 'base' as 'base' | 'android-scan' | 'ios-scan';
-	$: {
+	let {
+		wallet,
+		walletInfo,
+		baseCustomBackClick = null,
+		setCustomBackClick
+	}: Props = $props();
+
+	let showScreen = $state('base' as 'base' | 'android-scan' | 'ios-scan');
+	run(() => {
 		if (showScreen !== 'base') {
 			setCustomBackClick(() => {
 				showScreen = 'base';
@@ -23,7 +34,7 @@
 		} else {
 			setCustomBackClick(baseCustomBackClick);
 		}
-	}
+	});
 
 	// TODO: handle back
 </script>
@@ -81,7 +92,9 @@
 	{@const url = (showScreen === 'android-scan' ? walletInfo.app.android : walletInfo.app.ios) || ''}
 	<div class="twsv-flex twsv-flex-col twsv-pt-2">
 		<QrCode qrCodeUri={url}>
-			<WalletImage walletId={wallet.id} class="twsv-h-[4.5rem] twsv-w-[4.5rem]" slot="image" />
+			{#snippet image()}
+								<WalletImage walletId={wallet.id} class="twsv-h-[4.5rem] twsv-w-[4.5rem]"  />
+							{/snippet}
 		</QrCode>
 		<span
 			class="twsv-mt-8 twsv-text-balance twsv-pb-4 twsv-text-center twsv-font-medium twsv-text-muted-foreground"

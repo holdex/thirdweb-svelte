@@ -5,13 +5,17 @@
 	import { getWalletInfoQuery } from '$/queries/wallets.js';
 	import SquareArrowOutUpRight from 'lucide-svelte/icons/square-arrow-out-up-right';
 
-	export let walletId: WalletId;
-	export let deepLinkPrefix: string;
+	interface Props {
+		walletId: WalletId;
+		deepLinkPrefix: string;
+	}
 
-	$: walletInfoQuery = getWalletInfoQuery(walletId);
-	$: walletName = $walletInfoQuery.data?.name;
+	let { walletId, deepLinkPrefix }: Props = $props();
 
-	$: href = `${deepLinkPrefix}${window.location.toString().replace('https://', '')}`;
+	let walletInfoQuery = $derived(getWalletInfoQuery(walletId));
+	let walletName = $derived($walletInfoQuery.data?.name);
+
+	let href = $derived(`${deepLinkPrefix}${window.location.toString().replace('https://', '')}`);
 </script>
 
 <div class="twsv-flex twsv-flex-col twsv-items-center twsv-justify-center twsv-pb-4">

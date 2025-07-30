@@ -7,13 +7,17 @@
 	import WalletImage from '../../components/wallet-image.svelte';
 	import { getInstalledWalletData } from '$/utils/wallets.js';
 
-	export let wallet: Wallet;
-	export let setStep: ConnectWalletModalStepProps<'wallet-selector'>['setStep'];
+	interface Props {
+		wallet: Wallet;
+		setStep: ConnectWalletModalStepProps<'wallet-selector'>['setStep'];
+	}
 
-	$: installedWalletInfo = getInstalledWalletData(wallet.id);
-	$: walletInfoQuery = getWalletInfoQuery(wallet.id);
+	let { wallet, setStep }: Props = $props();
 
-	$: walletName = installedWalletInfo?.info.name || $walletInfoQuery.data?.name;
+	let installedWalletInfo = $derived(getInstalledWalletData(wallet.id));
+	let walletInfoQuery = $derived(getWalletInfoQuery(wallet.id));
+
+	let walletName = $derived(installedWalletInfo?.info.name || $walletInfoQuery.data?.name);
 </script>
 
 <li class="twsv-w-full">

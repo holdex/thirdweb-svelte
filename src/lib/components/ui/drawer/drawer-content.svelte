@@ -8,9 +8,15 @@
 		theme?: 'light' | 'dark';
 	};
 
-	export let theme: $$Props['theme'] = 'dark';
-	let className: $$Props['class'] = undefined;
-	export { className as class };
+	interface Props {
+		theme?: $$Props['theme'];
+		class?: $$Props['class'];
+		children?: import('svelte').Snippet;
+		[key: string]: any
+	}
+
+	let { theme = 'dark', class: className = undefined, children, ...rest }: Props = $props();
+	
 </script>
 
 <DrawerPrimitive.Portal>
@@ -21,9 +27,9 @@
 			theme === 'dark' && 'dark',
 			className
 		)}
-		{...$$restProps}
+		{...rest}
 	>
-		<slot />
+		{@render children?.()}
 		<DrawerPrimitive.Close
 			class="twsv-absolute twsv-right-6 twsv-top-6 twsv-rounded-md twsv-opacity-50 twsv-ring-offset-background twsv-transition-opacity data-[state=open]:twsv-bg-accent data-[state=open]:twsv-text-muted-foreground hover:twsv-bg-secondary hover:twsv-opacity-100 focus:twsv-bg-secondary focus:twsv-outline-none focus:twsv-ring-2 focus:twsv-ring-ring focus:twsv-ring-offset-2 disabled:twsv-pointer-events-none"
 		>
