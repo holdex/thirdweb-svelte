@@ -35,7 +35,7 @@
 		position: relative;
 	}
 	.pulsating-container::before {
-		@apply twsv-bg-accent-foreground;
+		background-color: hsl(var(--twsv-accent-foreground) / var(--tw-bg-opacity, 1));
 		content: '';
 		display: block;
 		position: absolute;
