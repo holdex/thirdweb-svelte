@@ -51,8 +51,8 @@
 	<Input
 		{value}
 		type="email"
-		on:change={handleChange}
-		on:keypress={handleChange}
+		onchange={handleChange}
+		onkeypress={handleChange}
 		placeholder="Email address"
 		class={cn('twsv-pr-16 twsv-text-base', shownError && '!twsv-border-red-500')}
 	/>
