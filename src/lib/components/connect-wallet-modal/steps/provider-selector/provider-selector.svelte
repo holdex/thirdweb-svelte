@@ -33,7 +33,7 @@
 <Button
 	class="twsv-h-12 twsv-justify-start twsv-gap-3"
 	variant="outline"
-	on:click={() => setStep('wallet-selector', undefined)}
+	onclick={() => setStep('wallet-selector', undefined)}
 >
 	<SocialIcon iconName="wallet" class="twsv-h-5  twsv-w-5" />
 	<span class="twsv-font-medium">Connect a Wallet</span>

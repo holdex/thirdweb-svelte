@@ -35,6 +35,6 @@
 	{#if isRetrying}
 		<Spinner />
 	{:else}
-		<Button variant="default" class="twsv-h-11" on:click={handleRetry}>Retry</Button>
+		<Button variant="default" class="twsv-h-11" onclick={handleRetry}>Retry</Button>
 	{/if}
 </div>

@@ -18,12 +18,7 @@
 		setCustomBackClick: (backClick: (() => void) | null) => void;
 	}
 
-	let {
-		wallet,
-		walletInfo,
-		baseCustomBackClick = null,
-		setCustomBackClick
-	}: Props = $props();
+	let { wallet, walletInfo, baseCustomBackClick = null, setCustomBackClick }: Props = $props();
 
 	let showScreen = $state('base' as 'base' | 'android-scan' | 'ios-scan');
 	run(() => {
@@ -57,7 +52,7 @@
 		{/if}
 		{#if walletInfo.app.android}
 			<Button
-				on:click={() => {
+				onclick={() => {
 					if (isMobile()) {
 						openWindow(walletInfo.app.android || '');
 					} else {
@@ -73,7 +68,7 @@
 		{/if}
 		{#if walletInfo.app.ios}
 			<Button
-				on:click={() => {
+				onclick={() => {
 					if (isMobile()) {
 						openWindow(walletInfo.app.ios || '');
 					} else {
@@ -93,8 +88,8 @@
 	<div class="twsv-flex twsv-flex-col twsv-pt-2">
 		<QrCode qrCodeUri={url}>
 			{#snippet image()}
-								<WalletImage walletId={wallet.id} class="twsv-h-[4.5rem] twsv-w-[4.5rem]"  />
-							{/snippet}
+				<WalletImage walletId={wallet.id} class="twsv-h-[4.5rem] twsv-w-[4.5rem]" />
+			{/snippet}
 		</QrCode>
 		<span
 			class="twsv-mt-8 twsv-text-balance twsv-pb-4 twsv-text-center twsv-font-medium twsv-text-muted-foreground"

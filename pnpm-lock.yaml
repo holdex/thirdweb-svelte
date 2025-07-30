@@ -14,9 +14,6 @@ importers:
       '@jimmyverburgt/svelte-input-otp':
         specifier: ^0.0.3
         version: 0.0.3(svelte@5.37.1)
-      bits-ui:
-        specifier: ^0.22.0
-        version: 0.22.0(svelte@5.37.1)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -63,6 +60,9 @@ importers:
       autoprefixer:
         specifier: ^10.4.21
         version: 10.4.21(postcss@8.5.6)
+      bits-ui:
+        specifier: ^1.8.0
+        version: 1.8.0(svelte@5.37.1)
       eruda:
         specifier: ^3.4.3
         version: 3.4.3
@@ -106,8 +106,8 @@ importers:
         specifier: ^3.1.0
         version: 3.1.0(tailwindcss@3.4.17)
       tailwind-variants:
-        specifier: ^2.0.1
-        version: 2.0.1(tailwind-merge@2.6.0)(tailwindcss@3.4.17)
+        specifier: ^0.2.1
+        version: 0.2.1(tailwindcss@3.4.17)
       tailwindcss:
         specifier: ^3.4.17
         version: 3.4.17
@@ -1380,10 +1380,11 @@ packages:
     peerDependencies:
       svelte: ^4.0.0 || ^5.0.0-next.118
 
-  bits-ui@0.22.0:
-    resolution: {integrity: sha512-r7Fw1HNgA4YxZBRcozl7oP0bheQ8EHh+kfMBZJgyFISix8t4p/nqDcHLmBgIiJ3T5XjYnJRorYDjIWaCfhb5fw==}
+  bits-ui@1.8.0:
+    resolution: {integrity: sha512-CXD6Orp7l8QevNDcRPLXc/b8iMVgxDWT2LyTwsdLzJKh9CxesOmPuNePSPqAxKoT59FIdU4aFPS1k7eBdbaCxg==}
+    engines: {node: '>=18', pnpm: '>=8.7.0'}
     peerDependencies:
-      svelte: ^4.0.0 || ^5.0.0
+      svelte: ^5.11.0
 
   blakejs@1.2.1:
     resolution: {integrity: sha512-QXUSXI3QVc/gJME0dBpXrag1kbzOqCjCX8/b54ntNyW6sjtoqxqRk3LTmXzaJoh71zMsDCjM+47jS7XiwN/+fQ==}
@@ -2980,15 +2981,11 @@ packages:
     peerDependencies:
       tailwindcss: 3.x
 
-  tailwind-variants@2.0.1:
-    resolution: {integrity: sha512-1wt8c4PWO3jbZcKGBrjIV8cehWarREw1C2os0k8Mcq0nof/CbafNhUUjb0LRWiiRfAvDK6v1deswtHLsygKglw==}
+  tailwind-variants@0.2.1:
+    resolution: {integrity: sha512-2xmhAf4UIc3PijOUcJPA1LP4AbxhpcHuHM2C26xM0k81r0maAO6uoUSHl3APmvHZcY5cZCY/bYuJdfFa4eGoaw==}
     engines: {node: '>=16.x', pnpm: '>=7.x'}
     peerDependencies:
-      tailwind-merge: '>=3.0.0'
       tailwindcss: '*'
-    peerDependenciesMeta:
-      tailwind-merge:
-        optional: true
 
   tailwindcss@3.4.17:
     resolution: {integrity: sha512-w33E2aCvSDP0tW9RZuNXadXlkHXqFzSkQew/aIa2i/Sj8fThxwovwlXHSPXTbAHwEIhBFXAedUhP2tueAKP8Og==}
@@ -4944,12 +4941,17 @@ snapshots:
       nanoid: 5.1.5
       svelte: 5.37.1
 
-  bits-ui@0.22.0(svelte@5.37.1):
+  bits-ui@1.8.0(svelte@5.37.1):
     dependencies:
+      '@floating-ui/core': 1.7.3
+      '@floating-ui/dom': 1.7.3
       '@internationalized/date': 3.8.2
-      '@melt-ui/svelte': 0.76.2(svelte@5.37.1)
-      nanoid: 5.1.5
+      css.escape: 1.5.1
+      esm-env: 1.2.2
+      runed: 0.23.4(svelte@5.37.1)
       svelte: 5.37.1
+      svelte-toolbelt: 0.7.1(svelte@5.37.1)
+      tabbable: 6.2.0
 
   blakejs@1.2.1: {}
 
@@ -6472,11 +6474,10 @@ snapshots:
     dependencies:
       tailwindcss: 3.4.17
 
-  tailwind-variants@2.0.1(tailwind-merge@2.6.0)(tailwindcss@3.4.17):
+  tailwind-variants@0.2.1(tailwindcss@3.4.17):
     dependencies:
-      tailwindcss: 3.4.17
-    optionalDependencies:
       tailwind-merge: 2.6.0
+      tailwindcss: 3.4.17
 
   tailwindcss@3.4.17:
     dependencies:

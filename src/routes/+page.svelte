@@ -1,4 +1,4 @@
-<script lang='ts'>
+<script lang="ts">
 	import Button from '$/components/ui/button/button.svelte';
 	import Copy from 'lucide-svelte/icons/copy';
 	import GithubIcon from './github-icon.svelte';
@@ -64,7 +64,7 @@
 					size="auto"
 					class="twsv-rounded-lg twsv-bg-transparent twsv-p-2 twsv-text-muted-foreground"
 					variant="outline"
-					on:click={() => {
+					onclick={() => {
 						navigator.clipboard.writeText(command);
 						toast.success('Copied to clipboard!');
 					}}

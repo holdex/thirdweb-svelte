@@ -66,7 +66,7 @@
 				'twsv-h-full twsv-w-full twsv-rounded-l-none twsv-p-2 twsv-text-muted-foreground !twsv-outline-none !twsv-ring-0 !twsv-ring-offset-0 focus-visible:twsv-bg-secondary/50 focus-visible:twsv-text-secondary-foreground'
 			)}
 			type="submit"
-			on:click={() => {
+			onclick={() => {
 				showError = true;
 			}}
 		>

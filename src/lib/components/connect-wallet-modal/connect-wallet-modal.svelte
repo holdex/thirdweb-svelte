@@ -74,7 +74,7 @@
 							variant="ghost"
 							size="auto"
 							class="twsv-absolute -twsv-left-2 twsv-top-0 twsv-text-muted-foreground"
-							on:click={() => {
+							onclick={() => {
 								if (customBackClick) customBackClick();
 								else setStep('provider-selector');
 							}}
@@ -113,7 +113,7 @@
 							variant="ghost"
 							size="auto"
 							class="twsv-absolute -twsv-left-2 twsv-top-6 twsv-text-muted-foreground"
-							on:click={() => {
+							onclick={() => {
 								if (customBackClick) customBackClick();
 								else setStep('provider-selector');
 							}}

@@ -12,7 +12,12 @@
 	import * as DropdownMenu from '../ui/dropdown-menu/index.js';
 	import { Spinner } from '../ui/spinner/index.js';
 
-	let { disconnectButtonProps = undefined, exportPrivateKeyButtonProps = undefined, connect, ...rest }: ConnectWalletButtonProps = $props();
+	let {
+		disconnectButtonProps = undefined,
+		exportPrivateKeyButtonProps = undefined,
+		connect,
+		...rest
+	}: ConnectWalletButtonProps = $props();
 
 	const context = getThirdwebSvelteContext();
 	const wallet = context.wallet;
@@ -58,7 +63,7 @@
 	<div
 		class="twsv-rounded-full twsv-border-2 twsv-border-dashed twsv-border-secondary twsv-p-3 md:twsv-p-4"
 	>
-		<Button size="lg" on:click={() => (isOpen = !isOpen)} {...rest}>
+		<Button size="lg" onclick={() => (isOpen = !isOpen)} {...rest}>
 			{#if connect}
 				{@render connect?.()}
 			{:else}
@@ -121,7 +126,7 @@
 					size="lg"
 					variant="ghost"
 					{...disconnectButtonProps}
-					on:click={() => context.disconnect()}
+					onclick={() => context.disconnect()}
 				>
 					Disconnect
 				</Button>
@@ -130,7 +135,7 @@
 						size="lg"
 						variant="ghost"
 						{...exportPrivateKeyButtonProps}
-						on:click={() => (isExportPrivateKeyOpen = !isExportPrivateKeyOpen)}
+						onclick={() => (isExportPrivateKeyOpen = !isExportPrivateKeyOpen)}
 					>
 						Export Private Key
 					</Button>

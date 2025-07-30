@@ -25,15 +25,8 @@
 		setModalOpen: (open: boolean) => void;
 	}
 
-	let {
-		wallet,
-		walletInfo,
-		chain,
-		chains,
-		walletConnect,
-		onFinishConnect,
-		setModalOpen
-	}: Props = $props();
+	let { wallet, walletInfo, chain, chains, walletConnect, onFinishConnect, setModalOpen }: Props =
+		$props();
 
 	const context = getThirdwebSvelteContext();
 
@@ -134,14 +127,14 @@
 	<div class="twsv-flex twsv-flex-col twsv-items-center twsv-pt-3 twsv-text-center">
 		<QrCode {qrCodeUri}>
 			{#snippet image()}
-						<WalletImage  class="twsv-h-[4.5rem] twsv-w-[4.5rem]" walletId={wallet.id} />
-					{/snippet}
+				<WalletImage class="twsv-h-[4.5rem] twsv-w-[4.5rem]" walletId={wallet.id} />
+			{/snippet}
 		</QrCode>
 		<Button
 			variant="link"
 			size="auto"
 			class="twsv-mx-auto twsv-mt-2 twsv-w-fit"
-			on:click={async () => {
+			onclick={async () => {
 				try {
 					await navigator.clipboard.writeText(qrCodeUri);
 					linkCopied = true;

@@ -138,7 +138,7 @@
 			class="-twsv-ml-6 -twsv-mr-6 twsv-self-stretch twsv-border-t twsv-border-border twsv-pb-1 twsv-pt-4"
 		>
 			{#if accountStatus === 'sent'}
-				<Button variant="link" size="auto" on:click={sendOtp}>Resend verification code</Button>
+				<Button variant="link" size="auto" onclick={sendOtp}>Resend verification code</Button>
 			{:else if accountStatus === 'error'}
 				<span class="twsv-text-sm twsv-text-red-500"> Failed to send verification code</span>
 			{:else if accountStatus === 'sending'}

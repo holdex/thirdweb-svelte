@@ -25,7 +25,7 @@
 		size="auto"
 		class="twsv-w-full twsv-justify-start twsv-gap-3 twsv-p-2 twsv-transition-transform hover:twsv-scale-[1.01]"
 		variant="ghost"
-		on:click={async () => {
+		onclick={async () => {
 			await wallet.onConnectRequested?.();
 			setStep('wallet-connect', { wallet }, walletName);
 		}}

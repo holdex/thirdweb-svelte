@@ -72,7 +72,7 @@
 				>
 			{:else}
 				<span class="twsv-text-xl twsv-font-semibold">Connection Failed</span>
-				<Button variant="accent" on:click={connectToExtension} class="twsv-w-full">
+				<Button variant="accent" onclick={connectToExtension} class="twsv-w-full">
 					<div class="twsv-flex twsv-items-center twsv-gap-2 twsv-text-sm">
 						<RotateCw strokeWidth={1} class="twsv-h-4 twsv-w-4" />
 						<span>Try Again</span>
