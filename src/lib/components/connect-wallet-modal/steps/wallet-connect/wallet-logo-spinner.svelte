@@ -3,10 +3,13 @@
 	import type { WalletId } from 'thirdweb/wallets';
 	import WalletImage from '../../components/wallet-image.svelte';
 
-	export let error = false;
-	export let walletId: WalletId;
-	let className: string | undefined = undefined;
-	export { className as class };
+	interface Props {
+		error?: boolean;
+		walletId: WalletId;
+		class?: string | undefined;
+	}
+
+	let { error = false, walletId, class: className = undefined }: Props = $props();
 
 	const loaderRadius = 20;
 	const radiusFactor = 36 - loaderRadius;
@@ -66,7 +69,7 @@
 	}
 
 	.logo-container[data-error='true'] [data-container]::before {
-		@apply twsv-bg-red-500;
+		background-color: rgb(239 68 68 / var(--tw-bg-opacity, 1));
 		content: '';
 		position: absolute;
 		inset: 0;
@@ -85,7 +88,7 @@
 	}
 
 	.logo-container rect {
-		@apply twsv-stroke-accent-foreground;
+		stroke: hsl(var(--twsv-accent-foreground) / 1);
 		animation: dash-rotate-animation 1.2s linear infinite;
 	}
 

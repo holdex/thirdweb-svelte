@@ -1,41 +1,41 @@
 <script lang="ts">
-	import { Dialog as DialogPrimitive } from 'bits-ui';
+	import { Dialog as DialogPrimitive, type WithoutChildrenOrChild } from 'bits-ui';
 	import X from 'lucide-svelte/icons/x';
+	import type { Snippet } from 'svelte';
 	import * as Dialog from './index.js';
-	import { cn, flyAndScale } from '$/utils.js';
+	import { cn } from '$/utils.js';
 
-	type $$Props = DialogPrimitive.ContentProps & {
-		theme?: 'light' | 'dark';
-		onAnimationEnd?: (event: AnimationEvent) => void;
-	};
-
-	let className: $$Props['class'] = undefined;
-	export let theme: $$Props['theme'] = 'dark';
-	export let transition: $$Props['transition'] = flyAndScale;
-	export let transitionConfig: $$Props['transitionConfig'] = {
-		duration: 200
-	};
-	export let onAnimationEnd: $$Props['onAnimationEnd'] = undefined;
-	export { className as class };
+	let {
+		ref = $bindable(null),
+		class: className,
+		theme = 'dark',
+		portalProps,
+		children,
+		...restProps
+	}: WithoutChildrenOrChild<DialogPrimitive.ContentProps> & {
+		portalProps?: DialogPrimitive.PortalProps;
+		children: Snippet;
+		theme?: 'dark' | 'light';
+	} = $props();
 </script>
 
-<Dialog.Portal>
-	<Dialog.Overlay class={cn(theme === 'dark' && 'dark')} />
+<Dialog.Portal {...portalProps}>
+	<Dialog.Overlay />
 	<DialogPrimitive.Content
-		{transition}
-		{transitionConfig}
+		bind:ref
+		{...restProps}
 		class={cn(
-			'twsv-fixed twsv-left-[50%] twsv-top-[50%] twsv-z-50 twsv-w-full twsv-max-w-sm twsv-translate-x-[-50%] twsv-translate-y-[-50%] twsv-border twsv-border-border twsv-bg-background twsv-text-foreground twsv-shadow-lg sm:twsv-rounded-2xl md:twsv-w-full',
-			theme === 'dark' && 'dark'
+			'twsv-fixed twsv-left-[50%] twsv-top-[50%] twsv-z-50 twsv-grid twsv-w-full twsv-max-w-sm twsv-translate-x-[-50%] twsv-translate-y-[-50%] twsv-gap-4 twsv-rounded-lg twsv-border twsv-border-border twsv-bg-background twsv-text-foreground twsv-shadow-lg twsv-outline-none twsv-duration-200 data-[state=open]:twsv-animate-in data-[state=closed]:twsv-animate-out data-[state=closed]:twsv-fade-out-0 data-[state=open]:twsv-fade-in-0 data-[state=closed]:twsv-zoom-out-95 data-[state=open]:twsv-zoom-in-95 data-[state=closed]:twsv-slide-out-to-left-1/2 data-[state=closed]:twsv-slide-out-to-top-[48%] data-[state=open]:twsv-slide-in-from-left-1/2 data-[state=open]:twsv-slide-in-from-top-[48%] sm:twsv-rounded-2xl md:twsv-w-full',
+			theme === 'dark' && 'dark',
+			className
 		)}
-		{...$$restProps}
 	>
-		<div on:animationend={onAnimationEnd} class={cn('twsv-grid twsv-gap-6 twsv-p-6', className)}>
-			<slot />
+		<div class={cn('twsv-grid twsv-gap-6 twsv-p-6', className)}>
+			{@render children?.()}
 			<DialogPrimitive.Close
-				class="twsv-absolute twsv-right-6 twsv-top-6 twsv-rounded-md twsv-opacity-50 twsv-ring-offset-background twsv-transition-opacity data-[state=open]:twsv-bg-accent data-[state=open]:twsv-text-muted-foreground hover:twsv-bg-secondary hover:twsv-opacity-100 focus:twsv-bg-secondary focus:twsv-outline-none focus:twsv-ring-2 focus:twsv-ring-ring focus:twsv-ring-offset-2 disabled:twsv-pointer-events-none"
+				class="twsv-absolute twsv-right-4 twsv-top-4 twsv-rounded-sm twsv-opacity-70 twsv-ring-offset-background twsv-transition-opacity hover:twsv-opacity-100 focus:twsv-outline-none focus:twsv-ring-2 focus:twsv-ring-ring focus:twsv-ring-offset-2 disabled:twsv-pointer-events-none"
 			>
-				<X class="twsv-h-6 twsv-w-6" />
+				<X class="twsv-size-4"></X>
 				<span class="twsv-sr-only">Close</span>
 			</DialogPrimitive.Close>
 		</div>

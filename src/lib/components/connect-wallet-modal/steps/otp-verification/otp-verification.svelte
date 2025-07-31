@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import { Spinner } from '$/components/ui/spinner/index.js';
 	import type { ConnectWalletModalStepProps } from '../index.js';
 	import { Button } from '$/components/ui/button/index.js';
@@ -7,11 +9,12 @@
 	import { onMount } from 'svelte';
 	import { PinInput } from '$/components/ui/pin-input/index.js';
 
-	type $$Props = ConnectWalletModalStepProps<'otp-verification'>;
-	export let additionalProps: $$Props['additionalProps'];
-	export let chain: $$Props['chain'];
-	export let chains: $$Props['chains'] = undefined;
-	export let onFinishConnect: $$Props['onFinishConnect'];
+	let {
+		additionalProps,
+		chain,
+		chains = undefined,
+		onFinishConnect
+	}: ConnectWalletModalStepProps<'otp-verification'> = $props();
 
 	const { client } = getThirdwebSvelteContext();
 
@@ -22,13 +25,13 @@
 		| 'valid'
 		| 'idle'
 		| 'payment_required';
-	let verifyStatus: VerificationStatus = 'idle';
+	let verifyStatus: VerificationStatus = $state('idle');
 	type AccountStatus = 'sending' | 'sent' | 'error';
-	let accountStatus: AccountStatus = 'sent';
-	let error: string | null = null;
-	let isSendingOtpOnMount = true;
+	let accountStatus: AccountStatus = $state('sent');
+	let error: string | null = $state(null);
+	let isSendingOtpOnMount = $state(true);
 
-	let otp = '';
+	let otp = $state('');
 
 	async function sendOtp() {
 		accountStatus = 'sending';
@@ -84,14 +87,14 @@
 			console.error('Authentication Error', e);
 		}
 	};
-	$: {
+	run(() => {
 		if (otp.length === 6) {
 			verifyStatus = 'verifying';
 			verify(otp);
 		} else {
 			verifyStatus = 'idle';
 		}
-	}
+	});
 
 	onMount(() => {
 		sendOtp();
@@ -104,7 +107,7 @@
 	</div>
 {:else}
 	<form
-		on:submit={(e) => {
+		onsubmit={(e) => {
 			e.preventDefault();
 			verify(otp);
 		}}
@@ -135,7 +138,7 @@
 			class="-twsv-ml-6 -twsv-mr-6 twsv-self-stretch twsv-border-t twsv-border-border twsv-pb-1 twsv-pt-4"
 		>
 			{#if accountStatus === 'sent'}
-				<Button variant="link" size="auto" on:click={sendOtp}>Resend verification code</Button>
+				<Button variant="link" size="auto" onclick={sendOtp}>Resend verification code</Button>
 			{:else if accountStatus === 'error'}
 				<span class="twsv-text-sm twsv-text-red-500"> Failed to send verification code</span>
 			{:else if accountStatus === 'sending'}

@@ -7,13 +7,17 @@
 	import WalletImage from '../../components/wallet-image.svelte';
 	import { getInstalledWalletData } from '$/utils/wallets.js';
 
-	export let wallet: Wallet;
-	export let setStep: ConnectWalletModalStepProps<'wallet-selector'>['setStep'];
+	interface Props {
+		wallet: Wallet;
+		setStep: ConnectWalletModalStepProps<'wallet-selector'>['setStep'];
+	}
 
-	$: installedWalletInfo = getInstalledWalletData(wallet.id);
-	$: walletInfoQuery = getWalletInfoQuery(wallet.id);
+	let { wallet, setStep }: Props = $props();
 
-	$: walletName = installedWalletInfo?.info.name || $walletInfoQuery.data?.name;
+	let installedWalletInfo = $derived(getInstalledWalletData(wallet.id));
+	let walletInfoQuery = $derived(getWalletInfoQuery(wallet.id));
+
+	let walletName = $derived(installedWalletInfo?.info.name || $walletInfoQuery.data?.name);
 </script>
 
 <li class="twsv-w-full">
@@ -21,7 +25,7 @@
 		size="auto"
 		class="twsv-w-full twsv-justify-start twsv-gap-3 twsv-p-2 twsv-transition-transform hover:twsv-scale-[1.01]"
 		variant="ghost"
-		on:click={async () => {
+		onclick={async () => {
 			await wallet.onConnectRequested?.();
 			setStep('wallet-connect', { wallet }, walletName);
 		}}

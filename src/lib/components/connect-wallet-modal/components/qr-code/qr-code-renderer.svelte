@@ -1,24 +1,22 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import { encode } from 'uqr';
 
-	type $$Props = {
+	interface Props {
 		ecl: 'L' | 'M' | 'Q' | 'H';
 		size: number;
 		uri: string;
 		clearSize: number;
-	};
+	}
 
-	export let ecl: $$Props['ecl'] = 'M';
-	let sizeProp: $$Props['size'] = 200;
-	export { sizeProp as size };
-	export let uri: $$Props['uri'];
-	export let clearSize: $$Props['clearSize'] = 0;
+	let { ecl = 'M', size: sizeProp = 200, uri, clearSize = 0 }: Props = $props();
 
 	const logoSize = clearSize;
 	const size = sizeProp - 10 * 2;
 
-	let dots = '';
-	$: {
+	let dots = $state('');
+	run(() => {
 		const dotsArray: string[] = [];
 		const matrix = encode(uri, { ecc: ecl, border: 0 }).data;
 		const cellSize = size / matrix.length;
@@ -85,7 +83,7 @@
 		});
 
 		dots = dotsArray.join('');
-	}
+	});
 </script>
 
 <svg

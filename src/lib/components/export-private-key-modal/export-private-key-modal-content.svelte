@@ -7,12 +7,16 @@
 	import { NotSupportedIcon } from '../ui/not-supported-icon/index.js';
 	import { onDestroy, onMount } from 'svelte';
 
-	export let wallet: Wallet | null;
-	export let theme: ExportPrivateKeyModalProps['theme'] = 'dark';
+	interface Props {
+		wallet: Wallet | null;
+		theme?: ExportPrivateKeyModalProps['theme'];
+	}
+
+	let { wallet, theme = 'dark' }: Props = $props();
 
 	const { client } = getThirdwebSvelteContext();
 
-	let isLoading = true;
+	let isLoading = $state(true);
 
 	const baseDomain = 'https://embedded-wallet.thirdweb.com';
 	const iframeSrc = `${baseDomain}/sdk/2022-08-12/embedded-wallet/export-private-key?clientId=${
@@ -65,10 +69,10 @@
 		id={`export-wallet-${wallet.id}`}
 		title="Export In-App Wallet"
 		class={cn('twsv-h-[250px] twsv-w-full', isLoading ? 'twsv-invisible' : 'twsv-visible')}
-		on:load={() => (isLoading = false)}
+		onload={() => (isLoading = false)}
 		allow="clipboard-read; clipboard-write"
 		src={iframeSrc}
-	/>
+	></iframe>
 {:else}
 	<div class="twsv-flex twsv-h-[250px] twsv-w-full twsv-items-center twsv-justify-center">
 		<div

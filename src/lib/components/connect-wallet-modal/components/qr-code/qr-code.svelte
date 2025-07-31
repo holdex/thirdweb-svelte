@@ -2,32 +2,37 @@
 	import { cn } from '$/utils.js';
 	import QrCodeRenderer from './qr-code-renderer.svelte';
 
-	export let qrCodeUri: string = '';
-	export let size: number = 330;
+	interface Props {
+		qrCodeUri?: string;
+		size?: number;
+		image?: import('svelte').Snippet;
+	}
+
+	let { qrCodeUri = '', size = 330, image }: Props = $props();
 </script>
 
 <div class="twsv-relative twsv-flex twsv-justify-center">
 	{#if qrCodeUri}
 		<div class="qr-code-container">
-			<QrCodeRenderer uri={qrCodeUri} size={size + 20} ecl="M" clearSize={$$slots.image ? 76 : 0} />
+			<QrCodeRenderer uri={qrCodeUri} size={size + 20} ecl="M" clearSize={image ? 76 : 0} />
 		</div>
 	{:else}
 		<div style="--size:{size}px;" class="qr-code-placeholder">
-			<span data-v1 />
-			<span data-v2 />
-			<span data-v3 />
-			<div />
+			<span data-v1></span>
+			<span data-v2></span>
+			<span data-v3></span>
+			<div></div>
 		</div>
 	{/if}
 
-	{#if $$slots.image}
+	{#if image}
 		<div
 			class={cn(
 				'twsv-absolute twsv-inset-0 twsv-z-[1000] twsv-flex twsv-items-center twsv-justify-center',
 				!qrCodeUri && 'twsv-opacity-50'
 			)}
 		>
-			<slot name="image" />
+			{@render image?.()}
 		</div>
 	{/if}
 </div>

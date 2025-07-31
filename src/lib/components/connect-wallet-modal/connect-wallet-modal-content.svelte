@@ -14,17 +14,33 @@
 	import type { ConnectWalletModalProps } from './index.js';
 	import { OtpVerification } from './steps/otp-verification/index.js';
 
-	export let step: ConnectWalletModalStep;
-	export let setStep: ConnectWalletModalStepProps<'provider-selector'>['setStep'];
-	export let closeModal: () => void;
-	export let chain: Chain | undefined;
-	export let walletConnect: ConnectWalletModalProps['walletConnect'];
-	export let additionalProps: any;
-	export let chains: ConnectWalletModalProps['chains'];
-	export let wallets: Wallet[];
-	export let setModalOpen: (open: boolean) => void;
-	export let setCustomBackClick: (backClick: (() => void) | null) => void;
-	export let onConnected: ConnectWalletModalProps['onConnected'];
+	interface Props {
+		step: ConnectWalletModalStep;
+		setStep: ConnectWalletModalStepProps<'provider-selector'>['setStep'];
+		closeModal: () => void;
+		chain: Chain | undefined;
+		walletConnect: ConnectWalletModalProps['walletConnect'];
+		additionalProps: any;
+		chains: ConnectWalletModalProps['chains'];
+		wallets: Wallet[];
+		setModalOpen: (open: boolean) => void;
+		setCustomBackClick: (backClick: (() => void) | null) => void;
+		onConnected: ConnectWalletModalProps['onConnected'];
+	}
+
+	let {
+		step,
+		setStep,
+		closeModal,
+		chain,
+		walletConnect,
+		additionalProps,
+		chains,
+		wallets,
+		setModalOpen,
+		setCustomBackClick,
+		onConnected
+	}: Props = $props();
 
 	const context = getThirdwebSvelteContext();
 
@@ -34,7 +50,7 @@
 		onConnected?.(wallet);
 	};
 
-	let height = 0;
+	let height = $state(0);
 	const heightObserver: Action = (node) => {
 		const resizeObserver = new ResizeObserver(() => {
 			height = node.scrollHeight;
@@ -47,7 +63,7 @@
 	};
 
 	const hideFooterSteps = ['otp-verification', 'oauth-error', 'oauth-loading', 'wallet-connect'];
-	$: hideFooter = hideFooterSteps.includes(step);
+	let hideFooter = $derived(hideFooterSteps.includes(step));
 </script>
 
 <div

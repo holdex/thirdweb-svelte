@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import MediaQuery from 'svelte-media-queries';
 	import * as Dialog from '$/components/ui/dialog/index.js';
 	import * as Drawer from '$/components/ui/drawer/index.js';
@@ -11,20 +13,22 @@
 	import AutoConnect from '../auto-connect.svelte';
 	import { getDefaultWallets } from '$/utils/wallets.js';
 
-	type $$Props = ConnectWalletModalProps;
-	export let chain: $$Props['chain'] = undefined;
-	export let theme: $$Props['theme'] = 'dark';
-	export let open: $$Props['open'] = false;
-	export let walletConnect: $$Props['walletConnect'] = undefined;
-	export let chains: $$Props['chains'] = undefined;
-	export let wallets: NonNullable<$$Props['wallets']> = getDefaultWallets();
-	export let contentClassName: $$Props['contentClassName'] = '';
-	export let onConnected: $$Props['onConnected'] = undefined;
+	let {
+		chain = undefined,
+		theme = 'dark',
+		open = $bindable(false),
+		walletConnect = undefined,
+		chains = undefined,
+		wallets = getDefaultWallets(),
+		contentClassName = '',
+		onConnected = undefined,
+		...rest
+	}: ConnectWalletModalProps = $props();
 
-	let step: ConnectWalletModalStep = 'provider-selector';
-	let additionalProps: any = undefined;
-	let customTitle = '';
-	let customBackClick: (() => void) | null = null;
+	let step: ConnectWalletModalStep = $state('provider-selector');
+	let additionalProps: any = $state(undefined);
+	let customTitle = $state('');
+	let customBackClick: (() => void) | null = $state(null);
 
 	const setStep = (
 		nextStep: ConnectWalletModalStep,
@@ -44,20 +48,20 @@
 		customBackClick = backClick;
 	};
 
-	$: showBackButton = step !== 'provider-selector';
-	$: {
+	let showBackButton = $derived(step !== 'provider-selector');
+	run(() => {
 		if (open) {
 			step = 'provider-selector';
 		}
-	}
+	});
 
-	$: title = customTitle || 'Sign in';
+	let title = $derived(customTitle || 'Sign in');
 </script>
 
 <AutoConnect {chain} {chains} {wallets} />
 <MediaQuery query="(min-width: 768px)" let:matches>
 	{#if matches}
-		<Dialog.Root {...$$restProps} bind:open>
+		<Dialog.Root {...rest} bind:open>
 			<Dialog.Content {theme} class={cn('twsv-pb-4 twsv-font-sans', contentClassName)}>
 				<Dialog.Header
 					class={cn(
@@ -70,7 +74,7 @@
 							variant="ghost"
 							size="auto"
 							class="twsv-absolute -twsv-left-2 twsv-top-0 twsv-text-muted-foreground"
-							on:click={() => {
+							onclick={() => {
 								if (customBackClick) customBackClick();
 								else setStep('provider-selector');
 							}}
@@ -109,7 +113,7 @@
 							variant="ghost"
 							size="auto"
 							class="twsv-absolute -twsv-left-2 twsv-top-6 twsv-text-muted-foreground"
-							on:click={() => {
+							onclick={() => {
 								if (customBackClick) customBackClick();
 								else setStep('provider-selector');
 							}}

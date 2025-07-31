@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import type { ConnectWalletModalStepProps } from '../index.js';
 	import { getWalletInfoQuery } from '$/queries/wallets.js';
 	import { Spinner } from '$/components/ui/spinner/index.js';
@@ -13,30 +15,32 @@
 	import WalletGetStarted from '../wallet-get-started/wallet-get-started.svelte';
 	import { getInstalledWalletData, getInstalledWalletProviders } from '$/utils/wallets.js';
 
-	type $$Props = ConnectWalletModalStepProps<'wallet-connect'>;
-	export let additionalProps: $$Props['additionalProps'];
-	export let chain: Chain | undefined;
-	export let onFinishConnect: (wallet: Wallet) => void;
-	export let walletConnect: $$Props['walletConnect'];
-	export let chains: $$Props['chains'] = undefined;
-	export let setModalOpen: $$Props['setModalOpen'];
-	export let setCustomBackClick: $$Props['setCustomBackClick'];
+	let {
+		additionalProps,
+		chain,
+		onFinishConnect,
+		walletConnect,
+		chains = undefined,
+		setModalOpen,
+		setCustomBackClick
+	}: ConnectWalletModalStepProps<'wallet-connect'> = $props();
 
-	let screen: 'main' | 'get-started' = 'main';
-	$: {
+	let screen: 'main' | 'get-started' = $state('main');
+	run(() => {
 		if (screen === 'main') {
 			setCustomBackClick(null);
 		}
-	}
+	});
 
-	$: wallet = additionalProps.wallet;
-	$: walletInfoQuery = getWalletInfoQuery(wallet.id);
+	let wallet = $derived(additionalProps.wallet);
+	let walletInfoQuery = $derived(getWalletInfoQuery(wallet.id));
 
-	$: preferDeepLink = (wallet.getConfig() as { preferDeepLink: boolean | undefined } | undefined)
-		?.preferDeepLink;
+	let preferDeepLink = $derived(
+		(wallet.getConfig() as { preferDeepLink: boolean | undefined } | undefined)?.preferDeepLink
+	);
 
-	$: wcSupportedWallet = wallet as Wallet<WCSupportedWalletIds>;
-	$: wcWallet = wallet as Wallet<'walletConnect'>;
+	let wcSupportedWallet = $derived(wallet as Wallet<WCSupportedWalletIds>);
+	let wcWallet = $derived(wallet as Wallet<'walletConnect'>);
 </script>
 
 {#if $walletInfoQuery.isLoading}

@@ -1,7 +1,10 @@
 <script lang="ts">
-	type $$Props = {
+	interface Props {
 		class?: string;
-	};
+		[key: string]: any;
+	}
+
+	let { ...rest }: Props = $props();
 </script>
 
 <svg
@@ -9,7 +12,7 @@
 	width="32"
 	height="32"
 	viewBox="0 0 50 50"
-	{...$$restProps}
+	{...rest}
 >
 	<circle
 		class="twsv-animate-dash-animation twsv-stroke-accent-foreground"

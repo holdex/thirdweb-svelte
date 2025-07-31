@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import { type Wallet } from 'thirdweb/wallets';
 	import { setThirdwebSvelteContext, type AccountWithChain } from './context.js';
 	import { createThirdwebClient } from 'thirdweb';
@@ -6,7 +8,12 @@
 	import { lastActiveWalletIdStorage } from './storage.js';
 	import { onDestroy } from 'svelte';
 
-	export let clientId: string;
+	interface Props {
+		clientId: string;
+		children?: import('svelte').Snippet;
+	}
+
+	let { clientId, children }: Props = $props();
 
 	const client = createThirdwebClient({ clientId });
 	const wallet = writable<Wallet | null>(null);
@@ -46,8 +53,8 @@
 		isInitialized
 	});
 
-	let unsub: (() => void) | undefined;
-	$: {
+	let unsub: (() => void) | undefined = $state();
+	run(() => {
 		const unsubAccountChanged = $wallet?.subscribe('accountChanged', () => {
 			connect($wallet);
 		});
@@ -64,10 +71,10 @@
 			unsubAccountChanged?.();
 			unsubChainChanged?.();
 		};
-	}
+	});
 	onDestroy(() => {
 		unsub?.();
 	});
 </script>
 
-<slot />
+{@render children?.()}

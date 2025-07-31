@@ -2,11 +2,15 @@
 	import { cn } from '$/utils.js';
 	import { OTPInput, OTPRoot } from '@jimmyverburgt/svelte-input-otp';
 
-	export let value = '';
-	export let handleOtpComplete: (otp: string) => void;
-	export let isError = false;
+	interface Props {
+		value?: string;
+		handleOtpComplete: (otp: string) => void;
+		isError?: boolean;
+	}
 
-	let otpRef: any;
+	let { value = $bindable(''), handleOtpComplete, isError = false }: Props = $props();
+
+	let otpRef: any = $state();
 </script>
 
 <OTPRoot

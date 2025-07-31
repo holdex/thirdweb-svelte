@@ -6,9 +6,7 @@
 	import Button from '$/components/ui/button/button.svelte';
 	import { getInstalledWallets, sortWallets } from '$/utils/wallets.js';
 
-	type $$Props = ConnectWalletModalStepProps<'wallet-selector'>;
-	export let setStep: $$Props['setStep'];
-	export let wallets: Wallet[];
+	let { setStep, wallets }: ConnectWalletModalStepProps<'wallet-selector'> = $props();
 
 	const installedWallets = getInstalledWallets();
 	let _wallets: Wallet[] = [...wallets];

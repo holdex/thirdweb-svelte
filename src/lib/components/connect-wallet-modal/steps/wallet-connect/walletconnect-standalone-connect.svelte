@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import { getThirdwebSvelteContext } from '$/components/thirdweb-svelte-provider/context.js';
 	import type { Chain } from 'thirdweb';
 	import type { Account, Wallet, WalletInfo } from 'thirdweb/wallets';
@@ -13,19 +15,24 @@
 	import Check from 'lucide-svelte/icons/check';
 	import { wait } from '$/utils.js';
 
-	export let wallet: Wallet<'walletConnect'>;
-	export let walletInfo: WalletInfo;
-	export let chain: Chain | undefined;
-	export let chains: Chain[] | undefined;
-	export let walletConnect: ConnectWalletModalProps['walletConnect'];
-	export let onFinishConnect: (wallet: Wallet) => void;
-	export let setModalOpen: (open: boolean) => void;
+	interface Props {
+		wallet: Wallet<'walletConnect'>;
+		walletInfo: WalletInfo;
+		chain: Chain | undefined;
+		chains: Chain[] | undefined;
+		walletConnect: ConnectWalletModalProps['walletConnect'];
+		onFinishConnect: (wallet: Wallet) => void;
+		setModalOpen: (open: boolean) => void;
+	}
+
+	let { wallet, walletInfo, chain, chains, walletConnect, onFinishConnect, setModalOpen }: Props =
+		$props();
 
 	const context = getThirdwebSvelteContext();
 
-	let qrCodeUri = '';
-	let errorConnecting = false;
-	let linkCopied = false;
+	let qrCodeUri = $state('');
+	let errorConnecting = $state(false);
+	let linkCopied = $state(false);
 
 	const connect = async () => {
 		errorConnecting = false;
@@ -95,13 +102,13 @@
 		}
 	};
 
-	let scanStarted = false;
-	$: {
+	let scanStarted = $state(false);
+	run(() => {
 		if (!scanStarted) {
 			scanStarted = true;
 			connect();
 		}
-	}
+	});
 </script>
 
 {#if isMobile()}
@@ -119,13 +126,15 @@
 {:else}
 	<div class="twsv-flex twsv-flex-col twsv-items-center twsv-pt-3 twsv-text-center">
 		<QrCode {qrCodeUri}>
-			<WalletImage slot="image" class="twsv-h-[4.5rem] twsv-w-[4.5rem]" walletId={wallet.id} />
+			{#snippet image()}
+				<WalletImage class="twsv-h-[4.5rem] twsv-w-[4.5rem]" walletId={wallet.id} />
+			{/snippet}
 		</QrCode>
 		<Button
 			variant="link"
 			size="auto"
 			class="twsv-mx-auto twsv-mt-2 twsv-w-fit"
-			on:click={async () => {
+			onclick={async () => {
 				try {
 					await navigator.clipboard.writeText(qrCodeUri);
 					linkCopied = true;

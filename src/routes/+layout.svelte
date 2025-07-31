@@ -1,4 +1,6 @@
-<script>
+<script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import { ModeWatcher } from 'mode-watcher';
 	import Toaster from '$/components/ui/sonner/sonner.svelte';
 	import ThirdwebSvelteProvider from '$/components/thirdweb-svelte-provider/thirdweb-svelte-provider.svelte';
@@ -6,6 +8,11 @@
 	import '../app.css';
 	import { QueryClient, QueryClientProvider } from '@tanstack/svelte-query';
 	import { browser } from '$app/environment';
+	interface Props {
+		children?: import('svelte').Snippet;
+	}
+
+	let { children }: Props = $props();
 
 	const queryClient = new QueryClient({
 		defaultOptions: {
@@ -15,7 +22,7 @@
 		}
 	});
 
-	$: {
+	run(() => {
 		async function initEruda() {
 			if (typeof window !== 'undefined') {
 				const eruda = await import('eruda');
@@ -25,13 +32,13 @@
 		if (process.env.NODE_ENV === 'development') {
 			initEruda();
 		}
-	}
+	});
 </script>
 
 <ModeWatcher defaultMode="dark" />
 <Toaster />
 <QueryClientProvider client={queryClient}>
 	<ThirdwebSvelteProvider clientId={PUBLIC_THIRDWEB_CLIENT_ID}>
-		<slot />
+		{@render children?.()}
 	</ThirdwebSvelteProvider>
 </QueryClientProvider>
