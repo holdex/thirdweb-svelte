@@ -12,7 +12,7 @@
 <DropdownMenuPrimitive.SubContent
 	bind:ref
 	class={cn(
-		'twsv-z-50 twsv-min-w-[8rem] twsv-rounded-md twsv-border twsv-bg-popover twsv-p-1 twsv-text-popover-foreground twsv-shadow-lg focus:twsv-outline-none',
+		'twsv-z-50 twsv-min-w-[8rem] twsv-rounded-md twsv-border twsv-border-border twsv-bg-popover twsv-p-1 twsv-text-popover-foreground twsv-shadow-lg focus:twsv-outline-none',
 		className
 	)}
 	{...restProps}
