@@ -14,8 +14,12 @@
 
 	let walletInfoQuery = $derived(getWalletInfoQuery(walletId));
 	let walletName = $derived($walletInfoQuery.data?.name);
-
-	let href = $derived(`${deepLinkPrefix}${window.location.toString().replace('https://', '')}`);
+	let href = $derived.by(() => {
+		if (typeof window !== 'undefined') {
+			return `${deepLinkPrefix}${window.location.toString().replace('https://', '')}`;
+		}
+		return deepLinkPrefix; // fallback for SSR
+	});
 </script>
 
 <div class="twsv-flex twsv-flex-col twsv-items-center twsv-justify-center twsv-pb-4">
