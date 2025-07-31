@@ -30,12 +30,14 @@
 			className
 		)}
 	>
-		{@render children?.()}
-		<DialogPrimitive.Close
-			class="twsv-absolute twsv-right-4 twsv-top-4 twsv-rounded-sm twsv-opacity-70 twsv-ring-offset-background twsv-transition-opacity hover:twsv-opacity-100 focus:twsv-outline-none focus:twsv-ring-2 focus:twsv-ring-ring focus:twsv-ring-offset-2 disabled:twsv-pointer-events-none"
-		>
-			<X class="size-4"></X>
-			<span class="sr-only">Close</span>
-		</DialogPrimitive.Close>
+		<div class={cn('twsv-grid twsv-gap-6 twsv-p-6', className)}>
+			{@render children?.()}
+			<DialogPrimitive.Close
+				class="twsv-absolute twsv-right-4 twsv-top-4 twsv-rounded-sm twsv-opacity-70 twsv-ring-offset-background twsv-transition-opacity hover:twsv-opacity-100 focus:twsv-outline-none focus:twsv-ring-2 focus:twsv-ring-ring focus:twsv-ring-offset-2 disabled:twsv-pointer-events-none"
+			>
+				<X class="twsv-size-4"></X>
+				<span class="twsv-sr-only">Close</span>
+			</DialogPrimitive.Close>
+		</div>
 	</DialogPrimitive.Content>
 </Dialog.Portal>
