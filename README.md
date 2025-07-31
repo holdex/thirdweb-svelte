@@ -14,7 +14,7 @@ pnpm i @holdex/thirdweb-svelte thirdweb @tanstack/svelte-query vaul-svelte@1.0.0
 For svelte 4 projects, you can use the v0.x version of the SDK:
 
 ```bash
-pnpm i @holdex/thirdweb-svelte@0.x thirdweb @tanstack/svelte-query vaul-svelte@0.3.2
+pnpm i @holdex/thirdweb-svelte@0.2.16 thirdweb @tanstack/svelte-query vaul-svelte@0.3.2
 ```
 
 ### 2. Setup Provider
