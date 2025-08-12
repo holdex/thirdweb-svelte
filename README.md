@@ -251,3 +251,13 @@ If you encounter issues:
 3. **Browser compatibility:**
    - Use Chrome instead of Brave for development
    - Brave browser may not properly reflect changes during development
+
+4. **Thirdweb Version Compatibility Issue**
+
+If you encounter a `ReferenceError: process is not defined` error in the browser after using the `ConnectWalletModal`, this is due to a compatibility issue with newer versions of thirdweb. To resolve this, downgrade your thirdweb package to version `5.105.28` or earlier:
+
+```bash
+pnpm install thirdweb@5.105.28
+```
+
+This issue typically occurs with thirdweb versions `5.105.29` and above when used in browser environments.
