@@ -107,7 +107,7 @@ export default defineConfig({
 });
 ```
 
-This configuration prevents thirdweb and viem from running during SSR, which resolves the file descriptor limit issue during build processes.
+This configuration tells Vite not to externalize `thirdweb` and `viem` during SSR builds—bundling them instead—which helps avoid EMFILE by reducing filesystem load during dependency resolution in production (e.g., on Vercel).
 
 2. **Svelte 5 Initialization State Inconsistency**
 
