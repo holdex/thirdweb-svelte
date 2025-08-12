@@ -94,7 +94,22 @@ Note that this modal is only available for inApp wallets. If you would like to c
 
 ## Known Issues
 
-1. **Svelte 5 Initialization State Inconsistency**
+1. **Vercel Deployment EMFILE Error**
+
+For production deployments (especially on Vercel), you may encounter an EMFILE error (too many files open) due to thirdweb and viem packages. To resolve this, add the following configuration to your `vite.config.ts`:
+
+```ts
+export default defineConfig({
+	// ...existing config
+	ssr: {
+		noExternal: ['thirdweb', 'viem']
+	}
+});
+```
+
+This configuration prevents thirdweb and viem from running during SSR, which resolves the file descriptor limit issue during build processes.
+
+2. **Svelte 5 Initialization State Inconsistency**
 
 The `isInitialized` state from `getThirdwebSvelteContext()` may show inconsistent values in Svelte 5 components. To fix this, create a local state that syncs with the initialization status:
 
@@ -113,7 +128,7 @@ The `isInitialized` state from `getThirdwebSvelteContext()` may show inconsisten
 </script>
 ```
 
-2. **Vaul-svelte Version Compatibility** (only for v0.x)
+3. **Vaul-svelte Version Compatibility** (only for v0.x)
 
 You must use vaul-svelte@0.3.2 even with Svelte 5 (not vaul-svelte@next). While this version has a drawer entry animation issue in Svelte 5, you can fix it with custom animation:
 
