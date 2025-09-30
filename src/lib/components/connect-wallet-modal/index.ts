@@ -1,5 +1,6 @@
 import type { DialogProps } from '../ui/dialog/index.js';
 import ConnectWalletModal from '$/components/connect-wallet-modal/connect-wallet-modal.svelte';
+import WalletImage from '$/components/connect-wallet-modal/components/wallet-image.svelte';
 import type { Chain } from 'thirdweb';
 import type { Wallet } from 'thirdweb/wallets';
 
@@ -129,4 +130,4 @@ type ConnectWalletModalProps = DialogProps & {
 	onConnected?: (wallet: Wallet) => void;
 };
 
-export { type ConnectWalletModalProps, ConnectWalletModal };
+export { type ConnectWalletModalProps, ConnectWalletModal, WalletImage };
