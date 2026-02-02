@@ -1,6 +1,10 @@
 {
 	"name": "@holdex/thirdweb-svelte",
 	"version": "1.0.8",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/holdex/thirdweb-svelte"
+	},
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && pnpm run package",

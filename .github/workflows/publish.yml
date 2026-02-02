@@ -42,5 +42,5 @@ jobs:
         run: pnpm install
 
       - name: Publish
-        run: NODE_AUTH_TOKEN="" pnpm publish --access public --provenance --no-git-checks
+        run: pnpm publish --access public --provenance --no-git-checks
         # if: steps.check.outputs.changed == 'true'
