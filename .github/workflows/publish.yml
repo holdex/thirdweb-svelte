@@ -42,5 +42,5 @@ jobs:
         run: pnpm install
 
       - name: Publish
-        run: pnpm publish --access public --provenance --no-git-checks
+        run: npm publish --access public --provenance --no-git-checks
         # if: steps.check.outputs.changed == 'true'
