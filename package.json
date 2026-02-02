@@ -3,7 +3,7 @@
 	"version": "1.0.8",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/holdex/thirdweb-svelte"
+		"url": "git+https://github.com/holdex/thirdweb-svelte.git"
 	},
 	"scripts": {
 		"dev": "vite dev",
