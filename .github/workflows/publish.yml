@@ -43,4 +43,4 @@ jobs:
 
       - name: Publish
         run: NODE_AUTH_TOKEN="" pnpm publish --access public --provenance
-        if: steps.check.outputs.changed == 'true'
+        # if: steps.check.outputs.changed == 'true'
