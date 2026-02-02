@@ -18,14 +18,12 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v6
         with:
-          node-version: '20'
-
-      - name: Init NPM_RC
-        run: echo "${{ secrets.NPM_RC }}" > .npmrc
+          node-version: 24
+          registry-url: 'https://registry.npmjs.org'
 
       - id: check
         uses: EndBug/version-check@v2
@@ -43,5 +41,5 @@ jobs:
         run: pnpm install
 
       - name: Publish
-        run: pnpm publish --access public
+        run: NODE_AUTH_TOKEN="" pnpm publish --access public --provenance
         if: steps.check.outputs.changed == 'true'
