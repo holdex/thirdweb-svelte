@@ -27,12 +27,12 @@ jobs:
           node-version: 24
           registry-url: 'https://registry.npmjs.org'
 
-      - id: check
-        uses: EndBug/version-check@v2
-        with:
-          file-name: './package.json'
-          file-url: '::before'
-          static-checking: localIsNew
+      # - id: check
+      #   uses: EndBug/version-check@v2
+      #   with:
+      #     file-name: './package.json'
+      #     file-url: '::before'
+      #     static-checking: localIsNew
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
