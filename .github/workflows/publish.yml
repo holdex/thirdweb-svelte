@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - main
-      - feat/pnpm
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "publish"
@@ -45,5 +45,5 @@ jobs:
         run: npm install -g npm@latest
 
       - name: Publish
-        run: npm publish --access public --provenance --no-git-checks
-        # if: steps.check.outputs.changed == 'true'
+        run: npm publish --access public --provenance
+        if: steps.check.outputs.changed == 'true'
