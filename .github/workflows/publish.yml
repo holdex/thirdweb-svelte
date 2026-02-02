@@ -5,7 +5,6 @@ on:
   push:
     branches:
       - main
-      - feat/pnpm
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -27,12 +26,12 @@ jobs:
           node-version: 24
           registry-url: 'https://registry.npmjs.org'
 
-      # - id: check
-      #   uses: EndBug/version-check@v2
-      #   with:
-      #     file-name: './package.json'
-      #     file-url: '::before'
-      #     static-checking: localIsNew
+      - id: check
+        uses: EndBug/version-check@v2
+        with:
+          file-name: './package.json'
+          file-url: '::before'
+          static-checking: localIsNew
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -47,4 +46,4 @@ jobs:
 
       - name: Publish
         run: npm publish --access public --provenance --no-git-checks
-        # if: steps.check.outputs.changed == 'true'
+        if: steps.check.outputs.changed == 'true'
