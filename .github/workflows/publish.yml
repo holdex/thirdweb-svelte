@@ -32,9 +32,14 @@ jobs:
           file-url: '::before'
           static-checking: localIsNew
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - name: Install packages
-        run: npm install
+        run: pnpm install
 
       - name: Publish
-        run: NODE_AUTH_TOKEN="" npm publish --access public --provenance
+        run: NODE_AUTH_TOKEN="" pnpm publish --access public --provenance
         if: steps.check.outputs.changed == 'true'
