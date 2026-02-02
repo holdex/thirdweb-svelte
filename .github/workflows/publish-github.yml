@@ -23,9 +23,8 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '20'
-
-      - name: Init NPM_RC
-        run: echo "${{ secrets.NPM_RC_GITHUB_REGISTRY }}" > .npmrc
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@holdex'
 
       - id: check
         uses: EndBug/version-check@v2
@@ -46,3 +45,5 @@ jobs:
       - name: Publish
         run: pnpm publish
         if: steps.check.outputs.changed == 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
