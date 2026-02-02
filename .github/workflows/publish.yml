@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+      - feat/pnpm
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -43,6 +44,9 @@ jobs:
 
       - name: Upgrade npm to latest
         run: npm install -g npm@latest
+
+      - name: Who am I (OIDC)
+        run: npm whoami
 
       - name: Publish
         run: npm publish --access public --provenance
